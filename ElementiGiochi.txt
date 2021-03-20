@@ -1,0 +1,23 @@
+Elementi gioco
+
+Draghetto (Pinco pallo) --> Carica le bolle sul cannone
+Draghetto principale --> Quello indirizza le bolle
+
+Cannone --> si spsota di 180 gradi e spara le bolle + grafica freccettina + movimento mouse e frecce e AWSD + space per sparare
+
+Bolle --> blu, rosso, giallo, verde ecc. Quando perdi le palle diventano tutte grigie. 
+Vengono sparate le bolle solo del colore che rimane sulla mappa
+
+Mappa --> un'immagine + coordinate limiti + range min e max palline da posizionare +
+settare la griglia da riempire numeri letteri per i colori 
+Livelli --> 5 livelli base presi dall'orginale
+
+Punteggio = bolle che cadono senza scoppiare ( ∑_(i=1)^n〖 2^i*10 〗)
+ + bolla che scoppiano con quella che lancio (10) + bonus tempo (range) 
+
+Muro --> muro il scende ogni 14/16 sec e inizia a vibrare a 10 sec
+
+Schermata iniziale + impostazioni --> grafica (salva, restart (1 vita in meno), donazione, togli volume, home)
+
+
+
