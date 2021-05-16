@@ -11,7 +11,7 @@ public class Assets {
 	public static void init(){
 		
 		System.out.println("Prova");
-		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/texture/sheet.png"));
+		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/sheet.png"));
 		
 		btn_start = new BufferedImage[2];
 		btn_start[0] = sheet.crop(width * 6, height * 4, width * 2, height);
