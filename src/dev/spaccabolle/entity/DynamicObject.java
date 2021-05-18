@@ -5,7 +5,7 @@ public abstract class DynamicObject extends Entity{
     public static final int DEFAULT_SPEED = 10;
     
     protected float speed;
-    protected float xMove,yMove;
+    protected double xMove,yMove;
 
     public DynamicObject(float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -27,19 +27,19 @@ public abstract class DynamicObject extends Entity{
         this.speed = speed;
     }
 
-    public float getxMove() {
+    public double getxMove() {
         return xMove;
     }
 
-    public void setxMove(float xMove) {
+    public void setxMove(double xMove) {
         this.xMove = xMove;
     }
 
-    public float getyMove() {
+    public double getyMove() {
         return yMove;
     }
 
-    public void setyMove(float yMove) {
+    public void setyMove(double yMove) {
         this.yMove = yMove;
     }
 

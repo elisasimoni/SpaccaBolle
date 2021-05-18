@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.entity.Cannon;
+import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.*;
 
@@ -14,18 +15,22 @@ public class StatoGioco extends Stato{
         private static final int CANNON_Y=(Launcher.GAME_HEIGHT/2)+Assets.cannon.getHeight()+SCARTO;
     
         private Cannon cannon;
+        private CollectBall collectBall;
 	
 	public StatoGioco(Handler handler){
 		super(handler);
-		cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight());
+		collectBall=new CollectBall();
+		cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
 	}
 	
 	public void tick() {
 	    cannon.tick();
+	    collectBall.tick();
 	}
 
 	public void render(Graphics g) {
 	    g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
 	    cannon.render(g);
+	    collectBall.render(g);
 	}
 }
