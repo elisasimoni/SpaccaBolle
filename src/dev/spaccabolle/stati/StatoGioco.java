@@ -25,6 +25,7 @@ public class StatoGioco extends Stato{
 	}
 
 	public void render(Graphics g) {
+	    g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
 	    cannon.render(g);
 	}
 }
