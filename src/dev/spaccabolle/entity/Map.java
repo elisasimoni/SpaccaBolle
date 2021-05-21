@@ -1,34 +1,29 @@
 package dev.spaccabolle.entity;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
 import dev.spaccabolle.Launcher;
-import dev.spaccabolle.gfx.Assets;
-import dev.spaccabolle.entity.Ball;
 
 public class Map {
 	
 	private static final double SCARTO_X = 3.5;
 	private static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
 	private String line = null;
-	
-	private Ball bolla = null;
+	@SuppressWarnings("unused")
+	private Ball ballMap = null;
 	private int lineDimensionX = Ball.LEFT_BOUNCE;
 	private int lineDimensionY = Launcher.GAME_HEIGHT;
 	private int lineDimensionXLine = 0;
-	
-	
-	public Map(int gameYSize, int gameXSize) {
-		
-		@SuppressWarnings("resource")
+	private CollectBall collectBallMap;
+
+	public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
+		this.collectBallMap=collectBall;
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new FileReader("C:\\Users\\xelis\\git\\SpaccaBolle\\src\\res\\map\\level1.txt"));
+			reader = new BufferedReader(new FileReader("C:\\Users\\Elisa\\Desktop\\Elisa\\SpaccaBolle\\src\\res\\map\\level1.txt"));
 		} catch (FileNotFoundException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -152,10 +147,12 @@ public class Map {
 			
 			}
 				
-			bolla = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
-			System.out.println("bolla mappa");
+			ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
+			
+			System.out.println("bolla mappa ");
+			
 			}
-			System.out.println();
+			
 			try {
 				line = reader.readLine();
 			} catch (IOException e) {
@@ -163,6 +160,7 @@ public class Map {
 				e.printStackTrace();
 			}
 			posLine++;
+			collectBall.addBall(ballMap);
 		}
 	}
 

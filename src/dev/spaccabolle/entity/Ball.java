@@ -1,11 +1,6 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
 

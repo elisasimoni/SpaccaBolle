@@ -9,7 +9,7 @@ public abstract class DynamicObject extends Entity{
 
     public DynamicObject(float x, float y, int width, int height) {
         super(x, y, width, height);
-        speed=this.DEFAULT_SPEED;
+        speed=DynamicObject.DEFAULT_SPEED;
         xMove=0;
         yMove=0;
     }
