@@ -3,11 +3,12 @@ package dev.spaccabolle.stati;
 import java.awt.Graphics;
 
 import dev.spaccabolle.Handler;
+import dev.spaccabolle.entity.Ball;
 import dev.spaccabolle.entity.Cannon;
 import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.*;
-
+import dev.spaccabolle.entity.Map;
 public class StatoGioco extends Stato{
     
         private static final int CANNON_X=(Launcher.GAME_WIDTH/2)-(Assets.cannon.getWidth()/2);
@@ -16,11 +17,14 @@ public class StatoGioco extends Stato{
     
         private Cannon cannon;
         private CollectBall collectBall;
+        private Map map;
 	
 	public StatoGioco(Handler handler){
 		super(handler);
 		collectBall=new CollectBall();
 		cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
+		map = new Map(920, 220);
+		
 	}
 	
 	public void tick() {

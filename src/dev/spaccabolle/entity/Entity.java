@@ -1,6 +1,7 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 public abstract class Entity {
     protected float x,y;
@@ -48,7 +49,7 @@ public abstract class Entity {
 
     public abstract void tick();
     
-    public abstract void render(Graphics g);
+    public abstract void render(Graphics g) throws IOException;
 
 }
 
