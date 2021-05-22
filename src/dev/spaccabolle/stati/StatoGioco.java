@@ -1,6 +1,7 @@
 package dev.spaccabolle.stati;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
@@ -21,7 +22,7 @@ public class StatoGioco extends Stato{
         private CollectBall collectBallMap;
         private Map map;
 	
-	public StatoGioco(Handler handler){
+	public StatoGioco(Handler handler) {
 		super(handler);
 		collectBall=new CollectBall();
 		collectBallMap=new CollectBall();

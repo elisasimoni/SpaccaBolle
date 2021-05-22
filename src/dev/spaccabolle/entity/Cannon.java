@@ -69,7 +69,7 @@ public class Cannon extends DynamicObject{
     }
 
     public void render(Graphics g) {
-        AffineTransform at = AffineTransform.getTranslateInstance(Launcher.GAME_WIDTH/2-this.SCARTO_X_FRECCIA,674);
+        AffineTransform at = AffineTransform.getTranslateInstance(Launcher.GAME_WIDTH/2-Cannon.SCARTO_X_FRECCIA,674);
         at.rotate(Math.toRadians(angle),Assets.arrow.getWidth()/2,Assets.arrow.getHeight()/2);
         at.scale(1,1);
         Graphics2D g2 = (Graphics2D)g;
