@@ -10,8 +10,8 @@ public class Ball extends DynamicObject{
     public static final int LEFT_BOUNCE = Launcher.GAME_WIDTH/2-200;
     private static final int RIGHT_BOUNCE = Launcher.GAME_WIDTH/2+200;
     public static final int BOBBLE_SIZE = 50;
-	
-	
+   
+
     public float directMove;
     private int color;
     public boolean isMove;
@@ -21,8 +21,11 @@ public class Ball extends DynamicObject{
         this.color=color;
         this.directMove=0;
         this.isMove=false;
+
         System.out.println("ball creata");
         
+
+
     }
     
     public void direct() {
@@ -31,7 +34,7 @@ public class Ball extends DynamicObject{
     }
     
     private void destroy() {
-        if(this.y <= 0) {
+        if(this.y < 0) {
             this.isMove=false;
         }
     }
