@@ -12,12 +12,29 @@ public class Map {
     private static final double SCARTO_X = 3.5;
     private static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
     private String line = null;
-    private Ball ballMap = null;
-    private int lineDimensionX = Ball.LEFT_BOUNCE;
-    private int lineDimensionY = Launcher.GAME_HEIGHT;
+    public Ball ballMap = null;
+    public int lineDimensionX = Ball.LEFT_BOUNCE;
+    public int lineDimensionY = Launcher.GAME_HEIGHT;
     private int lineDimensionXLine = 0;
     private CollectBall collectBallMap;
+    public int[] coordinateX = new int[collectBallMap.numBolle()];;
+    public int[] coordinateY = new int[collectBallMap.numBolle()];;
     
+    public void getCoordinateX(int[] coordinateX) {
+    	this.coordinateX=coordinateX;
+    }
+    public void getCoordinateY(int[] coordinateY) {
+    	this.coordinateY=coordinateY;
+    }
+    public int[] getCoordinateX() {
+        return coordinateX;
+    }
+    public int[] getCoordinateY() {
+        return coordinateY;
+    }
+    public int getNumBall() {
+        return collectBallMap.numBolle();
+    }
     public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
         this.collectBallMap=collectBall;
         BufferedReader reader = null;
@@ -148,6 +165,7 @@ public class Map {
                 }
                         
                 ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
+                loadCoordinate(lineDimensionX,lineDimensionY);
                 collectBallMap.addBall(ballMap);              
                 }
                 
@@ -160,4 +178,14 @@ public class Map {
                 posLine++;
         }
     }
+    private void loadCoordinate(int xMap, int yMap) {
+    	
+    	for (int iterX=0; iterX<collectBallMap.numBolle(); iterX++) {
+      	  coordinateX[iterX] = xMap;
+      	}
+      for (int iterY=0; iterY<collectBallMap.numBolle(); iterY++) {
+    	  coordinateY[iterY] = yMap;
+    	}
+    }
+    
 }
