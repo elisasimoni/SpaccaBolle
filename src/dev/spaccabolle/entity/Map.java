@@ -16,15 +16,17 @@ public class Map {
     public int lineDimensionX = Ball.LEFT_BOUNCE;
     public int lineDimensionY = Launcher.GAME_HEIGHT;
     private int lineDimensionXLine = 0;
-    private CollectBall collectBallMap;
-    public int[] coordinateX = new int[collectBallMap.numBolle()];;
-    public int[] coordinateY = new int[collectBallMap.numBolle()];;
+    private static CollectBall collectBallMap;
+    public static int numBobble = 32;
+    public static int[] coordinateX = new int[numBobble];
+    public static int[] coordinateY = new int[numBobble];
+   
     
     public void getCoordinateX(int[] coordinateX) {
-    	this.coordinateX=coordinateX;
+    	Map.coordinateX=coordinateX;
     }
     public void getCoordinateY(int[] coordinateY) {
-    	this.coordinateY=coordinateY;
+    	Map.coordinateY=coordinateY;
     }
     public int[] getCoordinateX() {
         return coordinateX;
@@ -32,11 +34,9 @@ public class Map {
     public int[] getCoordinateY() {
         return coordinateY;
     }
-    public int getNumBall() {
-        return collectBallMap.numBolle();
-    }
+   
     public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
-        this.collectBallMap=collectBall;
+        Map.collectBallMap=collectBall;
         BufferedReader reader = null;
         try {
         		String filePath = new File("").getAbsolutePath();

@@ -20,7 +20,8 @@ public class StatoGioco extends Stato{
         private Cannon cannon;
         private CollectBall collectBall;
         private CollectBall collectBallMap;
-        private Map map;
+        @SuppressWarnings("unused")
+		private Map map;
 	
 	public StatoGioco(Handler handler) {
 		super(handler);

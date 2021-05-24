@@ -1,12 +1,11 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.Iterator;
+
 
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
-import dev.spaccabolle.entity.Map;
+
 
 
 public class Ball extends DynamicObject{
@@ -19,8 +18,8 @@ public class Ball extends DynamicObject{
     public float directMove;
     private int color;
     public boolean isMove;
-    //private boolean collisionX=false;
-    //private boolean collisionY=false;
+    private boolean collisionX=false;
+    private boolean collisionY=false;
     
 
     public Ball(float x, float y, int width, int height, int color) {
@@ -48,16 +47,17 @@ public class Ball extends DynamicObject{
         if(isMove) {
             if(this.x < LEFT_BOUNCE|| this.x > RIGHT_BOUNCE)
                 this.xMove*=-1;
-            /*for(int iterCoorX=0; iterCoorX<Map.this.getNumBall(); iterCoorX++ ) {
-            	if(this.x == Map.this.coordinateX[iterCoorX])
+            for(int iterCoorX=0; iterCoorX<Map.numBobble; iterCoorX++ ) {
+            	if(this.x == Map.coordinateX[iterCoorX])
+            		System.out.println("coordinata"+Map.coordinateX[iterCoorX]);
             		collisionX=true;
             }
-            for(int iterCoorY=0; iterCoorY<Map.this.getNumBall(); iterCoorY++ ) {
-            	if(this.y == Map.this.coordinateY[iterCoorY])
-            		collisionX=true;
+            for(int iterCoorY=0; iterCoorY<Map.numBobble; iterCoorY++ ) {
+            	if(this.y == Map.coordinateY[iterCoorY])
+            		collisionY=true;
             }
             if(collisionX && collisionY)
-            	this.isMove=false;*/
+            	this.isMove=false;
             move();
             destroy();
         }
