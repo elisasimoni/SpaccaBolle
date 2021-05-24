@@ -2,6 +2,9 @@ package dev.spaccabolle.entity;
 
 import java.io.BufferedReader;
 import java.io.File;
+
+import dev.spaccabolle.entity.Ball;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,8 +55,11 @@ public class Map {
         Map.collectBallMap=collectBall;
         BufferedReader reader = null;
         try {
+
         		String filePath = new File("").getAbsolutePath();
                 reader = new BufferedReader(new FileReader(filePath + "\\src\\res\\map\\level1.txt"));
+               
+
         } catch (FileNotFoundException e2) {
                 // TODO Auto-generated catch block
                 e2.printStackTrace();
