@@ -18,9 +18,7 @@ public class Ball extends DynamicObject{
     public float directMove;
     private int color;
     public boolean isMove;
-    private boolean collisionX=false;
-    private boolean collisionY=false;
-    
+   
 
     public Ball(float x, float y, int width, int height, int color) {
         super(x, y, width, height);
@@ -44,23 +42,21 @@ public class Ball extends DynamicObject{
     }
 
     public void tick() {
+    	
         if(isMove) {
-            if(this.x < LEFT_BOUNCE|| this.x > RIGHT_BOUNCE)
-                this.xMove*=-1;
-            for(int iterCoorX=0; iterCoorX<Map.numBobble; iterCoorX++ ) {
-            	if(this.x == Map.coordinateX[iterCoorX])
-            		System.out.println("coordinata"+Map.coordinateX[iterCoorX]);
-            		collisionX=true;
+            if(this.x < LEFT_BOUNCE|| this.x > RIGHT_BOUNCE) {
+            	  this.xMove*=-1;
             }
-            for(int iterCoorY=0; iterCoorY<Map.numBobble; iterCoorY++ ) {
-            	if(this.y == Map.coordinateY[iterCoorY])
-            		collisionY=true;
+            
+            
+            if(Map.collectBallMap.cordXMap(this.x) && Map.collectBallMap.cordYMap(this.y)) {
+                     	this.isMove=false;
             }
-            if(collisionX && collisionY)
-            	this.isMove=false;
+            
             move();
             destroy();
         }
+        
     }
 
     public void render(Graphics g) {

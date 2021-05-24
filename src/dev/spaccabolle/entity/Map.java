@@ -9,15 +9,28 @@ import java.io.IOException;
 import dev.spaccabolle.Launcher;
 
 public class Map {
-    private static final double SCARTO_X = 3.5;
-    private static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
+    public static final double SCARTO_X = 3.5;
+    
+    
+    public static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
+    public static final double SCARTO_Y = RADIUS-11;
     private String line = null;
     public Ball ballMap = null;
+    
+    // coordinate posizionamento su colonne e righe
     public int lineDimensionX = Ball.LEFT_BOUNCE;
     public int lineDimensionY = Launcher.GAME_HEIGHT;
+    
     private int lineDimensionXLine = 0;
-    private static CollectBall collectBallMap;
-    public static int numBobble = 32;
+    public static CollectBall collectBallMap;
+    
+    public static CollectBall getCollectBallMap() {
+		return collectBallMap;
+	}
+	public static void setCollectBallMap(CollectBall collectBallMap) {
+		Map.collectBallMap = collectBallMap;
+	}
+	public static int numBobble = 32;
     public static int[] coordinateX = new int[numBobble];
     public static int[] coordinateY = new int[numBobble];
    
@@ -100,6 +113,7 @@ public class Map {
                                         
                                         lineDimensionY = gameYSize+RADIUS;
                                         lineDimensionXLine = (int) (gameXSize/SCARTO_X);
+                                        
                                         break;
                                 case 3:
                                         
