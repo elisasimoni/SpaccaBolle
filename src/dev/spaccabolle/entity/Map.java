@@ -3,7 +3,7 @@ package dev.spaccabolle.entity;
 import java.io.BufferedReader;
 import java.io.File;
 
-import dev.spaccabolle.entity.Ball;
+
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,17 +12,48 @@ import java.io.IOException;
 import dev.spaccabolle.Launcher;
 
 public class Map {
-    private static final double SCARTO_X = 3.5;
-    private static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
-    private String line = null;
-    private Ball ballMap = null;
-    private int lineDimensionX = Ball.LEFT_BOUNCE;
-    private int lineDimensionY = Launcher.GAME_HEIGHT;
-    private int lineDimensionXLine = 0;
-    private CollectBall collectBallMap;
+    public static final double SCARTO_X = 10;
     
+    
+    public static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
+    public static final double SCARTO_Y = RADIUS+3;
+    private String line = null;
+    public Ball ballMap = null;
+    public static double finalX = 0;
+    
+    // coordinate posizionamento su colonne e righe
+    public int lineDimensionX = Ball.LEFT_BOUNCE;
+    public int lineDimensionY = Launcher.GAME_HEIGHT;
+    
+    private int lineDimensionXLine = 0;
+    public static CollectBall collectBallMap;
+    
+    public static CollectBall getCollectBallMap() {
+		return collectBallMap;
+	}
+	public static void setCollectBallMap(CollectBall collectBallMap) {
+		Map.collectBallMap = collectBallMap;
+	}
+	public static int numBobble = 32;
+    public static int[] coordinateX = new int[numBobble];
+    public static int[] coordinateY = new int[numBobble];
+   
+    
+    public void getCoordinateX(int[] coordinateX) {
+    	Map.coordinateX=coordinateX;
+    }
+    public void getCoordinateY(int[] coordinateY) {
+    	Map.coordinateY=coordinateY;
+    }
+    public int[] getCoordinateX() {
+        return coordinateX;
+    }
+    public int[] getCoordinateY() {
+        return coordinateY;
+    }
+   
     public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
-        this.collectBallMap=collectBall;
+        Map.collectBallMap=collectBall;
         BufferedReader reader = null;
         try {
 
@@ -84,31 +115,37 @@ public class Map {
                                         
                                         lineDimensionY = gameYSize;
                                         lineDimensionXLine = 0;
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 2:
                                         
                                         lineDimensionY = gameYSize+RADIUS;
                                         lineDimensionXLine = (int) (gameXSize/SCARTO_X);
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 3:
                                         
                                         lineDimensionY = gameYSize+(2*RADIUS);
                                         lineDimensionXLine = 0;
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 4:
                                         
                                         lineDimensionY = gameYSize+(3*RADIUS);
                                         lineDimensionXLine = (int) (gameXSize/SCARTO_X);
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 5:
                                         
                                         lineDimensionY = gameYSize+(4*RADIUS);
                                         lineDimensionXLine = 0;
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 6:
                                         
                                         lineDimensionY = gameYSize+(5*RADIUS);
                                         lineDimensionXLine =(int) (gameXSize/SCARTO_X);
+                                        finalX=lineDimensionXLine;
                                         break;
                                 default:
                                         break;
@@ -154,6 +191,7 @@ public class Map {
                 }
                         
                 ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
+                loadCoordinate(lineDimensionX,lineDimensionY);
                 collectBallMap.addBall(ballMap);              
                 }
                 
@@ -166,4 +204,14 @@ public class Map {
                 posLine++;
         }
     }
+    private void loadCoordinate(int xMap, int yMap) {
+    	
+    	for (int iterX=0; iterX<collectBallMap.numBolle(); iterX++) {
+      	  coordinateX[iterX] = xMap;
+      	}
+      for (int iterY=0; iterY<collectBallMap.numBolle(); iterY++) {
+    	  coordinateY[iterY] = yMap;
+    	}
+    }
+    
 }
