@@ -3,7 +3,7 @@ package dev.spaccabolle.entity;
 import java.io.BufferedReader;
 import java.io.File;
 
-import dev.spaccabolle.entity.Ball;
+
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,13 +12,14 @@ import java.io.IOException;
 import dev.spaccabolle.Launcher;
 
 public class Map {
-    public static final double SCARTO_X = 3.5;
+    public static final double SCARTO_X = 10;
     
     
     public static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
-    public static final double SCARTO_Y = RADIUS-11;
+    public static final double SCARTO_Y = RADIUS+3;
     private String line = null;
     public Ball ballMap = null;
+    public static double finalX = 0;
     
     // coordinate posizionamento su colonne e righe
     public int lineDimensionX = Ball.LEFT_BOUNCE;
@@ -114,32 +115,37 @@ public class Map {
                                         
                                         lineDimensionY = gameYSize;
                                         lineDimensionXLine = 0;
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 2:
                                         
                                         lineDimensionY = gameYSize+RADIUS;
                                         lineDimensionXLine = (int) (gameXSize/SCARTO_X);
-                                        
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 3:
                                         
                                         lineDimensionY = gameYSize+(2*RADIUS);
                                         lineDimensionXLine = 0;
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 4:
                                         
                                         lineDimensionY = gameYSize+(3*RADIUS);
                                         lineDimensionXLine = (int) (gameXSize/SCARTO_X);
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 5:
                                         
                                         lineDimensionY = gameYSize+(4*RADIUS);
                                         lineDimensionXLine = 0;
+                                        finalX=lineDimensionXLine;
                                         break;
                                 case 6:
                                         
                                         lineDimensionY = gameYSize+(5*RADIUS);
                                         lineDimensionXLine =(int) (gameXSize/SCARTO_X);
+                                        finalX=lineDimensionXLine;
                                         break;
                                 default:
                                         break;

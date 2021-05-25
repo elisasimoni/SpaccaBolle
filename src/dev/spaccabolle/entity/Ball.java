@@ -16,21 +16,25 @@ public class Ball extends DynamicObject{
    
 
     public float directMove;
-    private int color;
-    public boolean isMove;
+    public int color;
    
+
+    public boolean isMove;
+    
 
     public Ball(float x, float y, int width, int height, int color) {
         super(x, y, width, height);
         this.color=color;
         this.directMove=0;
         this.isMove=false;
-
-        System.out.println("ball creata");
         
 
+        System.out.println("ball creata" + this.color);
 
     }
+    public int getColor() {
+		return this.color;
+	}
     
     
     public void direct() {
@@ -43,7 +47,18 @@ public class Ball extends DynamicObject{
             this.isMove=false;
         }
     }
-
+    private void eliminate() {
+    	this.setHeight(0);
+    	this.setWidth(0);
+    }
+    
+    public void ballStatus() {
+    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color);  
+    	Map.collectBallMap.addBall(b);/*aggiungo la bolla alla mappa*/
+    	
+    
+    	
+    }
     public void tick() {
     	
         if(isMove) {
@@ -53,7 +68,10 @@ public class Ball extends DynamicObject{
             
             
             if(Map.collectBallMap.cordXMap(this.x) && Map.collectBallMap.cordYMap(this.y)) {
-                     	this.isMove=false;
+            	this.isMove=false;   
+                ballStatus();
+                eliminate();  
+                
             }
             
             move();
@@ -61,6 +79,8 @@ public class Ball extends DynamicObject{
         }
         
     }
+    
+    
 
     public void render(Graphics g) {
     	

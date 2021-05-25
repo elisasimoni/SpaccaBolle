@@ -18,14 +18,9 @@ public class CollectBall {
     public void tick() {
         Iterator<Ball> ba = collectionBall.iterator();
         while(ba.hasNext()) {
-            Ball b = ba.next();
+            Ball b = ba.next(); 	
             b.tick();
         }
-    }
-    
-    public void compareBobble() {
-    	
-    	
     }
     
   
@@ -45,8 +40,8 @@ public class CollectBall {
 	public boolean cordXMap(float coordinate) {
 		boolean tmp = false;
 		 for(Ball bobble: collectionBall) {
-			 if(coordinate > cordX(bobble)) {
-				 System.out.println(coordinate + " x");
+			 if(coordinate >= cordX(bobble)) {
+				 
 				 tmp=true;
 			 } 
 		 }
@@ -62,10 +57,8 @@ public class CollectBall {
 	public boolean cordYMap(float coordinate) {
 		boolean tmp = false;
 		 for(Ball bobble: collectionBall) {
-			 System.out.println(cordY(bobble) + "y all'inizio");
-			 if(coordinate > cordY(bobble) && coordinate < ((5*Map.RADIUS)-Map.SCARTO_Y)) {
-				 System.out.println(coordinate + " y");
-				 System.out.println(cordY(bobble) + "y");
+			 if(coordinate < (cordY(bobble)+Map.SCARTO_Y) ) {
+				 
 				 tmp=true;
 			 } 
 		 }

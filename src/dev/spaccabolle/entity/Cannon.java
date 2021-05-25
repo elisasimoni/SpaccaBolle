@@ -14,6 +14,7 @@ public class Cannon extends DynamicObject{
     private static final int SCARTO_X_FRECCIA=34;
     private static final int SCARTO_X_BOLLA=23;
     private static final int SCARTO_Y_BOLLA=15;
+
     
     private boolean ballPos;
     private Random rand = new Random();
@@ -28,7 +29,13 @@ public class Cannon extends DynamicObject{
         this.collectBall=collectBall;
         this.setSpeed(5);
         this.ballPos=true;
+        
         ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+        while(ball.color==0) {
+        
+        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+        	
+        }
         collectBall.addBall(ball);
     }
 
@@ -44,8 +51,13 @@ public class Cannon extends DynamicObject{
     }
     
     private void newBall() {
-        if(!ball.isMove && !ballPos) {
+        if(!ball.isMove && !ballPos ) {
             ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+            while(ball.color==0) {
+                
+            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+            	
+            }
             collectBall.addBall(ball);
             ballPos=true;
             System.out.println("ball creata");
