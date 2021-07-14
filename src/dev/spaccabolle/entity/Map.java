@@ -22,7 +22,7 @@ public class Map {
     public static double finalX = 0;
     
     // coordinate posizionamento su colonne e righe
-    public int lineDimensionX = Ball.LEFT_BOUNCE;
+    public int lineDimensionX = Launcher.GAME_WIDTH;
     public int lineDimensionY = Launcher.GAME_HEIGHT;
     
     private int lineDimensionXLine = 0;
@@ -34,7 +34,7 @@ public class Map {
 	public static void setCollectBallMap(CollectBall collectBallMap) {
 		Map.collectBallMap = collectBallMap;
 	}
-	public static int numBobble = 32;
+	public static int numBobble = 500;
     public static int[] coordinateX = new int[numBobble];
     public static int[] coordinateY = new int[numBobble];
    

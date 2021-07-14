@@ -3,7 +3,6 @@ package dev.spaccabolle.entity;
 public abstract class DynamicObject extends Entity{
     
     public static final int DEFAULT_SPEED = 10;
-    
     protected float speed;
     protected double xMove,yMove;
 
@@ -26,6 +25,9 @@ public abstract class DynamicObject extends Entity{
     public void setSpeed(float speed) {
         this.speed = speed;
     }
+    
+   
+    
 
     public double getxMove() {
         return xMove;
