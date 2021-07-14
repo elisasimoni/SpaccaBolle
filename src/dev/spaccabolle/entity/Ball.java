@@ -11,8 +11,8 @@ import dev.spaccabolle.gfx.Assets;
 public class Ball extends DynamicObject{
     
     public static final int LEFT_BOUNCE = Launcher.GAME_WIDTH/2-200;
-    private static final int RIGHT_BOUNCE = Launcher.GAME_WIDTH/2+200;
-    public static final int BOBBLE_SIZE = 50;
+    public static final int RIGHT_BOUNCE = Launcher.GAME_WIDTH/2+200;
+    public static final int BOBBLE_SIZE = 70;
    
 
     public float directMove;
@@ -62,7 +62,7 @@ public class Ball extends DynamicObject{
     public void tick() {
     	
         if(isMove) {
-            if(this.x < LEFT_BOUNCE|| this.x > RIGHT_BOUNCE) {
+            if(this.x < 0|| this.x > 840) {
             	  this.xMove*=-1;
             }
             

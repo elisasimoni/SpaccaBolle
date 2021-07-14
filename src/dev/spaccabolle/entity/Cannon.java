@@ -14,9 +14,10 @@ public class Cannon extends DynamicObject{
     private static final int SCARTO_X_FRECCIA=34;
     private static final int SCARTO_X_BOLLA=23;
     private static final int SCARTO_Y_BOLLA=15;
+    private static final int SCARTO_CANNON_SX = 175;
 
     
-    private boolean ballPos;
+    private boolean ballPos,bounce;
     private Random rand = new Random();
     
     private Ball ball;
@@ -27,13 +28,13 @@ public class Cannon extends DynamicObject{
     public Cannon(float x, float y, int width, int height, CollectBall collectBall) {
         super(x, y, width, height);
         this.collectBall=collectBall;
-        this.setSpeed(5);
+        this.setSpeed(50);
         this.ballPos=true;
-        
-        ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+        this.bounce=true;
+        ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
         while(ball.color==0) {
         
-        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
         	
         }
         collectBall.addBall(ball);
@@ -52,10 +53,10 @@ public class Cannon extends DynamicObject{
     
     private void newBall() {
         if(!ball.isMove && !ballPos ) {
-            ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+            ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
             while(ball.color==0) {
                 
-            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA,50,50,getColor());
+            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
             	
             }
             collectBall.addBall(ball);
@@ -74,7 +75,30 @@ public class Cannon extends DynamicObject{
         }
     }
     
+    public void checkBounce() {
+    	if(this.x>Ball.RIGHT_BOUNCE) {
+    		System.out.println("Superato limite destro");
+    		System.out.println(Ball.RIGHT_BOUNCE);
+    		this.bounce=false;
+    	}else if(this.x< (-Ball.LEFT_BOUNCE)+SCARTO_CANNON_SX) {
+    		this.bounce=true;
+    	}
+    }
+    
     public void tick() {
+    	checkBounce();
+    	if(this.bounce) {
+    		this.setX(this.x+(float)3.5);
+    		if(!ball.isMove) {
+    			ball.setX(this.x+(float)92);
+    		
+    		}
+    	}else {
+    		this.setX(this.x-(float)3.5);
+    		if(!ball.isMove) {
+    			ball.setX(this.x+(float)92);
+    		}
+    	}
         getInput();
         shot();
         newBall();
@@ -82,11 +106,11 @@ public class Cannon extends DynamicObject{
 
     public void render(Graphics g) {
         AffineTransform at = AffineTransform.getTranslateInstance(Launcher.GAME_WIDTH/2-Cannon.SCARTO_X_FRECCIA,674);
-        at.rotate(Math.toRadians(angle),Assets.arrow.getWidth()/2,Assets.arrow.getHeight()/2);
-        at.scale(1,1);
+       /* at.rotate(Math.toRadians(angle),Assets.arrow.getWidth()/2,Assets.arrow.getHeight()/2);
+        at.scale(1,1);*/
         Graphics2D g2 = (Graphics2D)g;
-        g.drawImage(Assets.cannon,(int)this.getX(),(int)this.getY(), this.getWidth(), this.getHeight(), null);
-        g2.drawImage(Assets.arrow, at, null);
+        g.drawImage(Assets.cannon,(int)this.getX()-50,(int)this.getY()-50, this.getWidth(), this.getHeight(), null);
+        /*g2.drawImage(Assets.arrow, at, null);*/
     }
 
 }

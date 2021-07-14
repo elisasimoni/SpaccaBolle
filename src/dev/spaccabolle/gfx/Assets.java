@@ -8,7 +8,7 @@ public class Assets {
 	
 	public static BufferedImage[] btn_start,ballGroup;
 
-	public static BufferedImage cannon,arrow,dark_background;
+	public static BufferedImage cannon,arrow,dark_background, logo;
 	
 
 	public static BufferedImage readBobble = null;
@@ -17,14 +17,14 @@ public class Assets {
 		
 		System.out.println("Prova");
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/res/textures/sheet.png"));
-		cannon=ImageLoader.loadImage("/res/textures/cannone.png");
-	        arrow=ImageLoader.loadImage("/res/textures/freccia.png");
-	        dark_background=ImageLoader.loadImage("/res/textures/dark_background.jpg");
+		cannon=ImageLoader.loadImage("/res/textures/cannone1.png");
+	    arrow=ImageLoader.loadImage("/res/textures/freccia.png");
+	    logo = ImageLoader.loadImage("/res/textures/Logo.png");
+	    dark_background=ImageLoader.loadImage("/res/textures/dark_background.jpg");
 		btn_start = new BufferedImage[2];
-		btn_start[0] = sheet.crop(width * 6, height * 4, width * 2, height);
-		btn_start[1] = sheet.crop(width * 6, height * 5, width * 2, height);
+		btn_start[0] = ImageLoader.loadImage("/res/textures/PLAY.png");
+		btn_start[1] = ImageLoader.loadImage("/res/textures/PlayDark1.png");
 		ballGroup = new BufferedImage[NUM_BOLLE];
-		ballGroup[0] = ImageLoader.loadImage("/res/textures/ballzerostatic.png");
 	    ballGroup[1] = ImageLoader.loadImage("/res/textures/staticRedBall.png");
 	    ballGroup[2] = ImageLoader.loadImage("/res/textures/staticBlueBall.png");
 	    ballGroup[3] = ImageLoader.loadImage("/res/textures/staticGreenBall.png");

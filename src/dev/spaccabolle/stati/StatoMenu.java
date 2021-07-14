@@ -2,6 +2,7 @@ package dev.spaccabolle.stati;
 
 import java.awt.Graphics;
 import dev.spaccabolle.Handler;
+import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.ui.ClickListener;
 import dev.spaccabolle.ui.UIImageButton;
@@ -17,7 +18,7 @@ public class StatoMenu extends Stato{
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 
-		uiManager.addObject(new UIImageButton(200, 200, 128, 64, Assets.btn_start, new ClickListener() {
+		uiManager.addObject(new UIImageButton(308, 700, 220, 150, Assets.btn_start, new ClickListener() {
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
 				Stato.setState(handler.getGame().gameState);
@@ -30,6 +31,10 @@ public class StatoMenu extends Stato{
 	}
 
 	public void render(Graphics g) {
+		
+		g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
+		g.drawImage(Assets.logo, 70, 70, 650, 650, null);
 		uiManager.render(g);
+		
 	}
 }
