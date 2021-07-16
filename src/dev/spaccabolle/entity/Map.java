@@ -16,7 +16,9 @@ public class Map {
     
     
     public static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
+    
     public static final double SCARTO_Y = RADIUS+3;
+    public static final int RADIUS_NINE = RADIUS + 506;
     private String line = null;
     public Ball ballMap = null;
     public static double finalX = 0;
@@ -25,7 +27,8 @@ public class Map {
     public int lineDimensionX = Launcher.GAME_WIDTH;
     public int lineDimensionY = Launcher.GAME_HEIGHT;
     
-    private int lineDimensionXLine = 0;
+    
+    
     public static CollectBall collectBallMap;
     
     public static CollectBall getCollectBallMap() {
@@ -34,7 +37,7 @@ public class Map {
 	public static void setCollectBallMap(CollectBall collectBallMap) {
 		Map.collectBallMap = collectBallMap;
 	}
-	public static int numBobble = 500;
+	public static int numBobble = 105;
     public static int[] coordinateX = new int[numBobble];
     public static int[] coordinateY = new int[numBobble];
    
@@ -54,6 +57,8 @@ public class Map {
    
     public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
         Map.collectBallMap=collectBall;
+       
+        
         BufferedReader reader = null;
         try {
 
@@ -81,7 +86,7 @@ public class Map {
                         char elem = line.charAt(i);
                         String checkElem = String.valueOf(elem);
                         int posChar = i;
-                        if(posChar == 9) {
+                        if(posChar == 13) {
                                 posChar = 0;
                         }
                         
@@ -114,39 +119,34 @@ public class Map {
                                 case 1:
                                         
                                         lineDimensionY = gameYSize;
-                                        lineDimensionXLine = 0;
-                                        finalX=lineDimensionXLine;
                                         break;
                                 case 2:
                                         
                                         lineDimensionY = gameYSize+RADIUS;
-                                        lineDimensionXLine = (int) (gameXSize/SCARTO_X);
-                                        finalX=lineDimensionXLine;
                                         break;
                                 case 3:
                                         
                                         lineDimensionY = gameYSize+(2*RADIUS);
-                                        lineDimensionXLine = 0;
-                                        finalX=lineDimensionXLine;
                                         break;
                                 case 4:
                                         
                                         lineDimensionY = gameYSize+(3*RADIUS);
-                                        lineDimensionXLine = (int) (gameXSize/SCARTO_X);
-                                        finalX=lineDimensionXLine;
                                         break;
                                 case 5:
                                         
                                         lineDimensionY = gameYSize+(4*RADIUS);
-                                        lineDimensionXLine = 0;
-                                        finalX=lineDimensionXLine;
                                         break;
                                 case 6:
                                         
                                         lineDimensionY = gameYSize+(5*RADIUS);
-                                        lineDimensionXLine =(int) (gameXSize/SCARTO_X);
-                                        finalX=lineDimensionXLine;
                                         break;
+                                case 7:
+                                		lineDimensionY = gameYSize+(6*RADIUS);
+                                		break;
+                                case 8:
+                            			lineDimensionY = gameYSize+(7*RADIUS);
+                            			break;		
+                            	
                                 default:
                                         break;
                                 
@@ -155,35 +155,47 @@ public class Map {
                         
                         switch(posChar) {
                         case 0:
-                                lineDimensionX = gameXSize + lineDimensionXLine;
-                                
+                                lineDimensionX = RADIUS;
                                 break;
                         case 1:
-                                lineDimensionX = gameXSize+RADIUS+lineDimensionXLine;
-                                
+                                lineDimensionX = 2*RADIUS;
                                 break;
                         case 2:
-                                lineDimensionX = gameXSize+(2*RADIUS)+lineDimensionXLine;
-                                
+                                lineDimensionX = 3*RADIUS;
                                 break;
                         case 3:
-                                lineDimensionX = gameXSize+(3*RADIUS)+lineDimensionXLine;
-                                
+                                lineDimensionX = 4*RADIUS;
                                 break;
                         case 4:
-                                lineDimensionX = gameXSize+(4*RADIUS)+lineDimensionXLine;
+                                lineDimensionX = 5*RADIUS;
                                 
                                 break;
                         case 5:
-                                lineDimensionX = gameXSize+(5*RADIUS)+lineDimensionXLine;
+                                lineDimensionX = 6*RADIUS;
                                 break;
                         case 6:
-                                lineDimensionX = gameXSize+(6*RADIUS)+lineDimensionXLine;
+                                lineDimensionX = 7*RADIUS;
                                 break;
                         case 7:
-                                lineDimensionX = gameXSize+(7*RADIUS)+lineDimensionXLine
-                                ;
+                                lineDimensionX = 8*RADIUS;
+                                
                                 break;
+                        case 8:
+                            	lineDimensionX = 9*RADIUS;
+                            	break;
+                        case 9:
+                    			lineDimensionX = RADIUS_NINE;
+                    			break;
+                        case 10:
+                        		lineDimensionX = 11*RADIUS+1;
+                        		break;
+                        case 11:
+                				lineDimensionX = 12*RADIUS;
+                				break;
+                        case 12:
+            					lineDimensionX = 13*RADIUS;
+            					break;
+                       
                         default:
                                 break;
                         
