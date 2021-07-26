@@ -6,7 +6,7 @@ public class Assets {
 	
 	private static final int width = 32, height = 32;
 	
-	public static BufferedImage[] btn_start,ballGroup;
+	public static BufferedImage[] btn_start,btn_pause,btn_exit,btn_load,ballGroup;
 
 	public static BufferedImage cannon,arrow,dark_background, logo;
 	
@@ -17,13 +17,22 @@ public class Assets {
 		
 		System.out.println("Prova");
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/res/textures/sheet.png"));
-		cannon=ImageLoader.loadImage("/res/textures/cannone1.png");
+		cannon=ImageLoader.loadImage("/res/textures/cannone.png");
 	    arrow=ImageLoader.loadImage("/res/textures/freccia.png");
 	    logo = ImageLoader.loadImage("/res/textures/Logo.png");
 	    dark_background=ImageLoader.loadImage("/res/textures/dark_background.jpg");
 		btn_start = new BufferedImage[2];
 		btn_start[0] = ImageLoader.loadImage("/res/textures/PLAY.png");
-		btn_start[1] = ImageLoader.loadImage("/res/textures/PlayDark1.png");
+		btn_start[1] = ImageLoader.loadImage("/res/textures/PlayDark.png");
+		btn_pause = new BufferedImage[2];
+                btn_pause[0] = ImageLoader.loadImage("/res/textures/pause.png");
+                btn_pause[1] = ImageLoader.loadImage("/res/textures/PauseDark.png");
+                btn_exit = new BufferedImage[2];
+                btn_exit[0] = ImageLoader.loadImage("/res/textures/exit.png");
+                btn_exit[1] = ImageLoader.loadImage("/res/textures/exitDark.png");
+                btn_load = new BufferedImage[2];
+                btn_load[0] = ImageLoader.loadImage("/res/textures/load.png");
+                btn_load[1] = ImageLoader.loadImage("/res/textures/loadDark.png");
 		ballGroup = new BufferedImage[NUM_BOLLE];
 	    ballGroup[1] = ImageLoader.loadImage("/res/textures/staticRedBall.png");
 	    ballGroup[2] = ImageLoader.loadImage("/res/textures/staticBlueBall.png");

@@ -2,12 +2,14 @@ package dev.spaccabolle.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.io.File;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class Display {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private Canvas canvas;
 	
 	private String title;
@@ -34,9 +36,23 @@ public class Display {
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
 		canvas.setFocusable(false);
-		
 		frame.add(canvas);
 		frame.pack();
+	}
+	
+	public static void closeDisplay() {
+	    frame.setVisible(false);
+	    frame.dispose();
+	}
+	
+	public static File getFile() {
+	    JFileChooser fileChooser = new JFileChooser();
+            int response = fileChooser.showOpenDialog(frame);
+            if(response == JFileChooser.APPROVE_OPTION) {
+                File file= new File(fileChooser.getSelectedFile().getAbsolutePath());
+                return file;
+            }
+            return null;
 	}
 
 	public Canvas getCanvas(){

@@ -1,8 +1,13 @@
 package dev.spaccabolle.stati;
 
 import java.awt.Graphics;
+import java.io.File;
+
+import javax.swing.JFileChooser;
+
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
+import dev.spaccabolle.display.Display;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.ui.ClickListener;
 import dev.spaccabolle.ui.UIImageButton;
@@ -18,12 +23,25 @@ public class StatoMenu extends Stato{
 		uiManager = new UIManager(handler);
 		handler.getMouseManager().setUIManager(uiManager);
 
-		uiManager.addObject(new UIImageButton(308, 700, 220, 150, Assets.btn_start, new ClickListener() {
+		uiManager.addObject(new UIImageButton(50, 600, 220, 150, Assets.btn_start, new ClickListener() {
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
 				Stato.setState(handler.getGame().gameState);
 			}
 		}));
+		uiManager.addObject(new UIImageButton(308, 600, 220, 150, Assets.btn_load, new ClickListener() {
+                    public void onClick() {
+                            File file;
+                            file=Display.getFile();
+                            System.out.println(file);
+                    }
+            }));
+		uiManager.addObject(new UIImageButton(566, 600, 220, 150, Assets.btn_exit, new ClickListener() {
+                    public void onClick() {
+                            handler.getMouseManager().setUIManager(null);
+                            Display.closeDisplay();
+                    }
+            }));
 	}
 
 	public void tick() {
