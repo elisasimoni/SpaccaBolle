@@ -10,6 +10,7 @@ public class UIManager {
 
 	private Handler handler;
 	private ArrayList<UIObject> objects;
+	private static final int yBtnLimits = 600;
 	
 	public UIManager(Handler handler){
 		this.handler = handler;
@@ -17,8 +18,13 @@ public class UIManager {
 	}
 	
 	public void tick(){
-		for(UIObject o : objects)
+		for(UIObject o : objects) {
 			o.tick();
+			if(o.y>yBtnLimits) {
+			    o.y--;
+			    o.bounds.y=(int) o.y;
+			}
+		}
 	}
 	
 	public void render(Graphics g){
