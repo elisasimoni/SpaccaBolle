@@ -21,7 +21,7 @@ public class UIManager {
 		for(UIObject o : objects) {
 			o.tick();
 			if(o.y>yBtnLimits) {
-			    o.y--;
+			    o.y-=2;
 			    o.bounds.y=(int) o.y;
 			}
 		}

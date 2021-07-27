@@ -48,7 +48,7 @@ public class StatoMenu extends Stato{
 	}
 	
 	private void moveLogo() {
-	    yMovelogo+=1.5;
+	    yMovelogo+=2;
 	}
 	
 	private void moveDragon() {
