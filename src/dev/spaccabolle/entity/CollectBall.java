@@ -37,38 +37,17 @@ public class CollectBall {
 		return b.y;
     	
     }
-	public boolean cordXMap(float coordinate) {
-		boolean tmp = false;
-		 for(Ball bobble: collectionBall) {
-			 if(coordinate >= cordX(bobble)) {
-				 
-				 tmp=true;
-			 } 
-		 }
-		if(tmp == true) {
-			return true;
-		}
-		else {
-			return false;
-		}
 	
-	}
-	
-	public boolean cordYMap(float coordinate) {
-		boolean tmp = false;
-		 for(Ball bobble: collectionBall) {
-			 if(coordinate < (cordY(bobble)+Map.SCARTO_Y) ) {
-				 
-				 tmp=true;
-			 } 
-		 }
-		if(tmp == true) {
-			return tmp;
-		}
-		else {
-			return tmp;
-		}
-	
+	public boolean check(float coordinateX,float coordinateY,Ball b) {
+            boolean check = false;
+            for(Ball bobble:collectionBall) {
+                if(coordinateY < (cordY(bobble)+Map.SCARTO_Y)){
+                    if(coordinateX >= cordX(bobble) && coordinateX <= (cordX(bobble))+bobble.width ) {
+                        check=true;
+                    }
+                }
+            }
+            return check;
 	}
     
     public ArrayList<Ball> getBolle() {

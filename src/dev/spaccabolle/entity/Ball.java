@@ -33,8 +33,8 @@ public class Ball extends DynamicObject{
 
     }
     public int getColor() {
-		return this.color;
-	}
+	return this.color;
+    }
     
     
     public void direct() {
@@ -67,7 +67,7 @@ public class Ball extends DynamicObject{
             }
             
             
-            if(Map.collectBallMap.cordXMap(this.x) && Map.collectBallMap.cordYMap(this.y)) {
+            if(Map.collectBallMap.check(this.x,this.y,getBall())) {
             	this.isMove=false;   
                 ballStatus();
                 eliminate();  
@@ -75,7 +75,6 @@ public class Ball extends DynamicObject{
             }
             
             move();
-            destroy();
         }
         
     }
@@ -85,6 +84,10 @@ public class Ball extends DynamicObject{
     public void render(Graphics g) {
     	
 		g.drawImage(Assets.ballGroup[color], (int)x, (int)y, width, height, null);
+    }
+    
+    private Ball getBall() {
+        return this;
     }
 
 }
