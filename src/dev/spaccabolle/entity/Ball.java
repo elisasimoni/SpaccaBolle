@@ -47,7 +47,7 @@ public class Ball extends DynamicObject{
             this.isMove=false;
         }
     }
-    private void eliminate() {
+    public void eliminate() {
     	this.setHeight(0);
     	this.setWidth(0);
     }
@@ -71,8 +71,13 @@ public class Ball extends DynamicObject{
             	this.isMove=false;   
                 ballStatus();
                 eliminate();  
+                if(Map.collectBallMap.tris(getBall())) {
+                	eliminate();
+                }
                 
             }
+            
+            
             
             move();
         }
