@@ -8,7 +8,7 @@ public class Assets {
 	
 	public static BufferedImage[] btn_start,btn_pause,btn_exit,btn_load,ballGroup, dragon;
 
-	public static BufferedImage cannon,arrow,dark_background, logo;
+	public static BufferedImage cannon,arrow,dark_background, logo, game_over;
 	
 
 	public static BufferedImage readBobble = null;
@@ -20,6 +20,7 @@ public class Assets {
 		cannon=ImageLoader.loadImage("/res/textures/cannone.png");
 	    arrow=ImageLoader.loadImage("/res/textures/freccia.png");
 	    logo = ImageLoader.loadImage("/res/textures/Logo.png");
+	    game_over = ImageLoader.loadImage("/res/textures/GAMEOVER.jpeg");
 	    dragon = new BufferedImage[2];
             dragon[0] = ImageLoader.loadImage("/res/textures/draghetto.png");
             dragon[1] = ImageLoader.loadImage("/res/textures/draghetto2.png");

@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.TreeMap;
+import java.util.Vector;
 
 import dev.spaccabolle.Launcher;
 
@@ -16,8 +18,10 @@ public class Map {
     
     
     public static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
+    public static final int NROW =  500;
+    public static final int NCOL = 500;
     
-    public static final double SCARTO_Y = RADIUS+3;
+    public static final double SCARTO_Y = RADIUS+5;
     public static final int RADIUS_NINE = RADIUS + 506;
     private String line = null;
     public Ball ballMap = null;
@@ -26,6 +30,12 @@ public class Map {
     // coordinate posizionamento su colonne e righe
     public int lineDimensionX = Launcher.GAME_WIDTH;
     public int lineDimensionY = Launcher.GAME_HEIGHT;
+    public static Ball[][] mapMatrix = new Ball[NROW][NCOL];
+    public static float[] posX = new float[NROW]; 
+    TreeMap<Integer,Ball> matrix = new TreeMap<Integer,Ball>();
+    
+    
+    
     
     
     
@@ -37,12 +47,15 @@ public class Map {
 	public static void setCollectBallMap(CollectBall collectBallMap) {
 		Map.collectBallMap = collectBallMap;
 	}
-	public static int numBobble = 105;
+	public static int numBobble = 200;
     public static int[] coordinateX = new int[numBobble];
     public static int[] coordinateY = new int[numBobble];
    
     
-    public void getCoordinateX(int[] coordinateX) {
+    public Ball[][] getMapmatrix() {
+		return mapMatrix;
+	}
+	public void getCoordinateX(int[] coordinateX) {
     	Map.coordinateX=coordinateX;
     }
     public void getCoordinateY(int[] coordinateY) {
@@ -54,11 +67,13 @@ public class Map {
     public int[] getCoordinateY() {
         return coordinateY;
     }
+    
+   
+	
+    
    
     public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
         Map.collectBallMap=collectBall;
-       
-        
         BufferedReader reader = null;
         try {
 
@@ -119,6 +134,7 @@ public class Map {
                                 case 1:
                                         
                                         lineDimensionY = gameYSize;
+                                        
                                         break;
                                 case 2:
                                         
@@ -156,44 +172,56 @@ public class Map {
                         switch(posChar) {
                         case 0:
                                 lineDimensionX = RADIUS;
+                                
                                 break;
                         case 1:
                                 lineDimensionX = 2*RADIUS;
+                                
                                 break;
                         case 2:
                                 lineDimensionX = 3*RADIUS;
+                                
                                 break;
                         case 3:
                                 lineDimensionX = 4*RADIUS;
+                                
                                 break;
                         case 4:
                                 lineDimensionX = 5*RADIUS;
                                 
+                                
                                 break;
                         case 5:
                                 lineDimensionX = 6*RADIUS;
+                               
                                 break;
                         case 6:
                                 lineDimensionX = 7*RADIUS;
+                               
                                 break;
                         case 7:
                                 lineDimensionX = 8*RADIUS;
                                 
+                                
                                 break;
                         case 8:
                             	lineDimensionX = 9*RADIUS;
+                            	
                             	break;
                         case 9:
                     			lineDimensionX = RADIUS_NINE;
+                    			
                     			break;
                         case 10:
                         		lineDimensionX = 11*RADIUS+1;
+                        		
                         		break;
                         case 11:
                 				lineDimensionX = 12*RADIUS;
                 				break;
                         case 12:
             					lineDimensionX = 13*RADIUS;
+            					
             					break;
                        
                         default:
@@ -203,7 +231,12 @@ public class Map {
                 }
                         
                 ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
-                loadCoordinate(lineDimensionX,lineDimensionY);
+               
+                loadCoordinate(lineDimensionX,lineDimensionY, posLine, posChar, readBobble, mapMatrix);
+                
+                System.out.println("MATRIX: " + mapMatrix[posLine][posChar]); //works
+                matrix.put(posLine, ballMap);
+                posX[posChar] = lineDimensionX;
                 collectBallMap.addBall(ballMap);              
                 }
                 
@@ -215,15 +248,16 @@ public class Map {
                 }
                 posLine++;
         }
+        
     }
-    private void loadCoordinate(int xMap, int yMap) {
+    private void loadCoordinate(int xMap, int yMap, int row, int col, int color, Ball[][] map) {
     	
-    	for (int iterX=0; iterX<collectBallMap.numBolle(); iterX++) {
-      	  coordinateX[iterX] = xMap;
-      	}
-      for (int iterY=0; iterY<collectBallMap.numBolle(); iterY++) {
-    	  coordinateY[iterY] = yMap;
-    	}
-    }
+    	 
+      	 map[row][col]= new Ball(xMap,yMap,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,color); /*caricamento matrice*/
+      	 
+      	
+      }
+    
+    
     
 }
