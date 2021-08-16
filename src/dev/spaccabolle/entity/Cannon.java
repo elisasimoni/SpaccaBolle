@@ -39,6 +39,8 @@ public class Cannon extends DynamicObject{
         }
         collectBall.addBall(ball);
     }
+    
+  
 
     private int getColor() {
         return rand.nextInt(4);
@@ -50,6 +52,7 @@ public class Cannon extends DynamicObject{
         if(KeyManager.left && this.angle>-60)
             angle += (int)-speed;
     }
+    
     
     private void newBall() {
         if(!ball.isMove && !ballPos ) {
@@ -68,11 +71,23 @@ public class Cannon extends DynamicObject{
     private void shot() {
         if(ballPos && KeyManager.enter) {
             System.out.println("ball shot");
+            System.out.println("COOORD SHOT: " + ball.y);
+            boolean iter = true;
+            int i=0;
+            while(iter) {
+            	if(ball.x >= Map.posX[i] && ball.x < Map.posX[i+1]) {
+            		ball.x = Map.posX[i];
+            		iter=false;
+            	}
+            	i++;
+            }
+            
             ball.directMove=(float) Math.toDegrees(Math.toRadians(angle-90));
             ball.direct();
             ball.isMove=true;
             ballPos=false;
-        }
+            
+            }
     }
     
     public void checkBounce() {
@@ -80,7 +95,7 @@ public class Cannon extends DynamicObject{
     		System.out.println("Superato limite destro");
     		System.out.println(Ball.RIGHT_BOUNCE);
     		this.bounce=false;
-    	}else if(this.x< (-Ball.LEFT_BOUNCE)+SCARTO_CANNON_SX) {
+    	}else if(this.x< (-Ball.LEFT_BOUNCE+190)) {
     		this.bounce=true;
     	}
     }
