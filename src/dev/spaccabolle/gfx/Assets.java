@@ -17,7 +17,7 @@ public class Assets {
 		
 		System.out.println("Prova");
 		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/res/textures/sheet.png"));
-		cannon=ImageLoader.loadImage("/res/textures/cannone.png");
+		cannon=ImageLoader.loadImage("/res/textures/cannone1.png");
 	    arrow=ImageLoader.loadImage("/res/textures/freccia.png");
 	    logo = ImageLoader.loadImage("/res/textures/Logo.png");
 	    game_over = ImageLoader.loadImage("/res/textures/GAMEOVER.jpeg");

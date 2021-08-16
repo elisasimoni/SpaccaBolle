@@ -52,7 +52,7 @@ public class Map {
     public static int[] coordinateY = new int[numBobble];
    
     
-    public Ball[][] getMapmatrix() {
+    public static Ball[][] getMapmatrix() {
 		return mapMatrix;
 	}
 	public void getCoordinateX(int[] coordinateX) {
@@ -234,7 +234,6 @@ public class Map {
                
                 loadCoordinate(lineDimensionX,lineDimensionY, posLine, posChar, readBobble, mapMatrix);
                 
-                System.out.println("MATRIX: " + mapMatrix[posLine][posChar]); //works
                 matrix.put(posLine, ballMap);
                 posX[posChar] = lineDimensionX;
                 collectBallMap.addBall(ballMap);              
