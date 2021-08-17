@@ -30,7 +30,9 @@ public class StatoMenu extends Stato{
 			public void onClick() {
 				handler.getMouseManager().setUIManager(null);
 				Stato.setState(handler.getGame().gameState);
+				
 			}
+			
 		}));
 		uiManager.addObject(new UIImageButton(308, YMoveButton, 220, 150, Assets.btn_load, new ClickListener() {
                     public void onClick() {

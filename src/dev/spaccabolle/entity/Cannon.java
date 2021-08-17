@@ -13,7 +13,7 @@ import dev.spaccabolle.stati.StatoGioco;
 public class Cannon extends DynamicObject{
     
     private static final int SCARTO_X_FRECCIA=34;
-    private static final int SCARTO_X_BOLLA=23;
+    private static final int SCARTO_X_BOLLA=30;
     private static final int SCARTO_Y_BOLLA=15;
     private static final int SCARTO_CANNON_SX = 175;
 
@@ -33,10 +33,10 @@ public class Cannon extends DynamicObject{
         this.setSpeed(50);
         this.ballPos=true;
         this.bounce=true;
-        ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+        ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
         while(ball.color==0) {
         
-        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
         	
         }
         collectBall.addBall(ball);
@@ -58,10 +58,10 @@ public class Cannon extends DynamicObject{
     
     private void newBall() {
         if(!ball.isMove && !ballPos ) {
-            ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+            ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
             while(ball.color==0) {
                 
-            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-50,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
             	
             }
             collectBall.addBall(ball);
@@ -171,7 +171,7 @@ public class Cannon extends DynamicObject{
        /* at.rotate(Math.toRadians(angle),Assets.arrow.getWidth()/2,Assets.arrow.getHeight()/2);
         at.scale(1,1);*/
         Graphics2D g2 = (Graphics2D)g;
-        g.drawImage(Assets.cannon,(int)this.getX()-50,(int)this.getY()-50, this.getWidth(), this.getHeight(), null);
+        g.drawImage(Assets.cannon,(int)this.getX()-50,(int)this.getY()-280, this.getWidth(), this.getHeight(), null);
         /*g2.drawImage(Assets.arrow, at, null);*/
     }
 
