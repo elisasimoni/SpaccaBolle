@@ -93,7 +93,7 @@ public class Map {
                 e1.printStackTrace();
         }
         
-        int posLine = 1;
+        int posLine = 0;
         while(line!=null) {
                 for(int i = 0; i < line.length(); i++) {
                         
@@ -131,37 +131,40 @@ public class Map {
                         
                         
                         switch(posLine) {
-                                case 1:
+                                case 0:
                                         
                                         lineDimensionY = gameYSize;
                                         
                                         break;
-                                case 2:
+                                case 1:
                                         
                                         lineDimensionY = gameYSize+RADIUS;
                                         break;
-                                case 3:
+                                case 2:
                                         
                                         lineDimensionY = gameYSize+(2*RADIUS);
                                         break;
-                                case 4:
+                                case 3:
                                         
                                         lineDimensionY = gameYSize+(3*RADIUS);
                                         break;
-                                case 5:
+                                case 4:
                                         
                                         lineDimensionY = gameYSize+(4*RADIUS);
                                         break;
-                                case 6:
+                                case 5:
                                         
                                         lineDimensionY = gameYSize+(5*RADIUS);
                                         break;
-                                case 7:
+                                case 6:
                                 		lineDimensionY = gameYSize+(6*RADIUS);
                                 		break;
-                                case 8:
+                                case 7:
                             			lineDimensionY = gameYSize+(7*RADIUS);
                             			break;		
+                                case 8:
+                        				lineDimensionY = gameYSize+(8*RADIUS);
+                        				break;	
                             	
                                 default:
                                         break;
@@ -213,14 +216,14 @@ public class Map {
                     			
                     			break;
                         case 10:
-                        		lineDimensionX = 11*RADIUS+1;
+                        		lineDimensionX = 11*RADIUS+2;
                         		
                         		break;
                         case 11:
-                				lineDimensionX = 12*RADIUS;
+                				lineDimensionX = 12*RADIUS+2;
                 				break;
                         case 12:
-            					lineDimensionX = 13*RADIUS;
+            					lineDimensionX = 13*RADIUS+2;
             					
             					break;
                        

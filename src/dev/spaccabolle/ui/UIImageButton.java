@@ -26,5 +26,6 @@ public class UIImageButton extends UIObject {
 	public void onClick() {
 		clicker.onClick();
 	}
+	
 
 }

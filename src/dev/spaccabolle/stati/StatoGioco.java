@@ -42,21 +42,20 @@ public class StatoGioco extends Stato{
 		cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
 		map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
 		
-		uiManager.addObject(new UIImageButton(40, 600, 200, 90, Assets.btn_save, new ClickListener() {
-			public void onClick() {
-				
-				
-			}
-		}));
-		uiManager.addObject(new UIImageButton(330, 600, 200, 90, Assets.btn_pause, new ClickListener() {
-			public void onClick() {
-		
-				
-			}
-		}));
-		uiManager.addObject(new UIImageButton(600, 600, 200, 90, Assets.btn_exit_statoGioco, new ClickListener() {
-			public void onClick() {
+		ClickListener clicker = null;
+		uiManager.addObject(new UIImageButton(100, 800, 200, 90, Assets.btn_save, clicker));
+		clicker.onClick();
 			
+		uiManager.addObject(new UIImageButton(330, 800, 200, 90, Assets.btn_pause, new ClickListener() {
+			public void onClick() {
+				System.out.println("SONO QUIIIII");
+				handler.getMouseManager().setUIManager(null);
+				Stato.setState(handler.getGame().menuState);
+				
+			}
+		}));
+		uiManager.addObject(new UIImageButton(600, 800, 200, 90, Assets.btn_exit_statoGioco, new ClickListener() {
+			public void onClick() {
 				
 			}
 		}));
@@ -101,12 +100,13 @@ public class StatoGioco extends Stato{
 		}
 		
 		public void tick() {
+			
 			getInput();
 			cannon.tick();
 		    collectBallMap.tick();
 		    collectBall.tick();
 		    
-		   // uiManager.tick();
+		  //  uiManager.tick();
 		}
 
 	public void render(Graphics g) {

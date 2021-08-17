@@ -69,42 +69,17 @@ public class CollectBall {
            boolean check = false; //change to false
            
            boolean control=false;
+           boolean control2=false;
            int saveCol=0;
            
-          /* for(; col<13;col++) {
-        	 
-			  if(coordinateX==mapCollect[1][col].x) {
-				  System.out.println("SONO DENTRO X");
-				  b.x=mapCollect[1][col].x;
-				  control=true;  
-				  saveCol=col;
-			}
-           }
-           if(control) {
-			for(; row<Map.NCOL; row++) {				
-					  if(mapCollect[row][saveCol].color==0) {
-						  System.out.println("SONO DENTRO Y");
-						  b.y=mapCollect[row][saveCol].y;
-						  mapCollect[row][saveCol]=b;
-						  if(coordinateY>600) {			
-	    						gameOver=true;
-	    						
-	    					}
-	    					
-	                        check=true;	
-					  }
-				  
-				  
-			  }
-           }*/
-           
+         
            
            for(Ball bobble:collectionBall) {
         	   
         	   
         	   
         	   if(coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0){
-        		   if(coordinateX >= cordX(bobble) && coordinateX <= (cordX(bobble))+bobble.width ) {
+        		   if(coordinateX >= cordX(bobble) && coordinateX <= (cordX(bobble))+bobble.width-15 ) {
         			   
         			   if(cordY(bobble)>169) {
       						b.x =cordX(bobble);
@@ -112,27 +87,39 @@ public class CollectBall {
       					}
    					b.x = cordX(bobble);
    					
-   					for(int col = 1 ; col < 13; col++) {
-    					 if(b.x==mapCollect[1][col].x ) {
+   					for(int col = 0 ; col < 12; col++) {
+    					 if(b.x==mapCollect[0][col].x ) {
     						 
     						  saveCol=col;
     					 }
     				}
    					
-  					for(int row = 1; row < 8;row++) {
-  						 System.out.println("ASSEGNAMENTO " + b.x +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);
+  					for(int row = 0; row < 7;row++) {
+  						
+  						if(control) {
+  							if(b.y>=mapCollect[row][saveCol].y-140 && b.y<= mapCollect[row][saveCol].y+140){
+  								mapCollect[row][saveCol] = b;
+  							}
+						 }
+  						
+  						
     					 if(b.y>=mapCollect[row][saveCol].y-15 && b.y<= mapCollect[row][saveCol].y+15) {
+    						 
     					 System.out.println("ASSEGNAMENTO " + b.x +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);
     					 mapCollect[row][saveCol] = b;
     					 System.out.println("mapCollect nuova bolla");
+    					 if(row>=6) {
+    						 control=true;
+    					 }
+    					 
     					}
   					}
    					
-   					if(coordinateY>600) {
+   					if(coordinateY>450) {
    						System.out.println("GAME OVER");
    						gameOver=true;
-   						for(int c=1; c<8; c++) {
-   							for(int r=1; r<13; r++) {
+   						for(int c=0; c<8; c++) {
+   							for(int r=0; r<13; r++) {
    							 System.out.print(" " + mapCollect[c][r].color + " ");
    								
    							}

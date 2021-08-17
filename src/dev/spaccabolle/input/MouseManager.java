@@ -71,6 +71,14 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		switch(e.getButton())
+	     { 
+	      case MouseEvent.NOBUTTON : // do stuff on button release
+	           break;
+	      case MouseEvent.BUTTON1 : // do stuff on click
+	           break;
+
+	     }
 		
 	}
 
