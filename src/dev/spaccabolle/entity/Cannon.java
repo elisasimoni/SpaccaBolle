@@ -8,6 +8,7 @@ import java.util.Random;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
+import dev.spaccabolle.stati.StatoGioco;
 
 public class Cannon extends DynamicObject{
     
@@ -24,7 +25,8 @@ public class Cannon extends DynamicObject{
     private CollectBall collectBall;
     
     private int angle=0;
-
+    public int difficult = 1;
+    
     public Cannon(float x, float y, int width, int height, CollectBall collectBall) {
         super(x, y, width, height);
         this.collectBall=collectBall;
@@ -69,7 +71,7 @@ public class Cannon extends DynamicObject{
      }
     
     private void shot() {
-        if(ballPos && KeyManager.enter) {
+        if(ballPos && KeyManager.enter && StatoGioco.pause == false) {
             System.out.println("ball shot");
             System.out.println("COOORD SHOT: " + ball.y);
             boolean iter = true;
@@ -100,20 +102,65 @@ public class Cannon extends DynamicObject{
     	}
     }
     
-    public void tick() {
-    	checkBounce();
-    	if(this.bounce) {
-    		this.setX(this.x+(float)3.5);
-    		if(!ball.isMove) {
-    			ball.setX(this.x+(float)92);
-    		
-    		}
-    	}else {
-    		this.setX(this.x-(float)3.5);
-    		if(!ball.isMove) {
-    			ball.setX(this.x+(float)92);
-    		}
+    public void difficults() {
+    	if(StatoGioco.pause == false) {
+	    	switch(difficult) {
+	    	
+	    	case 1: 
+		    	if(this.bounce) {
+		    		this.setX(this.x+(float)3.5);
+		    		if(!ball.isMove) {
+		    			ball.setX(this.x+(float)92);	    		
+		    		}
+		    	}else {
+		    		this.setX(this.x-(float)3.5);
+		    		if(!ball.isMove) {
+		    			ball.setX(this.x+(float)92);
+		    		}
+		    	}
+		    	break;
+	    	case 2: 
+		    	if(this.bounce) {
+		    		this.setX(this.x+(float)4.5);
+		    		if(!ball.isMove) {
+		    			ball.setX(this.x+(float)92);	    		
+		    		}
+		    	}else {
+		    		this.setX(this.x-(float)4.5);
+		    		if(!ball.isMove) {
+		    			ball.setX(this.x+(float)92);
+		    		}
+		    	}
+		    	break;
+	    	case 3: 
+		    	if(this.bounce) {
+		    		this.setX(this.x+(float)5.5);
+		    		if(!ball.isMove) {
+		    			ball.setX(this.x+(float)92);	    		
+		    		}
+		    	}else {
+		    		this.setX(this.x-(float)5.5);
+		    		if(!ball.isMove) {
+		    			ball.setX(this.x+(float)92);
+		    		}
+		    	}
+		    	break;
+		    	
+	    	default:
+	            break;
+	    	}
     	}
+    }
+    public void cannonMove() {
+  
+	    	checkBounce();
+	    	difficults();
+	    	
+    }
+    
+    public void tick() {
+    	
+    	cannonMove();
         getInput();
         shot();
         newBall();
