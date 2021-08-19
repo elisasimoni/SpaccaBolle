@@ -106,15 +106,23 @@ public class CollectBall {
     					 if(b.y>=mapCollect[row][saveCol].y-15 && b.y<= mapCollect[row][saveCol].y+15) {
     						 
     					 System.out.println("ASSEGNAMENTO " + b.x +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);
+    					 
     					 mapCollect[row][saveCol] = b;
     					 System.out.println("mapCollect nuova bolla");
+    					 for(int c=0; c<8; c++) {
+    							for(int r=0; r<13; r++) {
+    							 System.out.print(" " + mapCollect[c][r].color + " ");
+    								
+    							}
+    							System.out.println();
+    						}
     					 if(row>=6) {
     						 control=true;
     					 }
     					 
     					}
   					}
-   					
+  					
    					if(coordinateY>450) {
    						System.out.println("GAME OVER");
    						gameOver=true;
@@ -144,15 +152,82 @@ public class CollectBall {
            
 	}
 	
-	public boolean tris(Ball b) {
-		boolean checkTris = false;
-		for(Ball bobble:collectionBall) {
-			if(b.color == color(bobble)) {
-				popBall = true;
-				checkTris=true;
-			
+	public static boolean tris() {
+		boolean checkTris=false;
+			/*controllo orizzontale*/
+			for(int r=0; r<8; r++) {
+				for(int c=0; c<13; c++) {
+					int c2=c+1;
+					int c3=c+2;
+					if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null) {
+					
+					if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
+						
+						checkTris=true;
+						
+						mapCollect[r][c].color=0;
+						mapCollect[r][c2].color=0;
+						mapCollect[r][c3].color=0;
+						
+						
+					
+					}
+					}
+				}
 			}
-		}
+			/*controllo verticale*/
+			for(int r=0; r<8; r++) {
+				for(int c=0; c<13; c++) {
+					int r2=r+1;
+					int r3=r+2;
+					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null && mapCollect[r3][c]!=null) {
+					
+					if(mapCollect[r][c].color==mapCollect[r2][c].color && mapCollect[r2][c].color== mapCollect[r3][c].color ) {
+						
+						checkTris=true;
+						mapCollect[r][c].color=0;
+						mapCollect[r2][c].color=0;
+						mapCollect[r3][c].color=0;
+						
+					
+					}
+					}
+				}
+			}
+			/*controllo palline attaccate al vuoto*/
+			for(int r=0; r<8; r++) {
+				for(int c=0; c<13; c++) {
+					
+					int r2=r-1; //pallina sopra
+					if(r2==-1) {
+						r2=0;
+						
+					}
+					int r3=r+1; //pallina sotto
+					int c2=c-1; //pallina a sx
+					if(c2==-1) {
+						c2=0;
+						
+					}
+					int c3=c+2; //pallina a dx
+					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null && mapCollect[r3][c]!=null && mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null ) {
+					
+					if( mapCollect[r2][c].color==0 && mapCollect[r3][c].color==0 && mapCollect[r][c2].color==0 &&  mapCollect[r][c3].color== 0 ) {
+						
+						checkTris=true;
+						System.out.println("PALLINA STACCCATA :) ");
+						mapCollect[r][c].color=0;
+						
+						
+					
+					}
+					}
+				}
+			}
+			
+			
+			
+			
 		
 		return checkTris;
 		
