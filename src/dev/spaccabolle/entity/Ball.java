@@ -71,7 +71,7 @@ public class Ball extends DynamicObject{
             	this.isMove=false;   
                 ballStatus();
                 eliminate();  
-                if(Map.collectBallMap.tris(getBall())) {
+                if(CollectBall.tris()) {
                 	eliminate();
                 }
                 
