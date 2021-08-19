@@ -42,6 +42,7 @@ public class StatoGioco extends Stato{
 		cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
 		map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
 		
+		
 		uiManager.addObject(new UIImageButton(40, 800, 200, 90, Assets.btn_save, new ClickListener(){
 			public void onClick() {
 				

@@ -234,7 +234,7 @@ public class Map {
                 }
                         
                 ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
-               
+                
                 loadCoordinate(lineDimensionX,lineDimensionY, posLine, posChar, readBobble, mapMatrix);
                 
                 matrix.put(posLine, ballMap);

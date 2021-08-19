@@ -27,9 +27,6 @@ public class Ball extends DynamicObject{
         this.color=color;
         this.directMove=0;
         this.isMove=false;
-        
-
-        System.out.println("ball creata" + this.color);
 
     }
     public int getColor() {
@@ -71,7 +68,7 @@ public class Ball extends DynamicObject{
             	this.isMove=false;   
                 ballStatus();
                 eliminate();  
-                if(CollectBall.tris()) {
+                if(Map.collectBallMap.tris()) {
                 	eliminate();
                 }
                 

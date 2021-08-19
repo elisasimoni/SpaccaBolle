@@ -22,7 +22,7 @@ public class Cannon extends DynamicObject{
     private Random rand = new Random();
     
     private Ball ball;
-    private CollectBall collectBall;
+    private static CollectBall collectBall;
     
     private int angle=0;
     public int difficult = 1;
@@ -43,6 +43,13 @@ public class Cannon extends DynamicObject{
     }
     
   
+
+    public static CollectBall getCollectBall() {
+        return collectBall;
+    }
+
+
+
 
     private int getColor() {
         return rand.nextInt(4);
@@ -66,13 +73,11 @@ public class Cannon extends DynamicObject{
             }
             collectBall.addBall(ball);
             ballPos=true;
-            System.out.println("ball creata");
         }
      }
     
     private void shot() {
         if(ballPos && KeyManager.enter && StatoGioco.pause == false) {
-            System.out.println("ball shot");
             System.out.println("COOORD SHOT: " + ball.y);
             boolean iter = true;
             int i=0;
@@ -94,7 +99,6 @@ public class Cannon extends DynamicObject{
     
     public void checkBounce() {
     	if(this.x>Ball.RIGHT_BOUNCE) {
-    		System.out.println("Superato limite destro");
     		System.out.println(Ball.RIGHT_BOUNCE);
     		this.bounce=false;
     	}else if(this.x< (-Ball.LEFT_BOUNCE+190)) {

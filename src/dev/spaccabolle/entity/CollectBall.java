@@ -62,8 +62,6 @@ public class CollectBall {
 		return b.color;
 	}
 	
-	
-	
 	public boolean check(float coordinateX,float coordinateY,Ball b) {
 		
            boolean check = false; //change to false
@@ -152,7 +150,7 @@ public class CollectBall {
            
 	}
 	
-	public static boolean tris() {
+	public boolean tris() {
 		boolean checkTris=false;
 			/*controllo orizzontale*/
 			for(int r=0; r<8; r++) {
@@ -215,7 +213,6 @@ public class CollectBall {
 					if( mapCollect[r2][c].color==0 && mapCollect[r3][c].color==0 && mapCollect[r][c2].color==0 &&  mapCollect[r][c3].color== 0 ) {
 						
 						checkTris=true;
-						System.out.println("PALLINA STACCCATA :) ");
 						mapCollect[r][c].color=0;
 						
 						
@@ -224,9 +221,19 @@ public class CollectBall {
 					}
 				}
 			}
-			
-			
-			
+		
+			for(int r=0; r<8; r++) {
+                            for(int c=0; c<13; c++) {
+                                if(mapCollect[r][c].color==0) {
+                                    for(Ball b:collectionBall) {
+                                        if(mapCollect[r][c].getX() == b.getX() && mapCollect[r][c].getY()==b.getY()) {
+                                            b.color=0;
+                                            b.eliminate();
+                                        }
+                                    }
+                                }
+                            }
+		        }
 			
 		
 		return checkTris;
@@ -255,8 +262,5 @@ public class CollectBall {
     public void addBall(Ball b) {
         collectionBall.add(b);
     }
-
-
-	
-
+ 
 }
