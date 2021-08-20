@@ -30,6 +30,7 @@ public class Map {
     // coordinate posizionamento su colonne e righe
     public int lineDimensionX = Launcher.GAME_WIDTH;
     public int lineDimensionY = Launcher.GAME_HEIGHT;
+    public static int index=0;
     public static Ball[][] mapMatrix = new Ball[NROW][NCOL];
     public static float[] posX = new float[NROW]; 
     TreeMap<Integer,Ball> matrix = new TreeMap<Integer,Ball>();
@@ -233,9 +234,9 @@ public class Map {
                 
                 }
                         
-                ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble);
+                ballMap = new Ball(lineDimensionX,lineDimensionY,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,readBobble,index);
                 
-                loadCoordinate(lineDimensionX,lineDimensionY, posLine, posChar, readBobble, mapMatrix);
+                loadCoordinate(lineDimensionX,lineDimensionY, posLine, posChar, readBobble, mapMatrix,index++);
                 
                 matrix.put(posLine, ballMap);
                 posX[posChar] = lineDimensionX;
@@ -250,13 +251,11 @@ public class Map {
                 }
                 posLine++;
         }
-        
     }
-    private void loadCoordinate(int xMap, int yMap, int row, int col, int color, Ball[][] map) {
+    private void loadCoordinate(int xMap, int yMap, int row, int col, int color, Ball[][] map,int index) {
     	
     	 
-      	 map[row][col]= new Ball(xMap,yMap,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,color); /*caricamento matrice*/
-      	 
+      	 map[row][col]= new Ball(xMap,yMap,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,color,index); /*caricamento matrice*/
       	
       }
     

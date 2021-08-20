@@ -16,15 +16,16 @@ public class Ball extends DynamicObject{
    
 
     public float directMove;
-    public int color;
+    public int color,index;
    
 
     public boolean isMove;
     
 
-    public Ball(float x, float y, int width, int height, int color) {
+    public Ball(float x, float y, int width, int height, int color,int index) {
         super(x, y, width, height);
         this.color=color;
+        this.index=index;
         this.directMove=0;
         this.isMove=false;
 
@@ -50,7 +51,8 @@ public class Ball extends DynamicObject{
     }
     
     public void ballStatus() {
-    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color);  
+    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color,++Map.index);
+    	this.index=Map.index;
     	Map.collectBallMap.addBall(b);/*aggiungo la bolla alla mappa*/
     	
     

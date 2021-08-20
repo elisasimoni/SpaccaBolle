@@ -43,6 +43,7 @@ public class UIManager {
 	}
 	
 	public void addObject(UIObject o){
+	    System.out.println(o.toString());
 		objects.add(o);
 	}
 	

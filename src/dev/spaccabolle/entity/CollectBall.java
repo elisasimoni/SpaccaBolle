@@ -226,16 +226,16 @@ public class CollectBall {
                             for(int c=0; c<13; c++) {
                                 if(mapCollect[r][c].color==0) {
                                     for(Ball b:collectionBall) {
-                                        if(mapCollect[r][c].getX() == b.getX() && mapCollect[r][c].getY()==b.getY()) {
+                                        if(mapCollect[r][c].index==b.index) {
                                             b.color=0;
                                             b.eliminate();
+                                            System.out.println(b.index+" "+mapCollect[r][c].index);
                                         }
                                     }
                                 }
                             }
 		        }
 			
-		
 		return checkTris;
 		
 	}

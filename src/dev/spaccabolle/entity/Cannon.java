@@ -25,7 +25,7 @@ public class Cannon extends DynamicObject{
     private static CollectBall collectBall;
     
     private int angle=0;
-    public int difficult = 1;
+    public int difficult = 1,index;
     
     public Cannon(float x, float y, int width, int height, CollectBall collectBall) {
         super(x, y, width, height);
@@ -33,10 +33,10 @@ public class Cannon extends DynamicObject{
         this.setSpeed(50);
         this.ballPos=true;
         this.bounce=true;
-        ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+        ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor(),index);
         while(ball.color==0) {
         
-        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+        	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor(),index);
         	
         }
         collectBall.addBall(ball);
@@ -65,10 +65,10 @@ public class Cannon extends DynamicObject{
     
     private void newBall() {
         if(!ball.isMove && !ballPos ) {
-            ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+            ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor(),index);
             while(ball.color==0) {
                 
-            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor());
+            	ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor(),index);
             	
             }
             collectBall.addBall(ball);
