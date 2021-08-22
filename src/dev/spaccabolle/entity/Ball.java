@@ -1,7 +1,7 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
-
+import java.io.IOException;
 
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
@@ -16,15 +16,16 @@ public class Ball extends DynamicObject{
    
 
     public float directMove;
-    public int color;
+    public int color,index;
    
 
     public boolean isMove;
     
 
-    public Ball(float x, float y, int width, int height, int color) {
+    public Ball(float x, float y, int width, int height, int color,int index) {
         super(x, y, width, height);
         this.color=color;
+        this.index=index;
         this.directMove=0;
         this.isMove=false;
 
@@ -39,7 +40,8 @@ public class Ball extends DynamicObject{
         this.setyMove(Math.sin(Math.toRadians(directMove))*this.speed);
     }
     
-    private void destroy() {
+    @SuppressWarnings("unused")
+	private void destroy() {
         if(this.y < 0) {
             this.isMove=false;
         }
@@ -50,7 +52,8 @@ public class Ball extends DynamicObject{
     }
     
     public void ballStatus() {
-    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color);  
+    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color,++Map.index);
+    	this.index=Map.index;
     	Map.collectBallMap.addBall(b);/*aggiungo la bolla alla mappa*/
     	
     
@@ -64,15 +67,21 @@ public class Ball extends DynamicObject{
             }
             
             
-            if(Map.collectBallMap.check(this.x,this.y,getBall())) {
-            	this.isMove=false;   
-                ballStatus();
-                eliminate();  
-                if(Map.collectBallMap.tris()) {
-                	eliminate();
-                }
-                
-            }
+            try {
+				if(Map.collectBallMap.check(this.x,this.y,getBall())) {
+					this.isMove=false; 
+					
+				    ballStatus();
+				    eliminate();  
+				    if(Map.collectBallMap.tris()) {
+				    	eliminate();
+				    }
+				    
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             
             
             

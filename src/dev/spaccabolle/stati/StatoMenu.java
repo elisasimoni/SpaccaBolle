@@ -2,9 +2,6 @@ package dev.spaccabolle.stati;
 
 import java.awt.Graphics;
 import java.io.File;
-
-import javax.swing.JFileChooser;
-
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.display.Display;
@@ -19,6 +16,8 @@ public class StatoMenu extends Stato{
 	private int YMoveButton=840;
 	private int yMovelogo=-430, dimDragon=0,xDragon=800,yDragon=445,yMove=-1;
 	private static final int yLogoLimits = 30, xDragonLimits=345,yDragonLimits=445;
+	public static boolean isLoadGame = false;
+	public static  File loadGame;
 
 	public StatoMenu(Handler handler) {
 		
@@ -36,9 +35,11 @@ public class StatoMenu extends Stato{
 		}));
 		uiManager.addObject(new UIImageButton(308, YMoveButton, 220, 150, Assets.btn_load, new ClickListener() {
                     public void onClick() {
-                            File file;
-                            file=Display.getFile();
-                            System.out.println(file);
+                            loadGame = Display.getFile();
+                            isLoadGame=true;   
+                            Stato.setState(handler.getGame().gameState);
+                            
+                            
                     }
             }));
 		uiManager.addObject(new UIImageButton(566, YMoveButton, 220, 150, Assets.btn_exit, new ClickListener() {

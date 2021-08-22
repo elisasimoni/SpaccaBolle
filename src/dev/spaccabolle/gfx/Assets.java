@@ -4,24 +4,23 @@ import java.awt.image.BufferedImage;
 
 public class Assets {
 	
-	private static final int width = 32, height = 32;
 	
 	public static BufferedImage[] btn_start,btn_pause,btn_exit,btn_load,ballGroup, dragon, btn_save, btn_exit_statoGioco;
 
-	public static BufferedImage cannon,arrow,dark_background, logo, game_over, exit, black, home, pause, easy, normal, hard;
-	
+	public static BufferedImage cannon,arrow,dark_background, logo, game_over, victory, exit, black, home, pause, easy, normal, hard;
 
 	public static BufferedImage readBobble = null;
 	private static final int NUM_BOLLE = 5;
 	public static void init(){
 		
 		System.out.println("Prova");
-		SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/res/textures/sheet.png"));
+		
 		cannon=ImageLoader.loadImage("/res/textures/cannoneFreccia.png");
 	    arrow=ImageLoader.loadImage("/res/textures/freccia.png");
 	    logo = ImageLoader.loadImage("/res/textures/Logo.png");
 	    dark_background=ImageLoader.loadImage("/res/textures/dark_background.jpg");
-	    game_over = ImageLoader.loadImage("/res/textures/GAMEOVER.jpeg");
+	    game_over = ImageLoader.loadImage("/res/textures/GAMEOVER3.png");
+	    victory = ImageLoader.loadImage("/res/textures/victory.png");
 	    black = ImageLoader.loadImage("/res/textures/Blackground.png");
 	    home = ImageLoader.loadImage("/res/textures/home.png");
 	    pause = ImageLoader.loadImage("/res/textures/pause2.png");
