@@ -1,21 +1,15 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.util.Random;
-
-import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
 import dev.spaccabolle.stati.StatoGioco;
 
 public class Cannon extends DynamicObject{
     
-    private static final int SCARTO_X_FRECCIA=34;
     private static final int SCARTO_X_BOLLA=30;
     private static final int SCARTO_Y_BOLLA=15;
-    private static final int SCARTO_CANNON_SX = 175;
 
     
     private boolean ballPos,bounce;
@@ -27,7 +21,8 @@ public class Cannon extends DynamicObject{
     private int angle=0;
     public int difficult = 1,index;
     
-    public Cannon(float x, float y, int width, int height, CollectBall collectBall) {
+    @SuppressWarnings("static-access")
+	public Cannon(float x, float y, int width, int height, CollectBall collectBall) {
         super(x, y, width, height);
         this.collectBall=collectBall;
         this.setSpeed(50);
@@ -171,12 +166,8 @@ public class Cannon extends DynamicObject{
     }
 
     public void render(Graphics g) {
-        AffineTransform at = AffineTransform.getTranslateInstance(Launcher.GAME_WIDTH/2-Cannon.SCARTO_X_FRECCIA,674);
-       /* at.rotate(Math.toRadians(angle),Assets.arrow.getWidth()/2,Assets.arrow.getHeight()/2);
-        at.scale(1,1);*/
-        Graphics2D g2 = (Graphics2D)g;
         g.drawImage(Assets.cannon,(int)this.getX()-50,(int)this.getY()-280, this.getWidth(), this.getHeight(), null);
-        /*g2.drawImage(Assets.arrow, at, null);*/
+        
     }
 
 }

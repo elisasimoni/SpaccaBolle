@@ -2,11 +2,8 @@ package dev.spaccabolle.stati;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.io.IOException;
-
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
-import dev.spaccabolle.display.Display;
 import dev.spaccabolle.entity.Ball;
 import dev.spaccabolle.entity.Cannon;
 import dev.spaccabolle.entity.CollectBall;
@@ -29,7 +26,6 @@ public class StatoGioco extends Stato{
         @SuppressWarnings("unused")
 		private Map map;
         private UIManager uiManager; 
-        private Display display;
         public static boolean pause = false;
         
 	public StatoGioco(Handler handler) {
@@ -68,15 +64,15 @@ public class StatoGioco extends Stato{
 			//avviare lo stato di pausa
 			
 			if(KeyManager.pause) {
-			  // Stato.setState(handler.getGame().pauseState);
+			 
 			  pause = true;
-			  //KeyManager.enter = false; //disabilitare il tasto invio per sparare le bolle 
 			  
-				//display.popupMenu.show(display.getFrame(), 200, 200);
+			  
+				
 		   }
 		   if(KeyManager.space) {
 			   pause = false;
-			  // KeyManager.enter = true; //riabilitare il tasto enter per sparare le bolle 
+			  
 		   }
 		   //uscita dal gioco 
 		   if(KeyManager.exit) {
@@ -114,9 +110,14 @@ public class StatoGioco extends Stato{
 
 	public void render(Graphics g) {
 	    g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
+	   
 	    cannon.render(g);
-	    collectBallMap.render(g);
 	    collectBall.render(g);
+
+	    collectBallMap.render(g); 
+	   
+	    uiManager.render(g);
+
 	    if(pause) {
 	    	g.setColor(Color.WHITE);
 	    	g.drawImage(Assets.black, 200, 200, 400, 400, null);

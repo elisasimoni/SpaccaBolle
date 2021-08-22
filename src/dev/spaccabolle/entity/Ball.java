@@ -1,7 +1,7 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
-
+import java.io.IOException;
 
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
@@ -40,7 +40,8 @@ public class Ball extends DynamicObject{
         this.setyMove(Math.sin(Math.toRadians(directMove))*this.speed);
     }
     
-    private void destroy() {
+    @SuppressWarnings("unused")
+	private void destroy() {
         if(this.y < 0) {
             this.isMove=false;
         }
@@ -66,15 +67,21 @@ public class Ball extends DynamicObject{
             }
             
             
-            if(Map.collectBallMap.check(this.x,this.y,getBall())) {
-            	this.isMove=false;   
-                ballStatus();
-                eliminate();  
-                if(Map.collectBallMap.tris()) {
-                	eliminate();
-                }
-                
-            }
+            try {
+				if(Map.collectBallMap.check(this.x,this.y,getBall())) {
+					this.isMove=false; 
+					
+				    ballStatus();
+				    eliminate();  
+				    if(Map.collectBallMap.tris()) {
+				    	eliminate();
+				    }
+				    
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             
             
             

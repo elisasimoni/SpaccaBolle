@@ -1,17 +1,15 @@
+
 package dev.spaccabolle.entity;
 
 import java.io.BufferedReader;
 import java.io.File;
-
-
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.TreeMap;
-import java.util.Vector;
 
 import dev.spaccabolle.Launcher;
+import dev.spaccabolle.stati.StatoMenu;
 
 public class Map {
     public static final double SCARTO_X = 10;
@@ -78,8 +76,15 @@ public class Map {
         BufferedReader reader = null;
         try {
 
-        		String filePath = new File("").getAbsolutePath();
-                reader = new BufferedReader(new FileReader(filePath + "\\src\\res\\map\\level1.txt"));
+        	if(StatoMenu.isLoadGame) {
+   			 System.out.println("HO CARICATO IL TUO LIVELLO");
+   		
+   			 reader = new BufferedReader(new FileReader(StatoMenu.loadGame));
+   		}
+   		else {
+   		String filePath = new File("").getAbsolutePath();
+           reader = new BufferedReader(new FileReader(filePath + "\\src\\res\\map\\level1.txt"));
+   		}
                
 
         } catch (FileNotFoundException e2) {
