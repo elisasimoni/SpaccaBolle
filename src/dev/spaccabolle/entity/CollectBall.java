@@ -61,8 +61,9 @@ public class CollectBall {
     public static int getColorInMap() {
     	int blue=0,yellow=0, green=0, red=0;
     	//bisogna vedere che colori sono rimasti sulla mappa
-    	for(int r=0; r<9; r++) {
+    	for(int r=0; r<8; r++) {
     		for(int c=0; c<13; c++) {
+    		System.out.println("mapCollect   "+ r + c);
     	    int readColor=mapCollect[r][c].color;
     		switch(readColor) {
     				
@@ -84,11 +85,11 @@ public class CollectBall {
     			}
     		}
     	}
-
+    	
     	
     	int random = 0;
     	int right=0;
-    	//algoritmo per sparare solo colori presenti sulla mappa
+    	
     	
     	while(right<1) {
     		random = rand.nextInt(5);
@@ -97,7 +98,7 @@ public class CollectBall {
     			right=0;
     			
     		}
-     		
+    		
 		}
     	
     	
@@ -125,6 +126,50 @@ public class CollectBall {
 		return b.color;
 	}
 	
+	public boolean roof(float coordinateX,float coordinateY,Ball b) throws IOException {
+		
+		  int saveCol=0;
+		  boolean check = false; //change to falsereturn false;
+		  for(int c=0; c<12; c++) {
+			  
+				  
+			  if((coordinateY < 40 && coordinateY < mapCollect[0][c].y && mapCollect[0][c].y<40) && mapCollect[0][c].color==0) {
+				  if(coordinateX == mapCollect[0][c].x ) {
+					  System.out.println("  indice   " + mapCollect);
+					  b.x=mapCollect[0][c].x;
+				     
+                      b.y=mapCollect[0][c].y;
+                     
+                      mapCollect[0][c]=b;
+                      
+				
+				
+				 randomColorCannon= getColorInMap();
+				 
+				 System.out.println("  indice   " + b.index);
+					 
+			     for(int c1=0; c1<8; c1++) {
+							for(int r=0; r<13; r++) {
+							 System.out.print(" " + mapCollect[c1][r].color + " ");
+								
+							}
+							System.out.println();
+						}
+					 
+					check=true;	
+              
+       			   
+       			   
+			  }	   
+            }
+		  }
+		  
+       		
+		  
+		  return check;
+		
+	}
+	
 	public boolean check(float coordinateX,float coordinateY,Ball b) throws IOException {
 		
            boolean check = false; //change to false
@@ -133,27 +178,60 @@ public class CollectBall {
            boolean control2=false;
            int saveCol=0;
            
-           
-          
-           for(Ball bobble:collectionBall) {
+             for(Ball bobble:collectionBall) {
+            	 
         	   
-        	  
-        	   
-        	   
-        	   if(((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0)) ){
+        	   if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
         		   if(coordinateX >= cordX(bobble) && coordinateX <= (cordX(bobble))+bobble.width-15 ) {
-        			   
+        			   System.out.println("COL   " + coordinateX + b.x + cordX(bobble));
         			   if(cordY(bobble)>169) {
       						b.x =cordX(bobble);
       						b.y=(float) (b.y-0.25);
       					}
+        			  float saveX=cordX(bobble);
    					b.x = cordX(bobble);
+   					boolean isEqual=true;
+   					int tempSaveCol=0;
+   					System.out.println("ASSEGNAMENTO " + saveX  + " = " + mapCollect[0][saveCol].x + " ");
+   					while(isEqual) {
+   						if(coordinateX!= mapCollect[0][tempSaveCol].x) {
+   						 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
+   						if( coordinateX <=mapCollect[0][tempSaveCol].x +55) {
+   							   
+   							   
+   							   isEqual=false;
+   							   saveCol=tempSaveCol;
+   							
+   						}else {
+   						tempSaveCol++;
+							if(tempSaveCol==13) {
+								isEqual=false;
+								
+							}
+   						}
+   						}
+   						else {
+   							isEqual=false;
+   							saveCol=tempSaveCol;
+   						}
+   					}
+   						
    					
+   					
+   				 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
    					for(int col = 0 ; col < 12; col++) {
+   						
     					 if(b.x==mapCollect[0][col].x ) {
+    						  
     						 
     						  saveCol=col;
+    						  System.out.println("COLONNA SAVE");
+    						 
+    	    					
     					 }
+    						
+    						 
+    					 
     				}
    					
   					for(int row = 0; row < 7;row++) {
@@ -166,12 +244,16 @@ public class CollectBall {
   							}
 						 }
   						
-  						
-    					 if(b.y>=mapCollect[row][saveCol].y-15 && b.y<= mapCollect[row][saveCol].y+15) {
+  						 
+    					 if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
+    						 System.out.println("ASSEGNAMENTO " + coordinateX +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);
     						 
-    					/*System.out.println("ASSEGNAMENTO " + b.x +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);*/
-    					 
+    				
+    					
     					 mapCollect[row][saveCol] = b;
+    					
+    					
+     					
     					 randomColorCannon= getColorInMap();
     					 
     					 System.out.println("mapCollect nuova bolla");
@@ -200,15 +282,15 @@ public class CollectBall {
    						
    						
    					}
-   					
+   					System.out.println("MATRICE DAL 2 IN POI");	
    					
                        check=true;	
                    }
         		 
         		  }
-        		  
-        	   
         	   }
+             
+        	   
         	   
             	
            
@@ -266,7 +348,60 @@ public class CollectBall {
 				
 				}
 			}
-			
+
+		/*controllo orizzontale particolare*/
+		for(int r=0; r<8; r++) {
+			for(int c=0; c<13; c++) {
+				
+				int c2=c-1;
+				
+				if(c2<0) {
+					c2=0;
+					
+				}
+				int c3=c-2;
+				if(c3<0) {
+					c3=0;
+					
+				}
+				
+				if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null) {
+				
+				if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
+						checkTris=true;
+					
+					mapCollect[r][c].color=0;
+					mapCollect[r][c2].color=0;
+					mapCollect[r][c3].color=0;
+					mapCollect[r][c].eliminate();
+					mapCollect[r][c2].eliminate();
+					mapCollect[r][c3].eliminate();
+					if(addPoint==0) {
+						addPoint=1;
+					point = point + 3;
+					}
+					//controllo vittoria
+   					int count=0;
+   					for(int r1=0; r1<8; r1++) {
+   			            for(int c1=0; c1<13; c1++) {
+   			            	
+   			                if(mapCollect[r1][c1].color!=0) {
+   			                	count++;
+   			                }
+   			            }
+   					}
+   					if(count==0) {
+   						victory=true;
+   					}
+					
+					
+					
+				
+				}
+				}
+			}
+		}
+		
 		
 			/*controllo orizzontale*/
 			for(int r=0; r<8; r++) {
@@ -279,23 +414,7 @@ public class CollectBall {
 					
 					if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
 						if(mapCollect[r][c3].color== mapCollect[r][c4].color) {
-						   if(mapCollect[r][c4].color== mapCollect[r][c5].color){
-								checkTris=true;
-								mapCollect[r][c].color=0;
-								mapCollect[r][c2].color=0;
-								mapCollect[r][c3].color=0;
-								mapCollect[r][c4].color=0;
-								mapCollect[r][c5].color=0;
-								mapCollect[r][c].eliminate();
-								mapCollect[r][c2].eliminate();
-								mapCollect[r][c3].eliminate();
-								mapCollect[r][c4].eliminate();
-								mapCollect[r][c5].eliminate();
-								if(addPoint==0) {
-								addPoint=1;
-								point = point + 5;}
-							}
-						   else {
+						   
 							checkTris=true;
 							mapCollect[r][c].color=0;
 							mapCollect[r][c2].color=0;
@@ -308,7 +427,7 @@ public class CollectBall {
 							if(addPoint==0) {
 								addPoint=1;
 							point = point + 4;}
-						   }
+						   
 						}
 						else {
 						
@@ -347,6 +466,7 @@ public class CollectBall {
 					}
 				}
 			}
+			
 			/*controllo verticale*/
 			for(int r=0; r<8; r++) {
 				for(int c=0; c<13; c++) {
@@ -384,6 +504,7 @@ public class CollectBall {
 					}
 				}
 			}
+			
 			/*controllo 1 pallina attaccate al vuoto*/
 			for(int r=0; r<8; r++) {
 				for(int c=0; c<13; c++) {
@@ -510,6 +631,7 @@ public class CollectBall {
 		addPoint=0;
 		return checkTris;
 		
+		
 	}
 	
 	
@@ -548,7 +670,6 @@ public class CollectBall {
         if(victory) {
         	
         	g.drawImage(Assets.victory, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
-        	
         	
         }
         score.render(g);
