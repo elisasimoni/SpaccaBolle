@@ -1,7 +1,6 @@
 package dev.spaccabolle.entity;
 
 import java.awt.Graphics;
-import java.util.Random;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
 import dev.spaccabolle.stati.StatoGioco;
@@ -10,10 +9,11 @@ public class Cannon extends DynamicObject{
     
     private static final int SCARTO_X_BOLLA=30;
     private static final int SCARTO_Y_BOLLA=15;
-
+    private static final float EASY = (float)3.5;
+    private static final float NORMAL = (float)6.5;
+    private static final float HARD = (float)11;
     
     private boolean ballPos,bounce;
-    private Random rand = new Random();
     
     private Ball ball;
     private static CollectBall collectBall;
@@ -44,21 +44,10 @@ public class Cannon extends DynamicObject{
         return collectBall;
     }
 
-
-
-
     private int getColor() {
     	  return CollectBall.randomColorCannon;
     }
-    
-    private void getInput() {
-        if(KeyManager.right && this.angle<60)
-            angle += (int) speed;
-        if(KeyManager.left && this.angle>-60)
-            angle += (int)-speed;
-    }
-    
-    
+       
     private void newBall() {
         if(!ball.isMove && !ballPos ) {
             ball=new Ball(this.x+width/2-SCARTO_X_BOLLA,this.y+SCARTO_Y_BOLLA-250,Ball.BOBBLE_SIZE,Ball.BOBBLE_SIZE,getColor(),index);
@@ -73,8 +62,7 @@ public class Cannon extends DynamicObject{
      }
     
     private void shot() {
-        if(ballPos && KeyManager.enter && StatoGioco.pause == false) {
-    
+        if(ballPos && KeyManager.space && !StatoGioco.pause && !CollectBall.gameOver && !CollectBall.victory) {
             boolean iter = true;
             int i=0;
             while(iter) {
@@ -102,48 +90,36 @@ public class Cannon extends DynamicObject{
     	}
     }
     
-    public void difficults() {
-    	if(StatoGioco.pause == false) {
+    private void ballSetX() {
+    	if(!ball.isMove) {
+			ball.setX(this.x+(float)92);	    		
+		}
+    }
+    
+    private void speedCannon(float x) {
+    	if(this.bounce) {
+    		this.setX(this.x+(float)x);
+    		ballSetX();
+    	}else {
+    		this.setX(this.x-(float)x);
+    		ballSetX();
+    	}
+    }
+    
+    private void difficults() {
+    	if(!StatoGioco.pause && !CollectBall.gameOver && !CollectBall.victory) {
 	    	switch(difficult) {
 	    	
 	    	case 1: 
-		    	if(this.bounce) {
-		    		this.setX(this.x+(float)3.5);
-		    		if(!ball.isMove) {
-		    			ball.setX(this.x+(float)92);	    		
-		    		}
-		    	}else {
-		    		this.setX(this.x-(float)3.5);
-		    		if(!ball.isMove) {
-		    			ball.setX(this.x+(float)92);
-		    		}
-		    	}
+	    		speedCannon(EASY);
 		    	break;
-	    	case 2: 
-		    	if(this.bounce) {
-		    		this.setX(this.x+(float)4.5);
-		    		if(!ball.isMove) {
-		    			ball.setX(this.x+(float)92);	    		
-		    		}
-		    	}else {
-		    		this.setX(this.x-(float)4.5);
-		    		if(!ball.isMove) {
-		    			ball.setX(this.x+(float)92);
-		    		}
-		    	}
+		    	
+	    	case 2:
+	    		speedCannon(NORMAL);
 		    	break;
+		    	
 	    	case 3: 
-		    	if(this.bounce) {
-		    		this.setX(this.x+(float)5.5);
-		    		if(!ball.isMove) {
-		    			ball.setX(this.x+(float)92);	    		
-		    		}
-		    	}else {
-		    		this.setX(this.x-(float)5.5);
-		    		if(!ball.isMove) {
-		    			ball.setX(this.x+(float)92);
-		    		}
-		    	}
+	    		speedCannon(HARD);
 		    	break;
 		    	
 	    	default:
@@ -151,24 +127,20 @@ public class Cannon extends DynamicObject{
 	    	}
     	}
     }
+    
     public void cannonMove() {
-  
-	    	checkBounce();
-	    	difficults();
-	    	
+    	checkBounce();
+    	difficults();
     }
     
     public void tick() {
-    	
     	cannonMove();
-        getInput();
         shot();
         newBall();
     }
 
     public void render(Graphics g) {
         g.drawImage(Assets.cannon,(int)this.getX()-50,(int)this.getY()-280, this.getWidth(), this.getHeight(), null);
-        
     }
 
 }

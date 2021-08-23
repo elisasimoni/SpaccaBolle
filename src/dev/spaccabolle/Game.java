@@ -3,6 +3,7 @@ package dev.spaccabolle;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import dev.spaccabolle.display.Display;
+import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
 import dev.spaccabolle.input.MouseManager;
@@ -59,11 +60,27 @@ public class Game implements Runnable {
 		Stato.setState(this.menuState);
 	}
 	
+	public void restart() {
+		Assets.init();
+		gameState = new StatoGioco(handler);
+	}
+	
 	private void tick(){
 		keyManager.tick();
 		
 		if(Stato.getState() != null)
 			Stato.getState().tick();
+		
+		if (CollectBall.gameOver) {
+			if(KeyManager.restart) {
+				restart();
+				CollectBall.gameOver = false;
+			}
+		}
+		if(StatoMenu.home) {
+			restart();
+			StatoMenu.home = false;
+		}
 	}
 	
 	private void render(){
@@ -74,7 +91,7 @@ public class Game implements Runnable {
 		}
 		g = bs.getDrawGraphics();
 		//Clear Screen
-		g.clearRect(0, 0, width, height);
+		//g.clearRect(0, 0, width, height);
 		//Draw Here!
 		
 		if(Stato.getState() != null)

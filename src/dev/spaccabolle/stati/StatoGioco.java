@@ -1,18 +1,16 @@
 package dev.spaccabolle.stati;
 
-import java.awt.Color;
+
 import java.awt.Graphics;
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.entity.Ball;
 import dev.spaccabolle.entity.Cannon;
 import dev.spaccabolle.entity.CollectBall;
-import  dev.spaccabolle.entity.score;
+
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
-import dev.spaccabolle.ui.ClickListener;
-import dev.spaccabolle.ui.UIImageButton;
-import dev.spaccabolle.ui.UIManager;
+
 import dev.spaccabolle.entity.Map;
 
 public class StatoGioco extends Stato{
@@ -20,120 +18,122 @@ public class StatoGioco extends Stato{
         private static final int CANNON_X=(Launcher.GAME_WIDTH/2)-(Assets.cannon.getWidth()/2);
         private static final int SCARTO=100;
         private static final int CANNON_Y=(Launcher.GAME_HEIGHT/2)+Assets.cannon.getHeight()+SCARTO;
-    
-        private Cannon cannon;
-        private CollectBall collectBall;
-        private CollectBall collectBallMap;
-        @SuppressWarnings("unused")
-		private Map map;
-        private UIManager uiManager; 
+        private static final int EASY = 1;
+        private static final int NORMAL = 2;
+        private static final int HARD = 3;
+        private static final int INITIAL_DRAGON = 200;
+        private static final int EASY_DRAGON = 200;
+        private static final int NORMAL_DRAGON = 300;
+        private static final int HARD_DRAGON = 410;
+        private static final int LIMITS = 15;
         
+        public  static int xDragon = 500, yDragon=200, yDragonVictory = 450,yMove=-1;
+    	public static int yDragonLimits=200, yDragonVictoryLimits=200;
+    	
+        static Cannon cannon;
+        static CollectBall collectBall;
+        static CollectBall collectBallMap;
+        @SuppressWarnings("unused")
+		private Map map; 
+        public static boolean exit = false;
+        public static boolean save = false;
         public static boolean pause = false;
         
-	public StatoGioco(Handler handler) {
-		super(handler);
-		uiManager = new UIManager(handler);
-		handler.getMouseManager().setUIManager(uiManager);
-		collectBall=new CollectBall();
-		collectBallMap=new CollectBall();
-		cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
-		map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
-		
-		
-		uiManager.addObject(new UIImageButton(40, 800, 200, 90, Assets.btn_save, new ClickListener(){
-			public void onClick() {
-				
-				Stato.setState(handler.getGame().menuState);
-				
-				
-			}
-		}));
-		uiManager.addObject(new UIImageButton(330, 800, 200, 90, Assets.btn_pause, new ClickListener() {
+        public static Pause paused;
+        private DrawImage imageDraw;
+        
+		public StatoGioco(Handler handler) {
+			super(handler);
+			collectBall=new CollectBall();
+			collectBallMap=new CollectBall();
+			cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
+			map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
 			
-			public void onClick() {
-				System.out.println("SONO QUIIIII");
-				handler.getMouseManager().setUIManager(null);
-				Stato.setState(handler.getGame().menuState);
-				
-			}
-		}));
-		uiManager.addObject(new UIImageButton(600, 800, 200, 90, Assets.btn_exit_statoGioco, new ClickListener() {
-			public void onClick() {
-				
-			}
-		}));
-	}
-	
-	 private void getInput() {
-			//avviare lo stato di pausa
-			
-			if(KeyManager.pause) {
-			 
-			  pause = true;
-			  
-			  
-				
-		   }
-		   if(KeyManager.space) {
-			   pause = false;
-			  
-		   }
-		   //uscita dal gioco 
-		   if(KeyManager.exit) {
-			   System.exit(0);
-		   }
-		   
-		   if(KeyManager.home) {
-			   Stato.setState(handler.getGame().menuState);//non funzionano i tasti poi!! 
-		   }
-		   if (pause) {
-			   if(KeyManager.hard) {
-					cannon.difficult = 3;  
-					pause = false;
+			paused = new Pause();
+			imageDraw = new DrawImage();
+		}
+		
+		private void ifPause() {
+		    if(KeyManager.pause && !CollectBall.gameOver) {
+	    	 	pause = true;
+		    }
+			if (pause) {
+			   if(KeyManager.easy) {
+				   cannon.difficult = EASY;   		
+				   yDragon = EASY_DRAGON;
+				   yDragonLimits = EASY_DRAGON;
 				}
 			   if(KeyManager.normal) {
-					cannon.difficult = 2;   		
-					pause = false;
+				   cannon.difficult = NORMAL;   		
+				   yDragon = NORMAL_DRAGON;
+				   yDragonLimits = NORMAL_DRAGON;
 				}
-			   if(KeyManager.easy) {
-					cannon.difficult = 1;   		
-					pause = false;
+			   if(KeyManager.hard) {
+				   cannon.difficult = HARD;
+				   yDragon = HARD_DRAGON;
+				   yDragonLimits = HARD_DRAGON;
 				}
 		   }
+		}
+		
+		private void ifExit() {
+			if(KeyManager.exit && !CollectBall.gameOver && !CollectBall.victory) {
+				   exit = true;
+			}else if (KeyManager.exit){
+				   System.exit(0);
+			}
+			   
+		   if(exit) {
+			   if(KeyManager.yes) {
+				   System.exit(0);
+			   }else if(KeyManager.no) {
+				   exit = false;
+			   }
+		   }
+		}
+		
+		private void ifGameOver() {
+			if (CollectBall.gameOver) {
+			   if(KeyManager.restart) {
+				   Stato.setState(handler.getGame().menuState);
+				   StatoMenu.run = false;
+			   }
+		   	}
+		}
+	
+		private void getInput() {
+		   ifPause();   //pause game
+		   ifExit();	//exit game
+		   ifGameOver(); //if game over restart game
+
+		   if(KeyManager.save) {
+			   save = true;
+		   }
+
+		   if(KeyManager.enter) {
+			   pause = false;
+			   yDragon = INITIAL_DRAGON;
+			   yDragonLimits = INITIAL_DRAGON;
+		   }
+		}
+		 
+		private void moveIcon() {
+			if((yDragon < yDragonLimits-LIMITS || yDragon > yDragonLimits)) {
+		          yMove*=-1;
+		     }
+		     yDragon+=yMove;
 		}
 		
 		public void tick() {
-			
 			getInput();
+			moveIcon();
 			cannon.tick();
 		    collectBallMap.tick();
 		    collectBall.tick();
-		    
-		  //  uiManager.tick();
+    
 		}
 
-	public void render(Graphics g) {
-	    g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
-	    
-	    cannon.render(g);
-	    collectBall.render(g);
-	    collectBallMap.render(g); 
-	   
-	    uiManager.render(g);
-	    if(pause) {
-	    	g.setColor(Color.WHITE);
-	    	g.drawImage(Assets.black, 200, 200, 400, 400, null);
-	    	g.drawRect(200, 200, 400, 400);
-	    	
-	    	g.drawImage(Assets.easy, 280, 210, 290, 90, null);
-	    	g.drawImage(Assets.normal, 280, 310, 290, 90, null);
-	    	g.drawImage(Assets.hard, 280, 410, 290, 90, null);
-	    	
-	    	g.drawImage(Assets.home, 210, 510, 90, 90, null);
-	    	g.drawImage(Assets.pause, 353, 510, 90, 90, null);
-	    	g.drawImage(Assets.exit, 495, 510, 90, 90, null);
-	    	
-	    	
-	    }
-	}
+		public void render(Graphics g) {
+			imageDraw.render(g);
+		}
 }

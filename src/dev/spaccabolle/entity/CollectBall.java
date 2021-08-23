@@ -549,6 +549,7 @@ public class CollectBall {
         	
         	g.drawImage(Assets.victory, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
         	
+        	
         }
         score.render(g);
       
