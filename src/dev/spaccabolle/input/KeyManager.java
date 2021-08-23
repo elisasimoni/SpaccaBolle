@@ -6,7 +6,8 @@ import java.awt.event.KeyListener;
 public class KeyManager implements KeyListener {
 	
 	private boolean[] keys;
-	public static boolean up, down, left, right, enter, pause, exit, settings, easy, normal, hard, space, home;
+	public static boolean up, down, left, right, enter, pause, exit, 
+	easy, normal, hard, space, home, restart, save, yes, no;
 	
 	public KeyManager(){
 		keys = new boolean[256];
@@ -21,11 +22,14 @@ public class KeyManager implements KeyListener {
 		space = keys[KeyEvent.VK_SPACE];
 		pause = keys[KeyEvent.VK_P];  //pause
 		exit = keys[KeyEvent.VK_E]; //exit game
-		settings = keys[KeyEvent.VK_S];//game settings 
 		easy = keys[KeyEvent.VK_1]; //difficoltà gioco, modalità facile 
 		normal = keys[KeyEvent.VK_2]; //difficoltà gioco, modalità normale
 		hard = keys[KeyEvent.VK_3]; //difficoltà gioco, modalità difficile
 		home = keys[KeyEvent.VK_H];
+		save = keys[KeyEvent.VK_S];
+		restart = keys[KeyEvent.VK_R];
+		yes = keys[KeyEvent.VK_Y];
+		no = keys[KeyEvent.VK_N];
 	}
 
 	public void keyPressed(KeyEvent e) {
