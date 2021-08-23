@@ -17,6 +17,7 @@ public class Cannon extends DynamicObject{
     
     private Ball ball;
     private static CollectBall collectBall;
+    public static Ball[][] mapColor = CollectBall.getMapCollect();
     
     private int angle=0;
     public int difficult = 1,index;
@@ -47,7 +48,7 @@ public class Cannon extends DynamicObject{
 
 
     private int getColor() {
-        return rand.nextInt(4);
+    	  return CollectBall.randomColorCannon;
     }
     
     private void getInput() {
@@ -73,7 +74,7 @@ public class Cannon extends DynamicObject{
     
     private void shot() {
         if(ballPos && KeyManager.enter && StatoGioco.pause == false) {
-            System.out.println("COOORD SHOT: " + ball.y);
+    
             boolean iter = true;
             int i=0;
             while(iter) {
@@ -94,7 +95,7 @@ public class Cannon extends DynamicObject{
     
     public void checkBounce() {
     	if(this.x>Ball.RIGHT_BOUNCE) {
-    		System.out.println(Ball.RIGHT_BOUNCE);
+    		
     		this.bounce=false;
     	}else if(this.x< (-Ball.LEFT_BOUNCE+190)) {
     		this.bounce=true;

@@ -27,9 +27,9 @@ public class StatoMenu extends Stato{
 
 		uiManager.addObject(new UIImageButton(50, YMoveButton, 220, 150, Assets.btn_start, new ClickListener() {
 			public void onClick() {
-			        handler.getMouseManager().setUIManager(null);
-			        System.out.println("Menu :"+uiManager.getObjects());
+				handler.getMouseManager().setUIManager(null);
 				Stato.setState(handler.getGame().gameState);
+				
 			}
 			
 		}));
@@ -44,10 +44,10 @@ public class StatoMenu extends Stato{
             }));
 		uiManager.addObject(new UIImageButton(566, YMoveButton, 220, 150, Assets.btn_exit, new ClickListener() {
                     public void onClick() {
-                            System.exit(0);
+                            handler.getMouseManager().setUIManager(null);
+                            Display.closeDisplay();
                     }
             }));
-	System.out.println("Menu :"+uiManager.getObjects());
 	}
 	
 	private void moveLogo() {
@@ -68,8 +68,7 @@ public class StatoMenu extends Stato{
 	}
 
 	public void tick() {
-	    uiManager.tick();
-	    
+		uiManager.tick();
 		if(yMovelogo < yLogoLimits) {
 		    moveLogo();
 		}
@@ -82,7 +81,6 @@ public class StatoMenu extends Stato{
 		g.drawImage(Assets.logo, 70, yMovelogo, 650, 650, null);
 		g.drawImage(Assets.dragon[0], xDragon, yDragon, dimDragon, dimDragon, null);
 		uiManager.render(g);
-		
 		
 	}
 }

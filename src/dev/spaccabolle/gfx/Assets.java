@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 public class Assets {
 	
 	
-	public static BufferedImage[] btn_start,btn_pause,btn_exit,btn_load,ballGroup, dragon, btn_save, btn_exit_statoGioco;
+	public static BufferedImage[] btn_start,btn_pause,btn_exit,btn_load,ballGroup, dragon, btn_save, btn_exit_statoGioco, numbers;
 
 	public static BufferedImage cannon,arrow,dark_background, logo, game_over, victory, exit, black, home, pause, easy, normal, hard;
 
@@ -19,7 +19,7 @@ public class Assets {
 	    arrow=ImageLoader.loadImage("/res/textures/freccia.png");
 	    logo = ImageLoader.loadImage("/res/textures/Logo.png");
 	    dark_background=ImageLoader.loadImage("/res/textures/dark_background.jpg");
-	    game_over = ImageLoader.loadImage("/res/textures/GAMEOVER3.png");
+	    game_over = ImageLoader.loadImage("/res/textures/GAMEOVER.jpeg");
 	    victory = ImageLoader.loadImage("/res/textures/victory.png");
 	    black = ImageLoader.loadImage("/res/textures/Blackground.png");
 	    home = ImageLoader.loadImage("/res/textures/home.png");
@@ -51,6 +51,20 @@ public class Assets {
         btn_save = new BufferedImage[2];
     		btn_save[0] = ImageLoader.loadImage("/res/textures/save.png");
     		btn_save[1] = ImageLoader.loadImage("/res/textures/save.png");
+    	numbers = new BufferedImage[10];
+    		numbers[0] = ImageLoader.loadImage("/res/textures/number_zero.png");
+    		numbers[1] = ImageLoader.loadImage("/res/textures/number_one.png");
+    		numbers[2] = ImageLoader.loadImage("/res/textures/number_two.png");
+    		numbers[3] = ImageLoader.loadImage("/res/textures/number_three.png");
+    		numbers[4] = ImageLoader.loadImage("/res/textures/number_four.png");
+    		numbers[5] = ImageLoader.loadImage("/res/textures/number_five.png");
+    		numbers[6] = ImageLoader.loadImage("/res/textures/number_six.png");
+    		numbers[7] = ImageLoader.loadImage("/res/textures/number_seven.png");
+    		numbers[8] = ImageLoader.loadImage("/res/textures/number_eight.png");
+    		numbers[9] = ImageLoader.loadImage("/res/textures/number_nine.png");
+    		
+    		
+    		
         ballGroup = new BufferedImage[NUM_BOLLE];
 	    ballGroup[1] = ImageLoader.loadImage("/res/textures/staticRedBall.png");
 	    ballGroup[2] = ImageLoader.loadImage("/res/textures/staticBlueBall.png");

@@ -14,6 +14,7 @@ public class Ball extends DynamicObject{
     public static final int RIGHT_BOUNCE = Launcher.GAME_WIDTH/2+200;
     public static final int BOBBLE_SIZE = 70;
    
+   
 
     public float directMove;
     public int color,index;
@@ -67,8 +68,9 @@ public class Ball extends DynamicObject{
             }
             
             
-            try {
-				if(Map.collectBallMap.check(this.x,this.y,getBall())) {
+            try {	
+            	if(Map.collectBallMap.check(this.x,this.y,getBall()) ) {
+            		
 					this.isMove=false; 
 					
 				    ballStatus();
@@ -78,11 +80,11 @@ public class Ball extends DynamicObject{
 				    }
 				    
 				}
+            	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            
             
             
             move();
