@@ -82,7 +82,7 @@ public class Cannon extends DynamicObject{
     }
     
     public void checkBounce() {
-    	if(this.x>Ball.RIGHT_BOUNCE) {
+    	if(this.x>Ball.RIGHT_BOUNCE+5) {
     		
     		this.bounce=false;
     	}else if(this.x< (-Ball.LEFT_BOUNCE+190)) {

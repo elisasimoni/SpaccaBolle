@@ -69,6 +69,18 @@ public class Ball extends DynamicObject{
             
             
             try {	
+            	
+            	if( Map.collectBallMap.roof(this.x,this.y,getBall())) {
+            		this.isMove=false; 
+					
+				    ballStatus();
+				   
+				    if(Map.collectBallMap.tris()) {
+				    	eliminate();
+				    }
+				    
+            		
+            	}else {
             	if(Map.collectBallMap.check(this.x,this.y,getBall()) ) {
             		
 					this.isMove=false; 
@@ -80,6 +92,7 @@ public class Ball extends DynamicObject{
 				    }
 				    
 				}
+            	}
             	
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
