@@ -62,7 +62,7 @@ public class CollectBall {
     public static int getColorInMap() {
     	int blue=0,yellow=0, green=0, red=0;
     	//bisogna vedere che colori sono rimasti sulla mappa
-    	for(int r=0; r<8; r++) {
+    	for(int r=0; r<9; r++) {
     		for(int c=0; c<13; c++) {
     		System.out.println("mapCollect   "+ r + c);
     	    int readColor=mapCollect[r][c].color;
@@ -137,7 +137,7 @@ public class CollectBall {
 					  if(coordinateY < 40 && bobble.getY()<40 && bobble.color==0) {
 					      System.out.println("So qua");
 
-					  for(int r=0; r<8; r++) {
+					  for(int r=0; r<9; r++) {
 			                        for(int c=0; c<13; c++) {
 			                            if(mapCollect[r][c].index==bobble.index) {
 			                                System.out.println(mapCollect[r][c].x+" "+mapCollect[r][c].y);
@@ -157,7 +157,7 @@ public class CollectBall {
 				 
 				 System.out.println("  indice   " + b.index);
 					 
-			     for(int c1=0; c1<8; c1++) {
+			     for(int c1=0; c1<9; c1++) {
 							for(int r1=0; r1<13; r1++) {
 							 System.out.print(" " + mapCollect[c1][r1].color + " ");
 								
@@ -193,10 +193,7 @@ public class CollectBall {
                 if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
                         if(coordinateX >= cordX(bobble) && coordinateX < (cordX(bobble))+bobble.width-15) {
                                 System.out.println("COL   " + coordinateX + b.x + cordX(bobble));
-                                if(cordY(bobble)>169) {
-                                             b.x =cordX(bobble);
-                                             b.y=(float) (b.y-0.25);
-                                     }
+                                
                                float saveX=cordX(bobble);
                                      b.x = cordX(bobble);
                                      boolean isEqual=true;
@@ -245,14 +242,7 @@ public class CollectBall {
 
                                      for(int row = 0; row < 8;row++) {
 
-                                             if(control) {
-                                                     if(b.y>=mapCollect[row][saveCol].y-140 && b.y<= mapCollect[row][saveCol].y+140){
-
-                                                             b.y= mapCollect[row][saveCol].y;
-                                                             mapCollect[row][saveCol] = b;
-
-                                                     }
-                                              }
+                                            
 
 
                                       if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
@@ -274,9 +264,7 @@ public class CollectBall {
                                                      }
                                                      System.out.println();
                                              }
-                                      if(row>=6) {
-                                              control=true;
-                                      }
+                                      
 
                                      }
                                      }
@@ -312,7 +300,7 @@ public class CollectBall {
 		
 		addPoint=0;
 		/*controllo orizzontale a 5*/
-		for(int r=0; r<8; r++) {
+		for(int r=0; r<9; r++) {
 			for(int c=0; c<13; c++) {
 				int c2=c+1;
 				int c3=c+2;
@@ -341,7 +329,7 @@ public class CollectBall {
 				}   
 					//controllo vittoria
    					int count=0;
-   					for(int r1=0; r1<8; r1++) {
+   					for(int r1=0; r1<9; r1++) {
    			            for(int c1=0; c1<13; c1++) {
    			            	
    			                if(mapCollect[r1][c1].color!=0) {
@@ -366,7 +354,7 @@ public class CollectBall {
 			}
 		}
 		/*controllo orizzontale particolare*/
-		for(int r=0; r<8; r++) {
+		for(int r=0; r<9; r++) {
 			for(int c=0; c<13; c++) {
 				
 				int c2=c-1;
@@ -421,7 +409,7 @@ public class CollectBall {
 		
 		
 			/*controllo orizzontale*/
-			for(int r=0; r<8; r++) {
+			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
 					int c2=c+1;
 					int c3=c+2;
@@ -485,7 +473,7 @@ public class CollectBall {
 			}
 			
 			/*controllo verticale*/
-			for(int r=0; r<8; r++) {
+			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
 					int r2=r+1;
 					int r3=r+2;
@@ -523,7 +511,7 @@ public class CollectBall {
 			}
 			
 			/*controllo 1 pallina attaccate al vuoto*/
-			for(int r=0; r<8; r++) {
+			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
 					
 					int r2=r-1; //pallina sopra
@@ -567,7 +555,7 @@ public class CollectBall {
 			}
 			/*controllo + palline attaccate al vuoto*/
 			
-			for(int r=0; r<8; r++) {
+			for(int r=0; r<9; r++) {
 				for(int c=0; c<14; c++) {
 					boolean stop=false;
 					int i=0;
@@ -625,7 +613,7 @@ public class CollectBall {
                             }
 		        }
 		//confronto mappa e collection Ball
-			for(int r=0; r<8; r++) {
+			for(int r=0; r<9; r++) {
                 for(int c=0; c<13; c++) {
                     if(mapCollect[r][c].color==0) {
                         for(Ball b:collectionBall) {
@@ -655,7 +643,7 @@ public class CollectBall {
 		File save = new File("save.txt");
 	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
 	    
-	    for(int r=0; r<8; r++) {
+	    for(int r=0; r<9; r++) {
             for(int c=0; c<13; c++) {
 	            out.print(matrix[r][c].color);
 	       }
