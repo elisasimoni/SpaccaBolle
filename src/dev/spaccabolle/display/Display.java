@@ -3,9 +3,15 @@ package dev.spaccabolle.display;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.math.BigInteger;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+
+import dev.spaccabolle.stati.StatoMenu;
 
 public class Display {
 
@@ -54,6 +60,19 @@ public class Display {
             }
             return null;
 	}
+	public static void saveFile() {
+			
+		File dir = null;
+		File file = new File(dir, "savedLevel.txt");
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		fileChooser.setDialogTitle("Save your game");
+		int resp = fileChooser.showOpenDialog(null);
+		if (resp == JFileChooser.APPROVE_OPTION) {
+		    dir = fileChooser.getSelectedFile();
+		}
+	}	
+	
 
 	public Canvas getCanvas(){
 		return canvas;

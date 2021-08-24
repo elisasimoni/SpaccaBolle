@@ -6,6 +6,7 @@ import dev.spaccabolle.gfx.Assets;
 
 public class score {
 	
+	public int tempPoint=0;
 	public int number;
 	public int number1;
 	public int number2;
@@ -23,7 +24,8 @@ public class score {
 	}
 	
 	public void addPoint(int point) {
-			int tempPoint=point;
+
+           this.tempPoint =this.tempPoint + point;
 		
 		
 			for (int i = 0; i <= 3; i++) {
