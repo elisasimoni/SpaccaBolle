@@ -74,12 +74,14 @@ public class Map {
     public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
         Map.collectBallMap=collectBall;
         BufferedReader reader = null;
+        
         try {
-
+        	System.out.println("LOAD GAME?  "+ StatoMenu.isLoadGame);
         	if(StatoMenu.isLoadGame) {
    			 System.out.println("HO CARICATO IL TUO LIVELLO");
-   		
-   			 reader = new BufferedReader(new FileReader(StatoMenu.loadGame));
+   			String filePath = new File("").getAbsolutePath();
+   			 reader = new BufferedReader(new FileReader(filePath +StatoMenu.loadGame.getAbsolutePath()));
+   			 
    		}
    		else {
    		String filePath = new File("").getAbsolutePath();

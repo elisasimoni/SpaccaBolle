@@ -2,6 +2,9 @@ package dev.spaccabolle;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
+
+
 import dev.spaccabolle.display.Display;
 import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.gfx.Assets;
@@ -36,6 +39,7 @@ public class Game implements Runnable {
 	private Handler handler;
 	
 	public Game(String title, int width, int height){
+		
 		this.width = width;
 		this.height = height;
 		this.title = title;

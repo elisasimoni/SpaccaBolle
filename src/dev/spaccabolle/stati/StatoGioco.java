@@ -4,6 +4,7 @@ package dev.spaccabolle.stati;
 import java.awt.Graphics;
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
+import dev.spaccabolle.display.Display;
 import dev.spaccabolle.entity.Ball;
 import dev.spaccabolle.entity.Cannon;
 import dev.spaccabolle.entity.CollectBall;
@@ -39,6 +40,7 @@ public class StatoGioco extends Stato{
         public static boolean save = false;
         public static boolean pause = false;
         
+        
         public static Pause paused;
         private DrawImage imageDraw;
         
@@ -46,11 +48,11 @@ public class StatoGioco extends Stato{
 			super(handler);
 			collectBall=new CollectBall();
 			collectBallMap=new CollectBall();
-			cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
-			map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
-			
+			cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);			
 			paused = new Pause();
 			imageDraw = new DrawImage();
+			
+			map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
 		}
 		
 		private void ifPause() {
@@ -108,6 +110,7 @@ public class StatoGioco extends Stato{
 
 		   if(KeyManager.save) {
 			   save = true;
+			   Display.saveFile();
 		   }
 
 		   if(KeyManager.enter) {

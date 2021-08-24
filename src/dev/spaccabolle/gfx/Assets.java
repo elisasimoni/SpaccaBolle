@@ -8,6 +8,8 @@ public class Assets {
 	public static BufferedImage[] btn_start,btn_exit,btn_load,trasparent, ballGroup, numbers;
 
 	public static BufferedImage cannon,arrow,dark_background, logo, dragon, dragon2, btn_pause, btn_save, btn_exit_statoGioco, game_over, victory, quitGame, exit, black, home, pause, easy, normal, hard;
+    public static String icon;
+	
 
 	public static BufferedImage readBobble = null;
 	private static final int NUM_BOLLE = 5;
@@ -30,6 +32,7 @@ public class Assets {
 		quitGame = ImageLoader.loadImage("/res/textures/quitGame.png");
 		game_over = ImageLoader.loadImage("/res/textures/GAMEOVER.jpeg");
 	    victory = ImageLoader.loadImage("/res/textures/youWin.jpeg");
+	    icon = "/res/textures/staticRedBall.png";
 	    
 		btn_start = new BufferedImage[2];
 			btn_start[0] = ImageLoader.loadImage("/res/textures/PLAY.png");

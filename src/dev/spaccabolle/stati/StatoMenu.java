@@ -1,7 +1,12 @@
 package dev.spaccabolle.stati;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
+
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
@@ -28,6 +33,7 @@ public class StatoMenu extends Stato{
 	public static boolean home = false;
 	public static boolean isLoadGame = false;
 	public static  File loadGame;
+	public static  File saveGame;
 
 	public StatoMenu(Handler handler) {
 		
@@ -46,6 +52,7 @@ public class StatoMenu extends Stato{
 		uiManager.addObject(new UIImageButton(40, 800, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
+					
 					
 				}
 			}
@@ -92,9 +99,12 @@ public class StatoMenu extends Stato{
 		uiManager.addObject(new UIImageButton(308, YMoveButton, 220, 150, Assets.btn_load, new ClickListener() {
                     public void onClick() {
                     	if(!run) {
-                    		loadGame = Display.getFile();
-                            isLoadGame=true;   
-                            Stato.setState(handler.getGame().gameState);
+                    		System.out.println("STO PRENDENDO IL TUO FILE");
+                    		Display.getFile();
+                    		isLoadGame=true;  
+                    		//Stato.setState(handler.getGame().gameState);
+            				run = true;
+                            
                     	}
                     }
             }));
@@ -106,6 +116,8 @@ public class StatoMenu extends Stato{
                     }
             }));
 	}
+	
+	
 	
 	private void moveLogo() {
 	    yMovelogo+=2;

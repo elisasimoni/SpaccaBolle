@@ -192,7 +192,7 @@ public class CollectBall {
    					b.x = cordX(bobble);
    					boolean isEqual=true;
    					int tempSaveCol=0;
-   					System.out.println("ASSEGNAMENTO " + saveX  + " = " + mapCollect[0][saveCol].x + " ");
+   					
    					while(isEqual) {
    						if(coordinateX!= mapCollect[0][tempSaveCol].x) {
    						 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
@@ -294,7 +294,7 @@ public class CollectBall {
         	   
             	
            
-           
+          saveGame(mapCollect);
           return check;
            
 	}
@@ -636,7 +636,9 @@ public class CollectBall {
 	
 	
 	public void saveGame(Ball[][] matrix) throws IOException {
-		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("save.txt")));
+		    File save = new File("save.txt");
+		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
+		    
 		    for(int r=0; r<8; r++) {
                 for(int c=0; c<13; c++) {
 		            out.print(matrix[r][c].color);
@@ -644,7 +646,9 @@ public class CollectBall {
 		       out.println();
 		}
 		out.close();
-		    
+		StatoMenu.saveGame=save;
+		
+		
 		   
 		  
 	}
