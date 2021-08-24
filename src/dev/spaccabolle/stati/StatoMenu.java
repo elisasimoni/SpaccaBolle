@@ -31,7 +31,7 @@ public class StatoMenu extends Stato{
 	public static boolean home = false;
 	public static boolean isLoadGame = false;
 	public static  File loadGame;
-
+	public static  File saveGame;
 	public StatoMenu(Handler handler) {
 		
 		super(handler);

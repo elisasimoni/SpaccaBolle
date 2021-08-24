@@ -6,6 +6,7 @@ import java.io.File;
 
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
+import dev.spaccabolle.display.Display;
 import dev.spaccabolle.entity.Ball;
 import dev.spaccabolle.entity.Cannon;
 import dev.spaccabolle.entity.CollectBall;
@@ -111,6 +112,7 @@ public class StatoGioco extends Stato{
 
 		   if(KeyManager.save) {
 			   save = true;
+			   Display.saveFile();
 		   }
 
 		   if(KeyManager.enter) {
