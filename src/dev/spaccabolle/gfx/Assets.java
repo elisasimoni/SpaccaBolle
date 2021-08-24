@@ -17,7 +17,7 @@ public class Assets {
 		dragon = ImageLoader.loadImage("/res/textures/draghetto.png");
 		cannon=ImageLoader.loadImage("/res/textures/cannoneFreccia.png");
 		btn_save = ImageLoader.loadImage("/res/textures/save2.png");
-	    btn_pause = ImageLoader.loadImage("/res/textures/pause4.png");
+	    btn_pause = ImageLoader.loadImage("/res/textures/Pause4.png");
 	    btn_exit_statoGioco = ImageLoader.loadImage("/res/textures/exit3.png");
 	    black = ImageLoader.loadImage("/res/textures/Blackground.png");
 	    dragon2 = ImageLoader.loadImage("/res/textures/draghetto4.png");

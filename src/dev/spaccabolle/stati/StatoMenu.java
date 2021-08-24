@@ -20,7 +20,6 @@ public class StatoMenu extends Stato{
 	
 	private int yMove=-1;
 	private int YMoveButton=840;
-	private DrawImage imageDraw;
 	
 	public static int yMovelogo=-430;
 	public static int dimDragon=0;
@@ -94,6 +93,7 @@ public class StatoMenu extends Stato{
 			}
 		}));
 		uiManager.addObject(new UIImageButton(308, YMoveButton, 220, 150, Assets.btn_load, new ClickListener() {
+                    @SuppressWarnings("static-access")
                     public void onClick() {
                     	if(!run) {
                     		loadGame = Display.getFile();

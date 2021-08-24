@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -69,7 +68,8 @@ public class Display {
 	    if (retrival == JFileChooser.APPROVE_OPTION) {
 	        try {
 	            File fw = new File(fileChooser.getSelectedFile()+".txt");
-	            FileInputStream in = new FileInputStream(menuFile.saveGame);
+	            @SuppressWarnings("static-access")
+                FileInputStream in = new FileInputStream(menuFile.saveGame);
 	            FileOutputStream out = new FileOutputStream(fw);
 	      
 	            try {

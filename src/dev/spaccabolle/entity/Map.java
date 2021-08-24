@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.util.TreeMap;
 
 import dev.spaccabolle.Launcher;
-import dev.spaccabolle.stati.StatoMenu;
 
 public class Map {
     public static final double SCARTO_X = 10;
@@ -64,7 +63,7 @@ public class Map {
         	    
         	    String filePath = new File("").getAbsolutePath();
         	    System.out.println(filePath+level.getName());
-        	    reader = new BufferedReader(new FileReader(filePath+"\\src\\res\\map\\"+level.getName()));
+        	    reader = new BufferedReader(new FileReader(filePath+("\\src\\res\\map\\")+level.getName()));
         	    System.out.println("Creato livello");
         	}else {
         	    String filePath = new File("").getAbsolutePath();
