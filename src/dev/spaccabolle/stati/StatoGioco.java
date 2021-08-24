@@ -79,17 +79,23 @@ public class StatoGioco extends Stato{
 				}
 		   }
 		}
-		
+		private void deleteSave(File f) {
+		    f.delete();
+		}
 		private void ifExit() {
+		    StatoMenu fileMenu=(StatoMenu) handler.getGame().menuState;
 			if(KeyManager.exit && !CollectBall.gameOver && !CollectBall.victory) {
 				   exit = true;
 			}else if (KeyManager.exit){
+			           deleteSave(fileMenu.saveGame);
 				   System.exit(0);
 			}
 			   
 		   if(exit) {
 			   if(KeyManager.yes) {
+			           deleteSave(fileMenu.saveGame);
 				   System.exit(0);
+				   
 			   }else if(KeyManager.no) {
 				   exit = false;
 			   }
@@ -112,7 +118,7 @@ public class StatoGioco extends Stato{
 
 		   if(KeyManager.save) {
 			   save = true;
-			   Display.saveFile();
+			   Display.saveFile((StatoMenu) handler.getGame().menuState);
 		   }
 
 		   if(KeyManager.enter) {

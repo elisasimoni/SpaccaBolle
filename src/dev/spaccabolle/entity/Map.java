@@ -47,30 +47,14 @@ public class Map {
 		Map.collectBallMap = collectBallMap;
 	}
 	public static int numBobble = 200;
-    public static int[] coordinateX = new int[numBobble];
-    public static int[] coordinateY = new int[numBobble];
+    
    
     
     public static Ball[][] getMapmatrix() {
 		return mapMatrix;
 	}
-	public void getCoordinateX(int[] coordinateX) {
-    	Map.coordinateX=coordinateX;
-    }
-    public void getCoordinateY(int[] coordinateY) {
-    	Map.coordinateY=coordinateY;
-    }
-    public int[] getCoordinateX() {
-        return coordinateX;
-    }
-    public int[] getCoordinateY() {
-        return coordinateY;
-    }
-    
-   
 	
     
-   
     public Map(int gameYSize, int gameXSize, CollectBall collectBall, File level) {
         Map.collectBallMap=collectBall;
         BufferedReader reader = null;

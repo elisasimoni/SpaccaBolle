@@ -61,10 +61,10 @@ intero U (U e V sono i parametri della funzione).
 		    }
 	
 	public void render(Graphics g) {
-		g.drawImage(Assets.numbers[number], 340, 720, 50, 50, null);
-		g.drawImage(Assets.numbers[number1], 380, 720, 50, 50, null);
-		g.drawImage(Assets.numbers[number2], 420, 720, 50, 50, null);
-		g.drawImage(Assets.numbers[number3], 460, 720, 50, 50, null);
+		g.drawImage(Assets.numbers[number], 340, 600, 50, 50, null);
+		g.drawImage(Assets.numbers[number1], 380, 600, 50, 50, null);
+		g.drawImage(Assets.numbers[number2], 420, 600, 50, 50, null);
+		g.drawImage(Assets.numbers[number3], 460, 600, 50, 50, null);
 	}
 	
 

@@ -12,9 +12,9 @@ public class DrawImage {
 		if(StatoMenu.run) {
 			 g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
 			 
-			 g.drawImage(Assets.btn_save, 40, 800, 200, 90, null);
-			 g.drawImage(Assets.btn_pause, 330, 800, 200, 90, null);
-			 g.drawImage(Assets.btn_exit_statoGioco, 600, 800, 200, 90, null);
+			 g.drawImage(Assets.btn_save, 40, 640, 200, 90, null);
+			 g.drawImage(Assets.btn_pause, 330, 640, 200, 90, null);
+			 g.drawImage(Assets.btn_exit_statoGioco, 600, 640, 200, 90, null);
 			 
 			 StatoGioco.cannon.render(g);
 			 StatoGioco.collectBallMap.render(g);

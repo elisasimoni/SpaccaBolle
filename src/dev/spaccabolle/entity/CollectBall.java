@@ -268,8 +268,10 @@ public class CollectBall {
 
                                      }
                                      }
-                                     //controllo game OVer
-                                     if(coordinateY>450) {
+                                     /**
+                                     ** controllo game OVer
+                                     **/
+                                     if(coordinateY>350) {
                                              System.out.println("GAME OVER");
                                              saveGame(mapCollect);
                                              gameOver=true;
@@ -323,6 +325,12 @@ public class CollectBall {
 							mapCollect[r][c4].eliminate();
 							mapCollect[r][c5].eliminate();						
 							checkTris=true;
+							if(checkTris) {
+								if(addPoint==0) {
+									addPoint=1;
+								point = point + 5;
+								}
+							}
 				
 							
 						}
@@ -347,12 +355,7 @@ public class CollectBall {
 				}
 			
 		}
-		if(checkTris) {
-			if(addPoint==0) {
-				addPoint=1;
-			point = point + 5;
-			}
-		}
+		
 		/*controllo orizzontale particolare*/
 		for(int r=0; r<9; r++) {
 			for(int c=0; c<13; c++) {
@@ -640,7 +643,9 @@ public class CollectBall {
 	
 	
 	public void saveGame(Ball[][] matrix) throws IOException {
-		File save = new File("save.txt");
+	    System.out.println("Scrivo");
+	    String filePath = new File("").getAbsolutePath();
+		File save = new File(filePath+"\\src\\res\\map\\save.txt");
 	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
 	    
 	    for(int r=0; r<9; r++) {
@@ -651,7 +656,6 @@ public class CollectBall {
 	}
 	out.close();
 	StatoMenu.saveGame=save;
-	
 	
 	   
 		

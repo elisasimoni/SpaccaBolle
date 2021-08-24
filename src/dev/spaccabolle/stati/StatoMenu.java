@@ -32,7 +32,7 @@ public class StatoMenu extends Stato{
 	public static boolean isLoadGame = false;
 	public static  File loadGame;
 	static String filePath = new File("").getAbsolutePath();
-	public static  File saveGame = new File(filePath+"//src//res//map//save.txt") ;
+	public static  File saveGame = new File(filePath+"//src//res//map//save.txt");
 	public StatoMenu(Handler handler) {
 		
 		super(handler);
@@ -47,14 +47,14 @@ public class StatoMenu extends Stato{
 			}
 		}));
 		
-		uiManager.addObject(new UIImageButton(40, 900, 200, 90, Assets.trasparent, new ClickListener() {
+		uiManager.addObject(new UIImageButton(40, 640, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
 					
 				}
 			}
 		}));
-		uiManager.addObject(new UIImageButton(330, 900, 200, 90, Assets.trasparent, new ClickListener() {
+		uiManager.addObject(new UIImageButton(330, 640, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
 					StatoGioco.pause = true;
@@ -62,7 +62,7 @@ public class StatoMenu extends Stato{
 			}
 		}));
 	
-		uiManager.addObject(new UIImageButton(600, 900, 200, 90, Assets.trasparent, new ClickListener() {
+		uiManager.addObject(new UIImageButton(600, 640, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
 					StatoGioco.exit = true;
