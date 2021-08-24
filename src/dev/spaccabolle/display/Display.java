@@ -62,7 +62,7 @@ public class Display {
 	public static void saveFile(StatoMenu menuFile) {
 		
 		String filePath = new File("").getAbsolutePath();
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
 		fileChooser.setDialogTitle("Save your game");   
 		
 		int retrival = fileChooser.showSaveDialog(frame);
