@@ -146,7 +146,7 @@ public class CollectBall {
 			                                b.x=mapCollect[r][c].x;
 			                                b.y=mapCollect[r][c].y;
 			                                mapCollect[r][c].color=b.color;
-			                                System.out.println(mapCollect[r][c].x);
+			                                
 			                            }
 			                        }
 					  }
@@ -302,17 +302,23 @@ public class CollectBall {
 		
 		addPoint=0;
 		/*controllo orizzontale a 5*/
-		for(int r=0; r<9; r++) {
+		for(int r=0; r<8; r++) {
 			for(int c=0; c<13; c++) {
 				int c2=c+1;
 				int c3=c+2;
-				int c4=c+3;
-				int c5=c+5;
+				int c4=c-1;
+				if(c4<0) {
+					c4=0;
+				}
+				int c5=c-2;
+				if(c5<0) {
+					c5=0;
+				}
 				if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null 
 						&& mapCollect[r][c4]!=null &&mapCollect[r][c5]!=null && mapCollect[r][c].color !=0 && mapCollect[r][c2].color !=0 && mapCollect[r][c3].color != 0 && mapCollect[r][c4].color!=0 &&mapCollect[r][c5].color!=0) {
-				
+					
 				if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color && mapCollect[r][c3].color== mapCollect[r][c4].color && mapCollect[r][c4].color== mapCollect[r][c5].color ) {
-				
+							
 							
 							mapCollect[r][c].color=0;
 							mapCollect[r][c2].color=0;
@@ -356,59 +362,8 @@ public class CollectBall {
 			
 		}
 		
-		/*controllo orizzontale particolare*/
-		for(int r=0; r<9; r++) {
-			for(int c=0; c<13; c++) {
-				
-				int c2=c-1;
-				
-				if(c2<0) {
-					c2=0;
-					
-				}
-				int c3=c-2;
-				if(c3<0) {
-					c3=0;
-					
-				}
-				
-				if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null && mapCollect[r][c].color !=0 && mapCollect[r][c2].color !=0 && mapCollect[r][c3].color != 0) {
-				
-				if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
-						
-					
-					mapCollect[r][c].color=0;
-					mapCollect[r][c2].color=0;
-					mapCollect[r][c3].color=0;
-					mapCollect[r][c].eliminate();
-					mapCollect[r][c2].eliminate();
-					mapCollect[r][c3].eliminate();
-					checkTris=true;
-					if(addPoint==0) {
-						addPoint=1;
-					point = point + 3;
-					}
-					//controllo vittoria
-   					int count=0;
-   					for(int r1=0; r1<8; r1++) {
-   			            for(int c1=0; c1<13; c1++) {
-   			            	
-   			                if(mapCollect[r1][c1].color!=0) {
-   			                	count++;
-   			                }
-   			            }
-   					}
-   					if(count==0) {
-   						victory=true;
-   					}
-					
-					
-					
-				
-				}
-				}
-			}
-		}
+		
+		
 		
 		
 			/*controllo orizzontale*/
@@ -474,7 +429,59 @@ public class CollectBall {
 					}
 				}
 			}
-			
+			/*controllo orizzontale particolare*/
+			for(int r=0; r<9; r++) {
+				for(int c=0; c<13; c++) {
+					
+					int c2=c-1;
+					
+					if(c2<0) {
+						c2=0;
+						
+					}
+					int c3=c-2;
+					if(c3<0) {
+						c3=0;
+						
+					}
+					
+					if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null && mapCollect[r][c].color !=0 && mapCollect[r][c2].color !=0 && mapCollect[r][c3].color != 0) {
+					
+					if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
+							
+						
+						mapCollect[r][c].color=0;
+						mapCollect[r][c2].color=0;
+						mapCollect[r][c3].color=0;
+						mapCollect[r][c].eliminate();
+						mapCollect[r][c2].eliminate();
+						mapCollect[r][c3].eliminate();
+						checkTris=true;
+						if(addPoint==0) {
+							addPoint=1;
+						point = point + 3;
+						}
+						//controllo vittoria
+	   					int count=0;
+	   					for(int r1=0; r1<8; r1++) {
+	   			            for(int c1=0; c1<13; c1++) {
+	   			            	
+	   			                if(mapCollect[r1][c1].color!=0) {
+	   			                	count++;
+	   			                }
+	   			            }
+	   					}
+	   					if(count==0) {
+	   						victory=true;
+	   					}
+						
+						
+						
+					
+					}
+					}
+				}
+			}
 			/*controllo verticale*/
 			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
@@ -530,7 +537,7 @@ public class CollectBall {
 						
 					}
 					int c3=c+2; //pallina a dx
-					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null && mapCollect[r3][c]!=null && mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null ) {
+					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null) {
 					
 					if( mapCollect[r2][c].color==0 ) {
 						
@@ -572,6 +579,12 @@ public class CollectBall {
 						r3=0;
 					}
 					i++;
+					if(mapCollect[0][c]!=null && mapCollect[0][c].color ==0) {
+						for(int row=0; row<8; row++) {
+							mapCollect[row][c].color=0;
+							mapCollect[row][c].eliminate();
+						}
+					}
 					if(mapCollect[r2][c]!=null) {
 						if(mapCollect[r2][c].color==0)
 						{
@@ -643,25 +656,25 @@ public class CollectBall {
 	
 	
 	public void saveGame(Ball[][] matrix) throws IOException {
-	    System.out.println("Scrivo");
-	    String filePath = new File("").getAbsolutePath();
-		File save = new File(filePath+"\\src\\res\\map\\save.txt");
-	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
-	    
-	    for(int r=0; r<9; r++) {
+            System.out.println("Scrivo");
+            String filePath = new File("").getAbsolutePath();
+                File save = new File(filePath+"\\src\\res\\map\\save.txt");
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
+            
+            for(int r=0; r<9; r++) {
             for(int c=0; c<13; c++) {
-	            out.print(matrix[r][c].color);
-	       }
-	       out.println();
-	}
-	out.close();
-	StatoMenu.saveGame=save;
-	
-	   
-		
-		   
-		  
-	}
+                    out.print(matrix[r][c].color);
+               }
+               out.println();
+        }
+        out.close();
+        StatoMenu.saveGame=save;
+        
+           
+                
+                  
+                  
+        }
     
     public ArrayList<Ball> getBolle() {
         return collectionBall;
