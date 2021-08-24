@@ -47,14 +47,14 @@ public class StatoMenu extends Stato{
 			}
 		}));
 		
-		uiManager.addObject(new UIImageButton(40, 800, 200, 90, Assets.trasparent, new ClickListener() {
+		uiManager.addObject(new UIImageButton(40, 900, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
 					
 				}
 			}
 		}));
-		uiManager.addObject(new UIImageButton(330, 800, 200, 90, Assets.trasparent, new ClickListener() {
+		uiManager.addObject(new UIImageButton(330, 900, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
 					StatoGioco.pause = true;
@@ -62,7 +62,7 @@ public class StatoMenu extends Stato{
 			}
 		}));
 	
-		uiManager.addObject(new UIImageButton(600, 800, 200, 90, Assets.trasparent, new ClickListener() {
+		uiManager.addObject(new UIImageButton(600, 900, 200, 90, Assets.trasparent, new ClickListener() {
 			public void onClick() {
 				if(run) {
 					StatoGioco.exit = true;
