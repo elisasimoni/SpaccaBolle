@@ -71,24 +71,25 @@ public class Map {
 	
     
    
-    public Map(int gameYSize, int gameXSize, CollectBall collectBall) {
+    public Map(int gameYSize, int gameXSize, CollectBall collectBall, File level) {
         Map.collectBallMap=collectBall;
         BufferedReader reader = null;
         try {
 
-        	if(StatoMenu.isLoadGame) {
-   			 System.out.println("HO CARICATO IL TUO LIVELLO");
-   		
-   			 reader = new BufferedReader(new FileReader(StatoMenu.loadGame));
-   		}
-   		else {
-   		String filePath = new File("").getAbsolutePath();
-           reader = new BufferedReader(new FileReader(filePath + "\\src\\res\\map\\level1.txt"));
-   		}
+        	if(level!=null) {
+        	    
+        	    String filePath = new File("").getAbsolutePath();
+        	    System.out.println(filePath+level.getName());
+        	    reader = new BufferedReader(new FileReader(filePath+"\\src\\res\\map\\"+level.getName()));
+        	    System.out.println("Creato livello");
+        	}else {
+        	    String filePath = new File("").getAbsolutePath();
+        	    reader = new BufferedReader(new FileReader(filePath + "\\src\\res\\map\\level1.txt"));
+        	}
                
 
         } catch (FileNotFoundException e2) {
-                // TODO Auto-generated catch block
+                
                 e2.printStackTrace();
         }
         

@@ -55,8 +55,9 @@ public class Game implements Runnable {
 		
 		handler = new Handler(this);
 		
-		this.gameState = new StatoGioco(this.handler);
+		
 		this.menuState = new StatoMenu(this.handler);
+		this.gameState = new StatoGioco(this.handler);
 		Stato.setState(this.menuState);
 	}
 	

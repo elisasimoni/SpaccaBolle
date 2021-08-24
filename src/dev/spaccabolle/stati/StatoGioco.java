@@ -2,6 +2,8 @@ package dev.spaccabolle.stati;
 
 
 import java.awt.Graphics;
+import java.io.File;
+
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.entity.Ball;
@@ -29,12 +31,13 @@ public class StatoGioco extends Stato{
         
         public  static int xDragon = 500, yDragon=200, yDragonVictory = 450,yMove=-1;
     	public static int yDragonLimits=200, yDragonVictoryLimits=200;
+    	public File level;
     	
         static Cannon cannon;
         static CollectBall collectBall;
         static CollectBall collectBallMap;
         @SuppressWarnings("unused")
-		private Map map; 
+		public Map map; 
         public static boolean exit = false;
         public static boolean save = false;
         public static boolean pause = false;
@@ -47,7 +50,7 @@ public class StatoGioco extends Stato{
 			collectBall=new CollectBall();
 			collectBallMap=new CollectBall();
 			cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
-			map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap);
+			map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap,level);
 			
 			paused = new Pause();
 			imageDraw = new DrawImage();

@@ -1,12 +1,14 @@
 package dev.spaccabolle.stati;
 
 import java.awt.Graphics;
+import java.io.File;
 
 import dev.spaccabolle.Handler;
 
 public abstract class Stato {
 	
 	private static Stato statoCorrente = null;
+	public static File level;
 	
 	public static void setState(Stato state){
 		statoCorrente = state;
@@ -15,6 +17,7 @@ public abstract class Stato {
 	public static Stato getState(){
 		return statoCorrente;
 	}
+	
 	
 	//CLASS
 	

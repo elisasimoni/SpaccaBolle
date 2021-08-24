@@ -6,6 +6,9 @@ import java.io.File;
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.display.Display;
+import dev.spaccabolle.entity.Ball;
+import dev.spaccabolle.entity.CollectBall;
+import dev.spaccabolle.entity.Map;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.ui.ClickListener;
 import dev.spaccabolle.ui.UIImageButton;
@@ -93,8 +96,13 @@ public class StatoMenu extends Stato{
                     public void onClick() {
                     	if(!run) {
                     		loadGame = Display.getFile();
-                            isLoadGame=true;   
-                            Stato.setState(handler.getGame().gameState);
+                    		StatoGioco game= (StatoGioco) handler.getGame().gameState;
+                    		game.level=loadGame;
+                    		game.collectBallMap = new CollectBall();
+                    		game.map=new Map(0, Ball.LEFT_BOUNCE,game.collectBallMap,game.level);
+                            isLoadGame=true;  
+                            run = true;
+                            
                     	}
                     }
             }));
