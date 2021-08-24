@@ -9,7 +9,7 @@ import dev.spaccabolle.gfx.Assets;
 public class DrawImage {
 	
 	public void render(Graphics g) {
-		if(StatoMenu.run) {
+		
 			 g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
 			 
 			 g.drawImage(Assets.btn_save, 40, 640, 200, 90, null);
@@ -30,11 +30,6 @@ public class DrawImage {
 			 if(CollectBall.victory) {
 				 g.drawImage(Assets.dragon, 350, StatoGioco.yDragon, 150, 150, null);
 			 }
-		}else {
-			g.drawImage(Assets.dark_background, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
-			g.drawImage(Assets.logo, 70, StatoMenu.yMovelogo, 650, 650, null);
-			g.drawImage(Assets.dragon, StatoMenu.xDragon, StatoMenu.yDragon, StatoMenu.dimDragon, StatoMenu.dimDragon, null);
-			StatoMenu.uiManager.render(g);
-		}
+		
 	}
 }

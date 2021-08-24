@@ -17,6 +17,7 @@ import java.util.Random;
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
+import dev.spaccabolle.score.Score;
 import dev.spaccabolle.stati.Stato;
 import dev.spaccabolle.stati.StatoGioco;
 import dev.spaccabolle.stati.StatoMenu;
@@ -29,12 +30,13 @@ public class CollectBall {
     public static Ball[][] mapCollect = Map.getMapmatrix();
     public static boolean gameOver = false;
     public static boolean victory = false;
-    public static score score =new score(0, 0, 0,0);
+    public static Score score =new Score(0, 0, 0,0);
     public static int addPoint=0;
     public static int point=0;
     private static final int[] exclude = {0,0,0,0,0};
     private static Random rand = new Random();
     public static int randomColorCannon=1;
+    public static int flyngPoint=0;
     
    
     
@@ -192,16 +194,16 @@ public class CollectBall {
 
                 if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
                         if(coordinateX >= cordX(bobble) && coordinateX < (cordX(bobble))+bobble.width-15) {
-                                System.out.println("COL   " + coordinateX + b.x + cordX(bobble));
+                                
                                 
                                float saveX=cordX(bobble);
                                      b.x = cordX(bobble);
                                      boolean isEqual=true;
                                      int tempSaveCol=0;
-                                     System.out.println("ASSEGNAMENTO " + saveX  + " = " + mapCollect[0][saveCol].x + " ");
+                                     
                                      while(isEqual) {
                                              if(coordinateX != mapCollect[0][tempSaveCol].x) {
-                                              System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
+                                              
                                              if( coordinateX <=mapCollect[0][tempSaveCol].x +55) {
 
 
@@ -224,15 +226,12 @@ public class CollectBall {
 
 
 
-                              System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
+                              
                                      for(int col = 1 ; col < 13; col++) {
-                                         System.out.println(bobble.x + " " + mapCollect[0][col].x + " c: "+col);
+                                        
                                       if(b.x==mapCollect[0][col].x ) {
-
-                                              System.out.println(bobble.x + " " + mapCollect[0][col].x + " c: "+col);
-                                               saveCol=col;
-                                               System.out.println("COLONNA SAVE");
-
+                                    	  		saveCol=col;
+                                               
 
                                       }
 
@@ -253,17 +252,14 @@ public class CollectBall {
 
                                       randomColorCannon= getColorInMap();
 
-                                      System.out.println("mapCollect nuova bolla");
-
-
-
-                                      for(int c=0; c<8; c++) {
+                                    
+                                    /*  for(int c=0; c<8; c++) {
                                                      for(int r=0; r<13; r++) {
                                                       System.out.print(" " + mapCollect[c][r].color + " ");
 
                                                      }
                                                      System.out.println();
-                                             }
+                                             }*/
                                       
 
                                      }
@@ -298,9 +294,9 @@ public class CollectBall {
 	
 	public boolean tris() {
 		boolean checkTris=false;
+		flyngPoint=0;
 		
 		
-		addPoint=0;
 		/*controllo orizzontale a 5*/
 		for(int r=0; r<8; r++) {
 			for(int c=0; c<13; c++) {
@@ -331,13 +327,12 @@ public class CollectBall {
 							mapCollect[r][c4].eliminate();
 							mapCollect[r][c5].eliminate();						
 							checkTris=true;
-							if(checkTris) {
+							
 								if(addPoint==0) {
 									addPoint=1;
 								point = point + 5;
 								}
-							}
-				
+							
 							
 						}
 				}   
@@ -366,7 +361,7 @@ public class CollectBall {
 		
 		
 		
-			/*controllo orizzontale*/
+			/*controllo orizzontale 4 e 3 */
 			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
 					int c2=c+1;
@@ -389,24 +384,25 @@ public class CollectBall {
 							mapCollect[r][c4].eliminate();
 							if(addPoint==0) {
 								addPoint=1;
-							point = point + 4;}
+							point = point + 4;
+							}
 						   
 						}
 						else {
 						
 						
-						checkTris=true;
-						
-						mapCollect[r][c].color=0;
-						mapCollect[r][c2].color=0;
-						mapCollect[r][c3].color=0;
-						mapCollect[r][c].eliminate();
-						mapCollect[r][c2].eliminate();
-						mapCollect[r][c3].eliminate();
-						if(addPoint==0) {
-							addPoint=1;
-						point = point + 3;
-						}
+							checkTris=true;
+							
+							mapCollect[r][c].color=0;
+							mapCollect[r][c2].color=0;
+							mapCollect[r][c3].color=0;
+							mapCollect[r][c].eliminate();
+							mapCollect[r][c2].eliminate();
+							mapCollect[r][c3].eliminate();
+							if(addPoint==0) {
+								addPoint=1;
+							point = point + 3;
+							}
 						}
 						//controllo vittoria
 	   					int count=0;
@@ -482,7 +478,7 @@ public class CollectBall {
 					}
 				}
 			}
-			/*controllo verticale*/
+			/*controllo verticale 3 */
 			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
 					int r2=r+1;
@@ -500,7 +496,8 @@ public class CollectBall {
 						mapCollect[r3][c].eliminate();
 						if(addPoint==0) {
 							addPoint=1;
-						point = point + 3;}
+						point = point + 3;
+						}
 						//controllo vittoria
 	   					int count=0;
 	   					for(int r1=0; r1<8; r1++) {
@@ -521,6 +518,8 @@ public class CollectBall {
 			}
 			
 			/*controllo 1 pallina attaccate al vuoto*/
+			
+		
 			for(int r=0; r<9; r++) {
 				for(int c=0; c<13; c++) {
 					
@@ -530,21 +529,21 @@ public class CollectBall {
 						r2=0;
 						
 					}
-					int r3=r+1; //pallina sotto
-					int c2=c-1; //pallina a sx
-					if(c2==-1) {
-						c2=0;
-						
-					}
+					
 					int c3=c+2; //pallina a dx
 					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null) {
 					
-					if( mapCollect[r2][c].color==0 ) {
+					if( mapCollect[r2][c].color==0) {
 						
 						checkTris=true;
+						
 						mapCollect[r][c].color=0;
 						mapCollect[r][c].eliminate();
-						
+						if(addPoint==0) {
+							addPoint=1;
+							System.out.println("SONO QUI");
+							flyngPoint =  1;
+						}
 						//controllo vittoria
 	   					int count=0;
 	   					for(int r1=0; r1<8; r1++) {
@@ -583,6 +582,13 @@ public class CollectBall {
 						for(int row=0; row<8; row++) {
 							mapCollect[row][c].color=0;
 							mapCollect[row][c].eliminate();
+							if(addPoint==0) {
+								
+								addPoint=1;
+								flyngPoint =  r;
+							}
+							
+							
 						}
 					}
 					if(mapCollect[r2][c]!=null) {
@@ -591,7 +597,10 @@ public class CollectBall {
 							checkTris=true;
 							mapCollect[r][c].color=0;
 							mapCollect[r][c].eliminate();
-							
+							if(addPoint==0) {
+								addPoint=1;
+								flyngPoint =  r;
+							}
 							
 							//controllo vittoria
 		   					int count=0;
@@ -636,7 +645,7 @@ public class CollectBall {
                             if(mapCollect[r][c].index==b.index) {
                                 b.color=0;
                                 b.eliminate();
-                                /*System.out.println(b.index+" "+mapCollect[r][c].index);*/
+                                
                             }
                         }
                     }
@@ -646,9 +655,9 @@ public class CollectBall {
 			
 			
 			
-		score.addPoint(point);
+		score.addPoint(point, flyngPoint);
 		
-		addPoint=0;
+		
 		return checkTris;
 		
 		

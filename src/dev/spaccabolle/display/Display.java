@@ -3,9 +3,9 @@ package dev.spaccabolle.display;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
@@ -34,7 +34,7 @@ public class Display {
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
-		
+		frame.setIconImage(new ImageIcon(getClass().getResource("/res/textures/draghetto4.png")).getImage());
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
@@ -58,47 +58,20 @@ public class Display {
             }
             return null;
 	}
-	public static void saveFile(StatoMenu menuFile) {
+	public static void saveFile() {
 		
+		@SuppressWarnings("unused")
 		String filePath = new File("").getAbsolutePath();
-		JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
+		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Save your game");   
+		@SuppressWarnings("unused")
+		int userSelection = fileChooser.showSaveDialog(frame);
 		
-		int retrival = fileChooser.showSaveDialog(frame);
+		int retrival = fileChooser.showSaveDialog(null);
 	    if (retrival == JFileChooser.APPROVE_OPTION) {
 	        try {
-	            File fw = new File(fileChooser.getSelectedFile()+".txt");
-	            @SuppressWarnings("static-access")
-                FileInputStream in = new FileInputStream(menuFile.saveGame);
-	            FileOutputStream out = new FileOutputStream(fw);
-	      
-	            try {
-	      
-	                int n;
-	      
-	                // read() function to read the
-	                // byte of data
-	                while ((n = in.read()) != -1) {
-	                    // write() function to write
-	                    // the byte of data
-	                    out.write(n);
-	                }
-	            }
-	            finally {
-	                if (in != null) {
-	      
-	                    // close() function to close the
-	                    // stream
-	                    in.close();
-	                }
-	                // close() function to close
-	                // the stream
-	                if (out != null) {
-	                    out.close();
-	                }
-	            }
-	            System.out.println("File Copied");
-	        
+	            FileWriter fw = new FileWriter(fileChooser.getSelectedFile()+".txt");
+	            
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }

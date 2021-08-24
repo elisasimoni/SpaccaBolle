@@ -63,7 +63,7 @@ public class Map {
         	    
         	    String filePath = new File("").getAbsolutePath();
         	    System.out.println(filePath+level.getName());
-        	    reader = new BufferedReader(new FileReader(filePath+("\\src\\res\\map\\")+level.getName()));
+        	    reader = new BufferedReader(new FileReader(filePath+"\\src\\res\\map\\"+level.getName()));
         	    System.out.println("Creato livello");
         	}else {
         	    String filePath = new File("").getAbsolutePath();

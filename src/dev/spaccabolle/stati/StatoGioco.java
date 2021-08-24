@@ -37,6 +37,7 @@ public class StatoGioco extends Stato{
         static Cannon cannon;
         static CollectBall collectBall;
         static CollectBall collectBallMap;
+        @SuppressWarnings("unused")
 		public Map map; 
         public static boolean exit = false;
         public static boolean save = false;
@@ -78,24 +79,17 @@ public class StatoGioco extends Stato{
 				}
 		   }
 		}
-		private void deleteSave(File f) {
-		    f.delete();
-		}
-		@SuppressWarnings({ "static-access" })
-        private void ifExit() {
-		    StatoMenu fileMenu=(StatoMenu) handler.getGame().menuState;
+		
+		private void ifExit() {
 			if(KeyManager.exit && !CollectBall.gameOver && !CollectBall.victory) {
 				   exit = true;
 			}else if (KeyManager.exit){
-			           deleteSave(fileMenu.saveGame);
 				   System.exit(0);
 			}
 			   
 		   if(exit) {
 			   if(KeyManager.yes) {
-			           deleteSave(fileMenu.saveGame);
 				   System.exit(0);
-				   
 			   }else if(KeyManager.no) {
 				   exit = false;
 			   }
@@ -118,7 +112,7 @@ public class StatoGioco extends Stato{
 
 		   if(KeyManager.save) {
 			   save = true;
-			   Display.saveFile((StatoMenu) handler.getGame().menuState);
+			   Display.saveFile();
 		   }
 
 		   if(KeyManager.enter) {
