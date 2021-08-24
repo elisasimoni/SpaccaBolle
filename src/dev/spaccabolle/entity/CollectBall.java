@@ -259,7 +259,7 @@ public class CollectBall {
                                             
                                       mapCollect[row][saveCol] = b;
 
-
+                                      saveGame(mapCollect);
 
                                       randomColorCannon= getColorInMap();
 
@@ -300,7 +300,7 @@ public class CollectBall {
 
 
 
-
+          
 
        return check;
 
@@ -643,6 +643,7 @@ public class CollectBall {
 			
 			
 		score.addPoint(point);
+		
 		addPoint=0;
 		return checkTris;
 		
@@ -651,15 +652,20 @@ public class CollectBall {
 	
 	
 	public void saveGame(Ball[][] matrix) throws IOException {
-		  StatoMenu.saveGame = new File("save.txt");
-		    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(StatoMenu.saveGame)));
-		    for(int r=0; r<8; r++) {
-                for(int c=0; c<13; c++) {
-		            out.print(matrix[r][c].color);
-		       }
-		       out.println();
-		}
-		out.close();
+		File save = new File("save.txt");
+	    PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
+	    
+	    for(int r=0; r<8; r++) {
+            for(int c=0; c<13; c++) {
+	            out.print(matrix[r][c].color);
+	       }
+	       out.println();
+	}
+	out.close();
+	StatoMenu.saveGame=save;
+	
+	
+	   
 		
 		   
 		  

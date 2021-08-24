@@ -31,7 +31,8 @@ public class StatoMenu extends Stato{
 	public static boolean home = false;
 	public static boolean isLoadGame = false;
 	public static  File loadGame;
-	public static  File saveGame;
+	static String filePath = new File("").getAbsolutePath();
+	public static  File saveGame = new File(filePath+"//src//res//map//save.txt") ;
 	public StatoMenu(Handler handler) {
 		
 		super(handler);
