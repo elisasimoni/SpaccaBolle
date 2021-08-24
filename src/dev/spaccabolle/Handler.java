@@ -1,5 +1,7 @@
 package dev.spaccabolle;
 
+import java.io.File;
+
 import dev.spaccabolle.input.KeyManager;
 import dev.spaccabolle.input.MouseManager;
 
