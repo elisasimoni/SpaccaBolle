@@ -53,7 +53,7 @@ public class Ball extends DynamicObject{
     }
     
     public void ballStatus() {
-    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color,++Map.index);
+    	Ball b = new Ball(this.x, this.y, this.height, this.width, this.color,Map.index);
     	this.index=Map.index;
     	Map.collectBallMap.addBall(b);/*aggiungo la bolla alla mappa*/
     	

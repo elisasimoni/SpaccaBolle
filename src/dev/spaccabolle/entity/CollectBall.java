@@ -129,18 +129,26 @@ public class CollectBall {
 	public boolean roof(float coordinateX,float coordinateY,Ball b) throws IOException {
 		
 		  int saveCol=0;
-		  boolean check = false; //change to falsereturn false;
-		  for(int c=0; c<12; c++) {
+		  boolean check = false; //change to false return false;
 			  
-				  
-			  if((coordinateY < 40 && coordinateY < mapCollect[0][c].y && mapCollect[0][c].y<40) && mapCollect[0][c].color==0) {
-				  if(coordinateX == mapCollect[0][c].x ) {
-					  System.out.println("  indice   " + mapCollect);
-					  b.x=mapCollect[0][c].x;
-				     
-                      b.y=mapCollect[0][c].y;
-                     
-                      mapCollect[0][c]=b;
+			for(Ball bobble:collectionBall) {	  
+			  if(coordinateX >= bobble.getX() && coordinateX <= bobble.getX()+bobble.getWidth()) {
+					  if(coordinateY < 40 && bobble.getY()<40 && bobble.color==0) {
+					      System.out.println("So qua");
+					  
+					  for(int r=0; r<8; r++) {
+			                        for(int c=0; c<13; c++) {
+			                            if(mapCollect[r][c].index==bobble.index) {
+			                                System.out.println(mapCollect[r][c].x+" "+mapCollect[r][c].y);
+			                                System.out.println(mapCollect[r][c-1].x+" "+mapCollect[r][c-1].y);
+			                                System.out.println(mapCollect[r+1][c].x+" "+mapCollect[r+1][c].y);
+			                                b.x=mapCollect[r][c].x;
+			                                b.y=mapCollect[r][c].y;
+			                                mapCollect[r][c].color=b.color;
+			                                System.out.println(mapCollect[r][c].x);
+			                            }
+			                        }
+					  }
                       
 				
 				
@@ -149,8 +157,8 @@ public class CollectBall {
 				 System.out.println("  indice   " + b.index);
 					 
 			     for(int c1=0; c1<8; c1++) {
-							for(int r=0; r<13; r++) {
-							 System.out.print(" " + mapCollect[c1][r].color + " ");
+							for(int r1=0; r1<13; r1++) {
+							 System.out.print(" " + mapCollect[c1][r1].color + " ");
 								
 							}
 							System.out.println();
@@ -167,137 +175,138 @@ public class CollectBall {
        		
 		  
 		  return check;
-		
-	}
+		  }
+	
 	
 	public boolean check(float coordinateX,float coordinateY,Ball b) throws IOException {
 		
-           boolean check = false; //change to false
-           
-           boolean control=false;
-           boolean control2=false;
-           int saveCol=0;
-           
-             for(Ball bobble:collectionBall) {
-            	 
-        	   
-        	   if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
-        		   if(coordinateX >= cordX(bobble) && coordinateX <= (cordX(bobble))+bobble.width-15 ) {
-        			   System.out.println("COL   " + coordinateX + b.x + cordX(bobble));
-        			   if(cordY(bobble)>169) {
-      						b.x =cordX(bobble);
-      						b.y=(float) (b.y-0.25);
-      					}
-        			  float saveX=cordX(bobble);
-   					b.x = cordX(bobble);
-   					boolean isEqual=true;
-   					int tempSaveCol=0;
-   					System.out.println("ASSEGNAMENTO " + saveX  + " = " + mapCollect[0][saveCol].x + " ");
-   					while(isEqual) {
-   						if(coordinateX!= mapCollect[0][tempSaveCol].x) {
-   						 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
-   						if( coordinateX <=mapCollect[0][tempSaveCol].x +55) {
-   							   
-   							   
-   							   isEqual=false;
-   							   saveCol=tempSaveCol;
-   							
-   						}else {
-   						tempSaveCol++;
-							if(tempSaveCol==13) {
-								isEqual=false;
-								
-							}
-   						}
-   						}
-   						else {
-   							isEqual=false;
-   							saveCol=tempSaveCol;
-   						}
-   					}
-   						
-   					
-   					
-   				 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
-   					for(int col = 0 ; col < 12; col++) {
-   						
-    					 if(b.x==mapCollect[0][col].x ) {
-    						  
-    						 
-    						  saveCol=col;
-    						  System.out.println("COLONNA SAVE");
-    						 
-    	    					
-    					 }
-    						
-    						 
-    					 
-    				}
-   					
-  					for(int row = 0; row < 7;row++) {
-  						
-  						if(control) {
-  							if(b.y>=mapCollect[row][saveCol].y-140 && b.y<= mapCollect[row][saveCol].y+140){
-  								
-  								mapCollect[row][saveCol] = b;
-  								
-  							}
-						 }
-  						
-  						 
-    					 if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
-    						 System.out.println("ASSEGNAMENTO " + coordinateX +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);
-    						 
-    				
-    					
-    					 mapCollect[row][saveCol] = b;
-    					
-    					
-     					
-    					 randomColorCannon= getColorInMap();
-    					 
-    					 System.out.println("mapCollect nuova bolla");
-    					 
-    					 
-    					 
-    					 for(int c=0; c<8; c++) {
-    							for(int r=0; r<13; r++) {
-    							 System.out.print(" " + mapCollect[c][r].color + " ");
-    								
-    							}
-    							System.out.println();
-    						}
-    					 if(row>=6) {
-    						 control=true;
-    					 }
-    					 
-    					}
-  					}
-  					//controllo game OVer
-   					if(coordinateY>450) {
-   						System.out.println("GAME OVER");
-   						saveGame(mapCollect);
-   						gameOver=true;
-   						
-   						
-   						
-   					}
-   					System.out.println("MATRICE DAL 2 IN POI");	
-   					
-                       check=true;	
-                   }
-        		 
-        		  }
-        	   }
-             
-        	   
-        	   
-            	
-           
-           
-          return check;
-           
-	}
+	    boolean check = false; //change to false
+	           
+	           boolean control=false;
+	           boolean control2=false;
+	           int saveCol=0;
+	           
+	             for(Ball bobble:collectionBall) {
+	                 
+	                   
+	                   if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
+	                           if(coordinateX >= cordX(bobble) && coordinateX < (cordX(bobble))+bobble.width-15) {
+	                                   System.out.println("COL   " + coordinateX + b.x + cordX(bobble));
+	                                   if(cordY(bobble)>169) {
+	                                                b.x =cordX(bobble);
+	                                                b.y=(float) (b.y-0.25);
+	                                        }
+	                                  float saveX=cordX(bobble);
+	                                        b.x = cordX(bobble);
+	                                        boolean isEqual=true;
+	                                        int tempSaveCol=0;
+	                                        System.out.println("ASSEGNAMENTO " + saveX  + " = " + mapCollect[0][saveCol].x + " ");
+	                                        while(isEqual) {
+	                                                if(coordinateX != mapCollect[0][tempSaveCol].x) {
+	                                                 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
+	                                                if( coordinateX <=mapCollect[0][tempSaveCol].x +55) {
+	                                                           
+	                                                           
+	                                                           isEqual=false;
+	                                                           saveCol=tempSaveCol;
+	                                                        
+	                                                }else {
+	                                                tempSaveCol++;
+	                                                        if(tempSaveCol==13) {
+	                                                                isEqual=false;
+	                                                                
+	                                                        }
+	                                                }
+	                                                }
+	                                                else {
+	                                                        isEqual=false;
+	                                                        saveCol=tempSaveCol;
+	                                                }
+	                                        }
+	                                                
+	                                        
+	                                        
+	                                 System.out.println("ASSEGNAMENTO " + coordinateX  + " = " + mapCollect[0][saveCol].x + " ");
+	                                        for(int col = 1 ; col < 13; col++) {
+	                                            System.out.println(bobble.x + " " + mapCollect[0][col].x + " c: "+col);
+	                                         if(b.x==mapCollect[0][col].x ) {
+	                                                  
+	                                                 System.out.println(bobble.x + " " + mapCollect[0][col].x + " c: "+col);
+	                                                  saveCol=col;
+	                                                  System.out.println("COLONNA SAVE");
+	                                                 
+	                                                
+	                                         }
+	                                                
+	                                                 
+	                                         
+	                                }
+	                                        
+	                                        for(int row = 0; row < 8;row++) {
+	                                                
+	                                                if(control) {
+	                                                        if(b.y>=mapCollect[row][saveCol].y-140 && b.y<= mapCollect[row][saveCol].y+140){
+	                                                            
+	                                                                b.y= mapCollect[row][saveCol].y;
+	                                                                mapCollect[row][saveCol] = b;
+	                                                                
+	                                                        }
+	                                                 }
+	                                                
+	                                                 
+	                                         if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
+	                                                 System.out.println("ASSEGNAMENTO " + coordinateX +" "+ b.y + " = " + mapCollect[row][saveCol].x + " " + mapCollect[row][saveCol].y);
+	                                                 
+	                                
+	                                        
+	                                         mapCollect[row][saveCol] = b;
+	                                        
+	                                        
+	                                        
+	                                         randomColorCannon= getColorInMap();
+	                                         
+	                                         System.out.println("mapCollect nuova bolla");
+	                                         
+	                                         
+	                                         
+	                                         for(int c=0; c<8; c++) {
+	                                                        for(int r=0; r<13; r++) {
+	                                                         System.out.print(" " + mapCollect[c][r].color + " ");
+	                                                                
+	                                                        }
+	                                                        System.out.println();
+	                                                }
+	                                         if(row>=6) {
+	                                                 control=true;
+	                                         }
+	                                         
+	                                        }
+	                                        }
+	                                        //controllo game OVer
+	                                        if(coordinateY>450) {
+	                                                System.out.println("GAME OVER");
+	                                                saveGame(mapCollect);
+	                                                gameOver=true;
+	                                                
+	                                                
+	                                                
+	                                        }
+	                                        System.out.println("MATRICE DAL 2 IN POI");     
+	                                        
+	                       check=true;      
+	                   }
+	                         
+	                          }
+	                   }
+	             
+	                   
+	                   
+	                
+	           
+	           
+	          return check;
+	           
+	        }
 	
 	public boolean tris() {
 		boolean checkTris=false;

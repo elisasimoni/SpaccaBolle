@@ -29,7 +29,7 @@ public class Assets {
 		hard = ImageLoader.loadImage("/res/textures/hard2.png");
 		quitGame = ImageLoader.loadImage("/res/textures/quitGame.png");
 		game_over = ImageLoader.loadImage("/res/textures/GAMEOVER.jpeg");
-	    victory = ImageLoader.loadImage("/res/textures/youWin.jpeg");
+	    victory = ImageLoader.loadImage("/res/textures/youWin.png");
 	    
 		btn_start = new BufferedImage[2];
 			btn_start[0] = ImageLoader.loadImage("/res/textures/PLAY.png");
