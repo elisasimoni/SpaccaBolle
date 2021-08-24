@@ -17,7 +17,7 @@ public class Ball extends DynamicObject{
    
 
     public float directMove;
-    public int color,index;
+    public int color,index,topConnected;
    
 
     public boolean isMove;
