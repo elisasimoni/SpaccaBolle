@@ -5,29 +5,46 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-import dev.spaccabolle.stati.StatoMenu;
+import dev.spaccabolle.stati.StateMenu;
 
+/**
+ * The Class Display.
+ */
 public class Display {
 
+	/** The frame. */
 	private static JFrame frame;
+	
+	/** The canvas. */
 	private Canvas canvas;
 	
+	/** The title. */
 	private String title;
+	
+	/** The height. */
 	private int width, height;
 	
+	/**
+	 * Instantiates a new display.
+	 *
+	 * @param title the title
+	 * @param width the width
+	 * @param height the height
+	 */
 	public Display(String title, int width, int height){
 		this.title = title;
 		this.width = width;
 		this.height = height;
-		
 		createDisplay();
 	}
 	
+	/**
+	 * Creates the display.
+	 */
 	private void createDisplay(){
 		frame = new JFrame(title);
 		frame.setSize(width, height);
@@ -45,11 +62,19 @@ public class Display {
 		frame.pack();
 	}
 	
+	/**
+	 * Close display.
+	 */
 	public static void closeDisplay() {
 	    frame.setVisible(false);
 	    frame.dispose();
 	}
 	
+	/**
+	 * Gets the file.
+	 *
+	 * @return the file
+	 */
 	public static File getFile() {
 	    JFileChooser fileChooser = new JFileChooser();
             int response = fileChooser.showOpenDialog(frame);
@@ -59,7 +84,13 @@ public class Display {
             }
             return null;
 	}
-	public static void saveFile(StatoMenu menuFile) {
+	
+/**
+ * Save file.
+ *
+ * @param menuFile the menu file
+ */
+public static void saveFile(StateMenu menuFile) {
 		
 		String filePath = new File("").getAbsolutePath();
 		JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
@@ -71,46 +102,42 @@ public class Display {
 	            File fw = new File(fileChooser.getSelectedFile()+".txt");
 	            @SuppressWarnings("static-access")
                 FileInputStream in = new FileInputStream(menuFile.saveGame);
-	            FileOutputStream out = new FileOutputStream(fw);
-	      
-	            try {
-	      
-	                int n;
-	      
-	                // read() function to read the
-	                // byte of data
-	                while ((n = in.read()) != -1) {
-	                    // write() function to write
-	                    // the byte of data
-	                    out.write(n);
+	            FileOutputStream out = new FileOutputStream(fw);	      
+	            try {	      
+	            		int n;	      
+	            		while ((n = in.read()) != -1) {	                   
+	            	    out.write(n);
 	                }
 	            }
 	            finally {
-	                if (in != null) {
-	      
-	                    // close() function to close the
-	                    // stream
+	                if (in != null) {	      
 	                    in.close();
 	                }
-	                // close() function to close
-	                // the stream
 	                if (out != null) {
 	                    out.close();
 	                }
 	            }
-	            System.out.println("File Copied");
-	        
+
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
 	    }
-	
-	}	
+	}
 
+	/**
+	 * Gets the canvas.
+	 *
+	 * @return the canvas
+	 */
 	public Canvas getCanvas(){
-		return canvas;
+		return this.canvas;
 	}
 	
+	/**
+	 * Gets the frame.
+	 *
+	 * @return the frame
+	 */
 	public JFrame getFrame(){
 		return frame;
 	}
