@@ -77,7 +77,7 @@ public class Display {
 	 */
 	public static File getFile() {
 	    String filePath = new File("").getAbsolutePath();
-	    JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
+	    JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//dev//spaccabolle//entity//map"));
             int response = fileChooser.showOpenDialog(frame);
             if(response == JFileChooser.APPROVE_OPTION) {
                 File file= new File(fileChooser.getSelectedFile().getAbsolutePath());
@@ -94,7 +94,7 @@ public class Display {
 public static void saveFile(StateMenu menuFile) {
 		
 		String filePath = new File("").getAbsolutePath();
-		JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
+		JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//dev//spaccabolle//entity//map"));
 		fileChooser.setDialogTitle("Save your game");   
 		
 		int retrival = fileChooser.showSaveDialog(frame);
