@@ -76,7 +76,8 @@ public class Display {
 	 * @return the file
 	 */
 	public static File getFile() {
-	    JFileChooser fileChooser = new JFileChooser();
+	    String filePath = new File("").getAbsolutePath();
+	    JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
             int response = fileChooser.showOpenDialog(frame);
             if(response == JFileChooser.APPROVE_OPTION) {
                 File file= new File(fileChooser.getSelectedFile().getAbsolutePath());
