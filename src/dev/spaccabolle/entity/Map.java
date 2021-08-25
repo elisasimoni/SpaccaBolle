@@ -14,10 +14,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-import com.sun.tools.javac.Main;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import dev.spaccabolle.Launcher;
 
@@ -135,24 +133,23 @@ public class Map {
      * @return the buffered reader
      */
     private BufferedReader loadLevel(BufferedReader reader, File level) {
-    	if(level!=null) {       	    
-            String filePath = new File("").getAbsolutePath();
-            //System.out.println(filePath+level.getName());
-            InputStream inputStream = Map.class.getResourceAsStream("map/"+level.getName());
-                InputStreamReader inputReader = new InputStreamReader(inputStream);
-                System.out.println(inputReader.toString());
-                reader = new BufferedReader(inputReader);
-            //System.out.println("Creato livello");        	    
-        } else {
-            String filePath = new File("").getAbsolutePath();
-            InputStream inputStream = Map.class.getResourceAsStream("map/level1.txt");
-            InputStreamReader inputReader = new InputStreamReader(inputStream);
-            System.out.println(inputReader.toString());
-            reader = new BufferedReader(inputReader);
+    	try {
+        	if(level!=null) {       	    
+        	    String filePath = new File("").getAbsolutePath();
+        	    //System.out.println(filePath+level.getName());
+        	    reader = new BufferedReader(new FileReader(filePath+"/../map/"+level.getName()));
+        	    //System.out.println("Creato livello");        	    
+        	} else {
+        	    String filePath = new File("").getAbsolutePath();
+        	    reader = new BufferedReader(new FileReader(filePath+"/../map/level1.txt"));
+        	    System.out.println(filePath+"/../map/level1.txt");
+        	}          
+        } catch (FileNotFoundException e2) {                
+                e2.printStackTrace();
         }    	
 		return reader;    	
     }
-
+    
     /**
      * Load map.
      *

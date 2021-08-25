@@ -65,7 +65,7 @@ public class StateMenu extends State{
 	static String filePath = new File("").getAbsolutePath();
 	
 	/** The save game. */
-	public static  File saveGame = new File(filePath+"//src//dev//spaccabolle//entity//map//save.txt") ;
+	public static  File saveGame = new File(filePath+"/../map/save.txt") ;
 	
 	/**
 	 * Instantiates a new state menu.
