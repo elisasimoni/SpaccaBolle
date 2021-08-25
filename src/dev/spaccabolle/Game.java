@@ -7,34 +7,65 @@ import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
 import dev.spaccabolle.input.MouseManager;
-import dev.spaccabolle.stati.Stato;
-import dev.spaccabolle.stati.StatoGioco;
-import dev.spaccabolle.stati.StatoMenu;
+import dev.spaccabolle.stati.State;
+import dev.spaccabolle.stati.StateGame;
+import dev.spaccabolle.stati.StateMenu;
 
+
+/**
+ * The Class Game.
+ */
 public class Game implements Runnable {
 
+	/** The display. */
 	private Display display;
+	
+	/** The height. */
 	private int width, height;
+	
+	/** The title. */
 	public String title;
 	
+	/** The running. */
 	private boolean running = false;
+	
+	/** The thread. */
 	private Thread thread;
 	
+	/** The bs. */
 	private BufferStrategy bs;
+	
+	/** The g. */
 	private Graphics g;
 	
+	/** The game state. */
 	//States
-	public Stato gameState;
-	public Stato menuState;
-	public Stato gameOverState;
+	public State gameState;
 	
+	/** The menu state. */
+	public State menuState;
+	
+	/** The game over state. */
+	public State gameOverState;
+	
+	/** The key manager. */
 	//Input
 	private KeyManager keyManager;
+	
+	/** The mouse manager. */
 	private MouseManager mouseManager;
 	
+	/** The handler. */
 	//Handler
 	private Handler handler;
 	
+	/**
+	 * Instantiates a new game.
+	 *
+	 * @param title the title
+	 * @param width the width
+	 * @param height the height
+	 */
 	public Game(String title, int width, int height){
 		this.width = width;
 		this.height = height;
@@ -43,6 +74,9 @@ public class Game implements Runnable {
 		mouseManager = new MouseManager();
 	}
 	
+	/**
+	 * Inits the.
+	 */
 	private void init(){
 		display = new Display(title, width, height);
 		display.getFrame().addKeyListener(keyManager);
@@ -54,21 +88,27 @@ public class Game implements Runnable {
 		Assets.init();
 		
 		handler = new Handler(this);
-		this.menuState = new StatoMenu(this.handler);
-		this.gameState = new StatoGioco(this.handler);
-		Stato.setState(this.menuState);
+		this.menuState = new StateMenu(this.handler);
+		this.gameState = new StateGame(this.handler);
+		State.setState(this.menuState);
 	}
 	
+	/**
+	 * Restart.
+	 */
 	public void restart() {
 		Assets.init();
-		gameState = new StatoGioco(handler);
+		gameState = new StateGame(handler);
 	}
 	
+	/**
+	 * Tick.
+	 */
 	private void tick(){
 		keyManager.tick();
 		
-		if(Stato.getState() != null)
-			Stato.getState().tick();
+		if(State.getState() != null)
+			State.getState().tick();
 		
 		if (CollectBall.gameOver) {
 			if(KeyManager.restart) {
@@ -76,31 +116,34 @@ public class Game implements Runnable {
 				CollectBall.gameOver = false;
 			}
 		}
-		if(StatoMenu.home) {
+		if(StateMenu.home) {
 			restart();
-			StatoMenu.home = false;
+			StateMenu.home = false;
 		}
 	}
 	
+	/**
+	 * Render.
+	 */
 	private void render(){
 		bs = display.getCanvas().getBufferStrategy();
 		if(bs == null){
 			display.getCanvas().createBufferStrategy(3);
 			return;
 		}
+		
 		g = bs.getDrawGraphics();
-		//Clear Screen
-		//g.clearRect(0, 0, width, height);
-		//Draw Here!
-		
-		if(Stato.getState() != null)
-			Stato.getState().render(g);
-		
-		//End Drawing!
+				
+		if(State.getState() != null) {
+			State.getState().render(g);
+		}
 		bs.show();
 		g.dispose();
 	}
 	
+	/**
+	 * Run.
+	 */
 	public void run(){
 		
 		init();
@@ -110,7 +153,7 @@ public class Game implements Runnable {
 		double delta = 0;
 		long now;
 		long lastTime = System.nanoTime();
-		long timer = 0;
+		long timer = 0;		
 		@SuppressWarnings("unused")
 		int ticks = 0;
 		
@@ -137,22 +180,45 @@ public class Game implements Runnable {
 		
 	}
 	
+	/**
+	 * Gets the key manager.
+	 *
+	 * @return the key manager
+	 */
 	public KeyManager getKeyManager(){
 		return keyManager;
 	}
 	
+	/**
+	 * Gets the mouse manager.
+	 *
+	 * @return the mouse manager
+	 */
 	public MouseManager getMouseManager(){
 		return mouseManager;
 	}
 	
+	/**
+	 * Gets the width.
+	 *
+	 * @return the width
+	 */
 	public int getWidth(){
 		return width;
 	}
 	
+	/**
+	 * Gets the height.
+	 *
+	 * @return the height
+	 */
 	public int getHeight(){
 		return height;
 	}
 	
+	/**
+	 * Start.
+	 */
 	public synchronized void start(){
 		if(running)
 			return;
@@ -161,6 +227,9 @@ public class Game implements Runnable {
 		thread.start();
 	}
 	
+	/**
+	 * Stop.
+	 */
 	public synchronized void stop(){
 		if(!running)
 			return;
