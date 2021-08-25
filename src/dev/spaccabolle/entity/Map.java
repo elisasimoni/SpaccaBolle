@@ -137,11 +137,11 @@ public class Map {
         	if(level!=null) {       	    
         	    String filePath = new File("").getAbsolutePath();
         	    //System.out.println(filePath+level.getName());
-        	    reader = new BufferedReader(new FileReader(filePath+"/../map/"+level.getName()));
+        	    reader = new BufferedReader(new FileReader(filePath+"/../src/res/map/"+level.getName()));
         	    //System.out.println("Creato livello");        	    
         	} else {
         	    String filePath = new File("").getAbsolutePath();
-        	    reader = new BufferedReader(new FileReader(filePath+"/../map/level1.txt"));
+        	    reader = new BufferedReader(new FileReader(filePath+"/../src/res/map/level1.txt"));
         	    System.out.println(filePath+"/../map/level1.txt");
         	}          
         } catch (FileNotFoundException e2) {                
