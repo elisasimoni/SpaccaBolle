@@ -3,16 +3,28 @@ package dev.spaccabolle.input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * The Class KeyManager.
+ */
 public class KeyManager implements KeyListener {
 	
+	/** The keys. */
 	private boolean[] keys;
+	
+	/** The no. */
 	public static boolean up, down, left, right, enter, pause, exit, 
 	easy, normal, hard, space, home, restart, save, yes, no;
 	
+	/**
+	 * Instantiates a new key manager.
+	 */
 	public KeyManager(){
 		keys = new boolean[256];
 	}
 	
+	/**
+	 * Tick.
+	 */
 	public void tick(){
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
@@ -32,16 +44,31 @@ public class KeyManager implements KeyListener {
 		no = keys[KeyEvent.VK_N];
 	}
 
+	/**
+	 * Key pressed.
+	 *
+	 * @param e the e
+	 */
 	public void keyPressed(KeyEvent e) {
 		keys[e.getKeyCode()] = true;
 	}
 
+	/**
+	 * Key released.
+	 *
+	 * @param e the e
+	 */
 	public void keyReleased(KeyEvent e) {
 		keys[e.getKeyCode()] = false;
 	}
 
+	/**
+	 * Key typed.
+	 *
+	 * @param e the e
+	 */
 	public void keyTyped(KeyEvent e) {
-		
+	
 	}
 
 }
