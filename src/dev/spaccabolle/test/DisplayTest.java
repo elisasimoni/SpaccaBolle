@@ -16,12 +16,5 @@ class DisplayTest {
 		JFileChooser fileChooser = new JFileChooser();
 		assertNotEquals(fileChooser, Display.getFile());
 	}
-	
-	
-	@Test
-	void testSaveFile() {
-		
-		
-	}
 
 }
