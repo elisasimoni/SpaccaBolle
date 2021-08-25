@@ -26,7 +26,9 @@ public class Cannon extends DynamicObject{
     private static final float HARD = (float)11;
     
     /** The bounce. */
-    private boolean ballPos,bounce;
+    private boolean ballPos;
+
+    public boolean bounce;
     
     /** The ball. */
     private Ball ball;
@@ -73,7 +75,7 @@ public class Cannon extends DynamicObject{
      *
      * @return the collect ball
      */
-    public static CollectBall getCollectBall() {
+    public CollectBall getCollectBall() {
         return collectBall;
     }
 
