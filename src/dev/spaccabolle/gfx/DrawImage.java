@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.entity.CollectBall;
-import dev.spaccabolle.stati.StateGame;
+import dev.spaccabolle.states.StateGame;
 
 
 /**

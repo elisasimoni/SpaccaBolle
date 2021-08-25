@@ -3,7 +3,7 @@ package dev.spaccabolle.gfx;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import dev.spaccabolle.stati.StateGame;
+import dev.spaccabolle.states.StateGame;
 
 /**
  * The Class Pause.
