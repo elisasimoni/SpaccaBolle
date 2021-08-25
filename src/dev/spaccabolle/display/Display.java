@@ -58,20 +58,47 @@ public class Display {
             }
             return null;
 	}
-	public static void saveFile() {
+	public static void saveFile(StatoMenu menuFile) {
 		
-		@SuppressWarnings("unused")
 		String filePath = new File("").getAbsolutePath();
-		JFileChooser fileChooser = new JFileChooser();
+		JFileChooser fileChooser = new JFileChooser(new File(filePath+"//src//res//map"));
 		fileChooser.setDialogTitle("Save your game");   
-		@SuppressWarnings("unused")
-		int userSelection = fileChooser.showSaveDialog(frame);
 		
-		int retrival = fileChooser.showSaveDialog(null);
+		int retrival = fileChooser.showSaveDialog(frame);
 	    if (retrival == JFileChooser.APPROVE_OPTION) {
 	        try {
-	            FileWriter fw = new FileWriter(fileChooser.getSelectedFile()+".txt");
-	            
+	            File fw = new File(fileChooser.getSelectedFile()+".txt");
+	            @SuppressWarnings("static-access")
+                FileInputStream in = new FileInputStream(menuFile.saveGame);
+	            FileOutputStream out = new FileOutputStream(fw);
+	      
+	            try {
+	      
+	                int n;
+	      
+	                // read() function to read the
+	                // byte of data
+	                while ((n = in.read()) != -1) {
+	                    // write() function to write
+	                    // the byte of data
+	                    out.write(n);
+	                }
+	            }
+	            finally {
+	                if (in != null) {
+	      
+	                    // close() function to close the
+	                    // stream
+	                    in.close();
+	                }
+	                // close() function to close
+	                // the stream
+	                if (out != null) {
+	                    out.close();
+	                }
+	            }
+	            System.out.println("File Copied");
+	        
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
 	        }
