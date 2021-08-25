@@ -1,17 +1,38 @@
+/**
+ * This class load the images for the game. There are two type of images
+ * The first one is an array because it's change is color when someone pressed it
+ * The seconde one is a static image
+ * @author Sofia Bagagli
+ */
 package dev.spaccabolle.gfx;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * The Class Assets.
+ */
 public class Assets {
 	
+	/** The Constant NUM_BOLLE. */
+	private static final int NUM_BOLLE = 5;
 	
+	/** The Constant NUM_BUTTONS. */
+	private static final int NUM_BUTTONS = 2;
+	
+	/** The Constant NUMBERS. */
+	private static final int NUMBERS = 10;
+	
+	/** The numbers. */
 	public static BufferedImage[] btn_start,btn_exit,btn_load,trasparent, ballGroup, numbers;
 
+	/** The hard. */
 	public static BufferedImage cannon,arrow,dark_background, logo, dragon, dragon2, btn_pause, btn_save, btn_exit_statoGioco, game_over, victory, quitGame, exit, black, home, pause, easy, normal, hard;
 
-	public static BufferedImage readBobble = null;
-	private static final int NUM_BOLLE = 5;
+	/**
+	 * Inits the.
+	 */
 	public static void init(){
+		
 		logo = ImageLoader.loadImage("/res/textures/Logo.png");
 		dark_background=ImageLoader.loadImage("/res/textures/dark_background.jpg");
 		dragon = ImageLoader.loadImage("/res/textures/draghetto.png");
@@ -31,20 +52,20 @@ public class Assets {
 		game_over = ImageLoader.loadImage("/res/textures/gameOver3.png");
 	    victory = ImageLoader.loadImage("/res/textures/youWin.png");
 	    
-		btn_start = new BufferedImage[2];
+		btn_start = new BufferedImage[NUM_BUTTONS];
 			btn_start[0] = ImageLoader.loadImage("/res/textures/PLAY.png");
 			btn_start[1] = ImageLoader.loadImage("/res/textures/PlayDark.png");
-	    btn_load = new BufferedImage[2];
+	    btn_load = new BufferedImage[NUM_BUTTONS];
             btn_load[0] = ImageLoader.loadImage("/res/textures/load.png");
             btn_load[1] = ImageLoader.loadImage("/res/textures/loadDark.png");
-		btn_exit = new BufferedImage[2];
+		btn_exit = new BufferedImage[NUM_BUTTONS];
             btn_exit[0] = ImageLoader.loadImage("/res/textures/exit.png");
             btn_exit[1] = ImageLoader.loadImage("/res/textures/exitDark.png");
-        trasparent = new BufferedImage[2];
+        trasparent = new BufferedImage[NUM_BUTTONS];
 			trasparent[0] = ImageLoader.loadImage("/res/textures/trasparent_button.png");
 			trasparent[1] = ImageLoader.loadImage("/res/textures/trasparent_button.png");
 			
-    	numbers = new BufferedImage[10];
+    	numbers = new BufferedImage[NUMBERS];
     		numbers[0] = ImageLoader.loadImage("/res/textures/number_zero.png");
     		numbers[1] = ImageLoader.loadImage("/res/textures/number_one.png");
     		numbers[2] = ImageLoader.loadImage("/res/textures/number_two.png");
