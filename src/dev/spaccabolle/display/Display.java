@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-import dev.spaccabolle.stati.StateMenu;
+import dev.spaccabolle.states.StateMenu;
 
 /**
  * The Class Display.
