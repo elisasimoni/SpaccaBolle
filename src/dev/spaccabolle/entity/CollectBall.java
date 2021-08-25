@@ -674,7 +674,7 @@ public class CollectBall {
 	 */
 	public void saveGame(Ball[][] matrix) throws IOException {
         String filePath = new File("").getAbsolutePath();
-        File save = new File(filePath+"/../map/save.txt");
+        File save = new File(filePath+"/../src/res/map/save.txt");
         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
             
         for(int r=0; r<9; r++) {
