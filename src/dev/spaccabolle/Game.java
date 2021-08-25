@@ -7,9 +7,9 @@ import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
 import dev.spaccabolle.input.MouseManager;
-import dev.spaccabolle.stati.State;
-import dev.spaccabolle.stati.StateGame;
-import dev.spaccabolle.stati.StateMenu;
+import dev.spaccabolle.states.State;
+import dev.spaccabolle.states.StateGame;
+import dev.spaccabolle.states.StateMenu;
 
 
 /**
