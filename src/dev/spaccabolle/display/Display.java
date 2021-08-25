@@ -3,7 +3,8 @@ package dev.spaccabolle.display;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
