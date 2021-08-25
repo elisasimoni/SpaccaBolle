@@ -1,5 +1,5 @@
 # SpaccaBolle
- Progetto OOP
+ Progetto OOP - Ingegneria e scienze informatiche (UNIBO)
  
  
  
@@ -17,4 +17,11 @@
 
 
 
-Contributors 
+Contributors:
+ - Sofia Bagagli
+ - Yuri Collini
+ - Michele Nardini
+ - Elisa Simoni
+
+Come giocare?
+Scaricare tutto il codice, andare nella cartella download e fare doppio click sul file Launcher.jar
