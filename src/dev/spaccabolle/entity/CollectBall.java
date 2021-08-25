@@ -18,40 +18,71 @@ import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.score.Score;
-import dev.spaccabolle.stati.Stato;
-import dev.spaccabolle.stati.StatoGioco;
-import dev.spaccabolle.stati.StatoMenu;
+import dev.spaccabolle.stati.State;
+import dev.spaccabolle.stati.StateGame;
+import dev.spaccabolle.stati.StateMenu;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CollectBall.
+ */
 @SuppressWarnings("unused")
 public class CollectBall {
     
-	/*lista bolle nel cannone*/
+	/** The collection ball. */
     private ArrayList<Ball> collectionBall;
-    public static Ball[][] mapCollect = Map.getMapmatrix();
-    public static boolean gameOver = false;
-    public static boolean victory = false;
-    public static Score score =new Score(0, 0, 0,0);
-    public static int addPoint=0;
-    public static int point=0;
-    private static final int[] exclude = {0,0,0,0,0};
-    private static Random rand = new Random();
-    public static int randomColorCannon=1;
-    public static int flyngPoint=0;
     
+    /** The map collect. */
+    public static Ball[][] mapCollect = Map.getMapmatrix();
+    
+    /** The game over. */
+    public static boolean gameOver = false;
+    
+    /** The victory. */
+    public static boolean victory = false;
+    
+    /** The score. */
+    public static Score score = new Score(0, 0, 0,0);
+    
+    /** The add point. */
+    public static int addPoint = 0;
+    
+    /** The point. */
+    public static int point = 0;    
+    
+    /** The rand. */
+    private static Random rand = new Random();
+    
+    /** The random color cannon. */
+    public static int randomColorCannon=1;
+    
+    /** The flyng point. */
+    public static int flyngPoint = 0;
+    
+    /** The check tris. */
+    private boolean checkTris = false;
    
     
 
+    /**
+     * Instantiates a new collect ball.
+     */
     public CollectBall() {
-        collectionBall = new ArrayList<>();
-       
-       
+        collectionBall = new ArrayList<>();       
     }
+    
+    /**
+     * Gets the map collect.
+     *
+     * @return the map collect
+     */
     public static Ball[][] getMapCollect() {
 		return mapCollect;
 	}
     
-    
-    /*carica  l'array*/
+    /**
+     * Tick.
+     */
     public void tick() {
         Iterator<Ball> ba = collectionBall.iterator();
         while(ba.hasNext()) {
@@ -60,661 +91,658 @@ public class CollectBall {
         }
     }
     
-    
+    /**
+     * Gets the color in map.
+     *
+     * @return the color in map
+     */
     public static int getColorInMap() {
-    	int blue=0,yellow=0, green=0, red=0;
-    	//bisogna vedere che colori sono rimasti sulla mappa
-    	for(int r=0; r<9; r++) {
-    		for(int c=0; c<13; c++) {
-    		System.out.println("mapCollect   "+ r + c);
-    	    int readColor=mapCollect[r][c].color;
-    		switch(readColor) {
-    				
+    	int blue = 0, yellow = 0, green = 0, red = 0;
+    	int random = 0;
+    	int right=0;
+    	
+    	for(int r = 0; r < 9; r++) {
+    		for(int c = 0; c < 13; c++) {
+    			
+    			int readColor=mapCollect[r][c].color;
+    			
+    			switch(readColor) {
     				case 1:
     					red++;
-    				  break;
+    					break;
     				case 2:
     					blue++;	
-    				  break;
+    					break;
     				case 3:
-    					green++;                     //FUNZIONA
-    				  break;
+    					green++;                     
+    					break;
     				case 4:
     					yellow++;
-    				  break;
+    					break;
     				default:
     					break;
-    				
     			}
     		}
     	}
     	
-    	
-    	int random = 0;
-    	int right=0;
-    	
-    	
-    	while(right<1) {
+    	while(right < 1) {
     		random = rand.nextInt(5);
-    		right=1;
-    		if((blue==0 && random==2) || (red==0 && random==1) || (green==0 && random==3) || (yellow==0 && random==4) || (random==0)) {
-    			right=0;
-    			
+    		right = 1;
+    		if((blue == 0 && random == 2) || (red == 0 && random == 1) || (green == 0 && random == 3) || (yellow == 0 && random == 4) || (random == 0)) {
+    			right = 0;	
     		}
-    		
 		}
-    	
-    	
-    	
+
     	return random;
-    
     }
    
-    
-  
+    /**
+     * Num bolle.
+     *
+     * @return the int
+     */
     public int numBolle() {
         return collectionBall.size();
     }
     
-
+	/**
+	 * Cord X.
+	 *
+	 * @param b the b
+	 * @return the float
+	 */
 	public float cordX(Ball b) {
 		return b.x;
-    	
     }
+	
+	/**
+	 * Cord Y.
+	 *
+	 * @param b the b
+	 * @return the float
+	 */
 	public float cordY(Ball b) {
 		return b.y;
-    	
     }
+	
+	/**
+	 * Color.
+	 *
+	 * @param b the b
+	 * @return the int
+	 */
 	public int color(Ball b) {
 		return b.color;
 	}
 	
+	/**
+	 * Game over check.
+	 *
+	 * @param coordinateY the coordinate Y
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	private void gameOverCheck(final float coordinateY) throws IOException {
+		
+		if(coordinateY>350) {
+            System.out.println("GAME OVER - HAI PERSO");
+            saveGame(mapCollect);
+            gameOver = true;
+		}
+	}
+	
+	/**
+	 * Roof.
+	 *
+	 * @param coordinateX the coordinate X
+	 * @param coordinateY the coordinate Y
+	 * @param b the b
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean roof(float coordinateX,float coordinateY,Ball b) throws IOException {
 		
 		  int saveCol=0;
-		  boolean check = false; //change to false return false;
+		  boolean check = false;
 			  
 		  for(Ball bobble:collectionBall) {	  
-			  if(coordinateX >= bobble.getX() && coordinateX <= bobble.getX()+bobble.getWidth()) {
-					  if(coordinateY < 40 && bobble.getY()<40 && bobble.color==0) {
-					      System.out.println("So qua");
-
+			  if(coordinateX >= bobble.getX() && coordinateX <= bobble.getX() + bobble.getWidth()) {
+				  
+				  if(coordinateY < 40 && bobble.getY() < 40 && bobble.color == 0) {
+					  
+					  System.out.println("So qua");
 					  for(int r=0; r<9; r++) {
-			                        for(int c=0; c<13; c++) {
-			                            if(mapCollect[r][c].index==bobble.index) {
-			                                System.out.println(mapCollect[r][c].x+" "+mapCollect[r][c].y);
-			                                System.out.println(mapCollect[r][c-1].x+" "+mapCollect[r][c-1].y);
-			                                System.out.println(mapCollect[r+1][c].x+" "+mapCollect[r+1][c].y);
-			                                b.x=mapCollect[r][c].x;
-			                                b.y=mapCollect[r][c].y;
-			                                mapCollect[r][c].color=b.color;
-			                                
-			                            }
-			                        }
+						  for(int c=0; c<13; c++) {
+							  if(mapCollect[r][c].index==bobble.index) {
+								  System.out.println(mapCollect[r][c].x + " " + mapCollect[r][c].y);
+			                      System.out.println(mapCollect[r][c-1].x + " " + mapCollect[r][c-1].y);
+			                      System.out.println(mapCollect[r+1][c].x + " " + mapCollect[r+1][c].y);
+			                      b.x = mapCollect[r][c].x;
+			                      b.y = mapCollect[r][c].y;
+			                      mapCollect[r][c].color = b.color;          
+			                  }
+			              }
 					  }
-                      
-				
-				
-				 randomColorCannon= getColorInMap();
+
+					  randomColorCannon= getColorInMap();
 				 
-				 System.out.println("  indice   " + b.index);
+					  System.out.println("  indice   " + b.index);
 					 
-			     for(int c1=0; c1<9; c1++) {
-							for(int r1=0; r1<13; r1++) {
-							 System.out.print(" " + mapCollect[c1][r1].color + " ");
-								
+					  for(int c1=0; c1<9; c1++) {
+						  for(int r1=0; r1<13; r1++) {
+							  System.out.print(" " + mapCollect[c1][r1].color + " ");
 							}
-							System.out.println();
+						  System.out.println();
 						}
-					 
-					check=true;	
-              
-       			   
-       			   
-			  }	   
-            }
+					  
+					  check=true;    			   
+				  }	   
+			  }
 		  }
-		  
-       		
-		  
+		   
 		  return check;
-		  }
-	
-	
+	}
+		
+	/**
+	 * Check.
+	 *
+	 * @param coordinateX the coordinate X
+	 * @param coordinateY the coordinate Y
+	 * @param b the b
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public boolean check(float coordinateX,float coordinateY,Ball b) throws IOException {
 		
-		boolean check = false; //change to false
-
-        boolean control=false;
-        boolean control2=false;
-        int saveCol=0;
+		boolean check = false;
+        boolean control = false;
+        boolean control2 = false;
+        int saveCol = 0;
 
           for(Ball bobble:collectionBall) {
-
-
-                if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
-                        if(coordinateX >= cordX(bobble) && coordinateX < (cordX(bobble))+bobble.width-15) {
-                                
-                                
-                               float saveX=cordX(bobble);
-                                     b.x = cordX(bobble);
-                                     boolean isEqual=true;
-                                     int tempSaveCol=0;
+        	  if((coordinateY < (cordY(bobble)+Map.SCARTO_Y) && bobble.color !=0) ){
+        		  if(coordinateX >= cordX(bobble) && coordinateX < (cordX(bobble))+bobble.width-15) {
+        			  
+        			  float saveX = cordX(bobble);
+                      b.x = cordX(bobble);
+                      boolean isEqual = true;
+                      int tempSaveCol = 0;
                                      
-                                     while(isEqual) {
-                                             if(coordinateX != mapCollect[0][tempSaveCol].x) {
-                                              
-                                             if( coordinateX <=mapCollect[0][tempSaveCol].x +55) {
-
-
-                                                        isEqual=false;
-                                                        saveCol=tempSaveCol;
-
-                                             }else {
-                                             tempSaveCol++;
-                                                     if(tempSaveCol==13) {
-                                                             isEqual=false;
-
-                                                     }
-                                             }
-                                             }
-                                             else {
-                                                     isEqual=false;
-                                                     saveCol=tempSaveCol;
-                                             }
-                                     }
-
-
-
-                              
-                                     for(int col = 1 ; col < 13; col++) {
-                                        
-                                      if(b.x==mapCollect[0][col].x ) {
-                                    	  		saveCol=col;
-                                               
-
-                                      }
-
-
-
-                             }
-
-                                     for(int row = 0; row < 8;row++) {
-
-                                            
-
-
-                                      if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
-                                            
-                                      mapCollect[row][saveCol] = b;
-
-                                      saveGame(mapCollect);
-
-                                      randomColorCannon= getColorInMap();
-
-                                    
-                                    /*  for(int c=0; c<8; c++) {
-                                                     for(int r=0; r<13; r++) {
-                                                      System.out.print(" " + mapCollect[c][r].color + " ");
-
-                                                     }
-                                                     System.out.println();
-                                             }*/
-                                      
-
-                                     }
-                                     }
-                                     /**
-                                     ** controllo game OVer
-                                     **/
-                                     if(coordinateY>350) {
-                                             System.out.println("GAME OVER");
-                                             saveGame(mapCollect);
-                                             gameOver=true;
-
-
-
-                                     }
-                                     
-
-                    check=true;      
-                }
-
-                       }
-                }
-
-
-
-
+                      while(isEqual) {
+                    	  if(coordinateX != mapCollect[0][tempSaveCol].x) {
+                    		  if( coordinateX <= mapCollect[0][tempSaveCol].x + 55) {
+                    			  isEqual = false;
+                                  saveCol  =tempSaveCol;
+                              }else {
+                            	  tempSaveCol++;
+                                  if(tempSaveCol == 13) {
+                                	  isEqual=false;
+                                  }
+                              }
+                    	  }else {
+                    		  isEqual = false;
+                              saveCol = tempSaveCol;
+                          }
+                      }
+                      
+                      for(int col = 1 ; col < 13; col++) {
+                    	  if(b.x==mapCollect[0][col].x ) {
+                    		  saveCol=col;
+                    	  }
+                      }
+                      
+                      for(int row = 0; row < 8;row++) {
+                    	  if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
+                    		  mapCollect[row][saveCol] = b;
+                              saveGame(mapCollect);
+                              randomColorCannon= getColorInMap();
+                    	  }
+                      }
+                      
+                      /*
+                      * Controllo Game Over
+                      */
+                      this.gameOverCheck(coordinateY);
+                      check = true;      
+        		  }
+        	  }
+          }
           
-
        return check;
-
-     }
+       
+	}
 	
-	public boolean tris() {
-		boolean checkTris=false;
-		flyngPoint=0;
+	/**
+	 * Five check.
+	 */
+	private void fiveCheck() {
 		
+		int count=0;
 		
-		/*controllo orizzontale a 5*/
-		for(int r=0; r<8; r++) {
-			for(int c=0; c<13; c++) {
-				int c2=c+1;
-				int c3=c+2;
-				int c4=c-1;
-				if(c4<0) {
-					c4=0;
-				}
+		/* 
+		 * Controllo Orizzontale a 5
+		 */
+		for(int r = 0; r < 8; r++) {
+			for(int c = 0; c < 13; c++) {
+				int c2 = c + 1;
+				int c3 = c + 2;
+				int c4 = c - 1;
 				int c5=c-2;
-				if(c5<0) {
-					c5=0;
+				
+				if(c4 < 0) {
+					c4 = 0;
 				}
-				if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null 
-						&& mapCollect[r][c4]!=null &&mapCollect[r][c5]!=null && mapCollect[r][c].color !=0 && mapCollect[r][c2].color !=0 && mapCollect[r][c3].color != 0 && mapCollect[r][c4].color!=0 &&mapCollect[r][c5].color!=0) {
-					
-				if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color && mapCollect[r][c3].color== mapCollect[r][c4].color && mapCollect[r][c4].color== mapCollect[r][c5].color ) {
-							
-							
-							mapCollect[r][c].color=0;
-							mapCollect[r][c2].color=0;
-							mapCollect[r][c3].color=0;
-							mapCollect[r][c4].color=0;
-							mapCollect[r][c5].color=0;
+				
+				if(c5 < 0 ) {
+					c5 = 0;
+				}
+				
+				if(mapCollect[r][c] != null && mapCollect[r][c2] != null && mapCollect[r][c3] != null && mapCollect[r][c4] != null &&mapCollect[r][c5] != null 
+				   && mapCollect[r][c].color != 0 && mapCollect[r][c2].color != 0 && mapCollect[r][c3].color != 0 && mapCollect[r][c4].color != 0 &&mapCollect[r][c5].color != 0) {
+					if(mapCollect[r][c].color == mapCollect[r][c2].color && mapCollect[r][c2].color == mapCollect[r][c3].color && mapCollect[r][c3].color == mapCollect[r][c4].color 
+					   && mapCollect[r][c4].color == mapCollect[r][c5].color ) {
+
+							mapCollect[r][c].color = 0;
+							mapCollect[r][c2].color = 0;
+							mapCollect[r][c3].color = 0;
+							mapCollect[r][c4].color = 0;
+							mapCollect[r][c5].color = 0;
 							mapCollect[r][c].eliminate();
 							mapCollect[r][c2].eliminate();
 							mapCollect[r][c3].eliminate();
 							mapCollect[r][c4].eliminate();
 							mapCollect[r][c5].eliminate();						
-							checkTris=true;
+							this.checkTris = true;
 							
-								if(addPoint==0) {
-									addPoint=1;
+							if(addPoint == 0) {
+								addPoint = 1;
 								point = point + 5;
-								}
-							
-							
-						}
+							}
+					}
 				}   
-					//controllo vittoria
-   					int count=0;
-   					for(int r1=0; r1<9; r1++) {
-   			            for(int c1=0; c1<13; c1++) {
-   			            	
-   			                if(mapCollect[r1][c1].color!=0) {
-   			                	count++;
-   			                }
-   			            }
-   					}
-   					if(count==0) {
-   						victory=true;
-   					}
 					
-					
-					
-				
-				}
-			
+				victory(mapCollect);
+			}
 		}
+	}
+
+	/**
+	 * Four and three check.
+	 */
+	private void fourAndThreeCheck() {
 		
+		int count = 0;
 		
-		
-		
-		
-			/*controllo orizzontale 4 e 3 */
-			for(int r=0; r<9; r++) {
-				for(int c=0; c<13; c++) {
-					int c2=c+1;
-					int c3=c+2;
-					int c4=c+3;
-					int c5=c+5;
-					if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null && mapCollect[r][c4]!=null &&mapCollect[r][c].color !=0 && mapCollect[r][c2].color !=0 && mapCollect[r][c3].color != 0 && mapCollect[r][c4].color!=0 ) {
-					
-					if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
-						if(mapCollect[r][c3].color== mapCollect[r][c4].color) {
-						   
-							checkTris=true;
-							mapCollect[r][c].color=0;
-							mapCollect[r][c2].color=0;
-							mapCollect[r][c3].color=0;
-							mapCollect[r][c4].color=0;
+		/* Controllo Orizzontale 4 e 3 */
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 13; c++) {
+				int c2 = c + 1;
+				int c3 = c + 2;
+				int c4 = c + 3;
+				int c5 = c + 5;
+				
+				if(mapCollect[r][c] != null && mapCollect[r][c2] != null && mapCollect[r][c3] != null && mapCollect[r][c4] != null && mapCollect[r][c].color != 0 
+				   && mapCollect[r][c2].color != 0 && mapCollect[r][c3].color != 0 && mapCollect[r][c4].color != 0 ) {
+					if(mapCollect[r][c].color == mapCollect[r][c2].color && mapCollect[r][c2].color == mapCollect[r][c3].color ) {
+						if(mapCollect[r][c3].color == mapCollect[r][c4].color) {
+							
+							checkTris = true;
+							mapCollect[r][c].color = 0;
+							mapCollect[r][c2].color = 0;
+							mapCollect[r][c3].color = 0;
+							mapCollect[r][c4].color = 0;
 							mapCollect[r][c].eliminate();
 							mapCollect[r][c2].eliminate();
 							mapCollect[r][c3].eliminate();
 							mapCollect[r][c4].eliminate();
-							if(addPoint==0) {
-								addPoint=1;
-							point = point + 4;
+						
+							if(addPoint == 0) {
+								addPoint = 1;
+								point = point + 4;
 							}
-						   
-						}
-						else {
-						
-						
-							checkTris=true;
+						}else {
 							
-							mapCollect[r][c].color=0;
-							mapCollect[r][c2].color=0;
-							mapCollect[r][c3].color=0;
+							checkTris = true;
+							mapCollect[r][c].color = 0;
+							mapCollect[r][c2].color = 0;
+							mapCollect[r][c3].color = 0;
 							mapCollect[r][c].eliminate();
 							mapCollect[r][c2].eliminate();
 							mapCollect[r][c3].eliminate();
-							if(addPoint==0) {
-								addPoint=1;
-							point = point + 3;
+						
+							if(addPoint == 0) {
+								addPoint = 1;
+								point = point + 3;
 							}
 						}
-						//controllo vittoria
-	   					int count=0;
-	   					for(int r1=0; r1<8; r1++) {
-	   			            for(int c1=0; c1<13; c1++) {
-	   			            	
-	   			                if(mapCollect[r1][c1].color!=0) {
-	   			                	count++;
-	   			                }
-	   			            }
-	   					}
-	   					if(count==0) {
-	   						victory=true;
-	   					}
 						
-						
-						
-					
-					}
+						victory(mapCollect);
+			
 					}
 				}
 			}
-			/*controllo orizzontale particolare*/
-			for(int r=0; r<9; r++) {
-				for(int c=0; c<13; c++) {
-					
-					int c2=c-1;
-					
-					if(c2<0) {
-						c2=0;
+		}
+	}
+	
+	/**
+	 * Three vertical check.
+	 */
+	private void threeVerticalCheck() {
+		
+		int count=0;
+		
+		/*Controllo Tris Verticale a 3 */
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 13; c++) {
+				int r2 = r + 1;
+				int r3 = r + 2;
+				
+				if(mapCollect[r][c] != null && mapCollect[r2][c] != null && mapCollect[r3][c] != null && mapCollect[r][c].color != 0 && mapCollect[r2][c].color != 0 
+				   && mapCollect[r3][c].color != 0) {
+					if(mapCollect[r][c].color == mapCollect[r2][c].color && mapCollect[r2][c].color == mapCollect[r3][c].color ) {
 						
-					}
-					int c3=c-2;
-					if(c3<0) {
-						c3=0;
-						
-					}
-					
-					if(mapCollect[r][c]!=null && mapCollect[r][c2]!=null && mapCollect[r][c3]!=null && mapCollect[r][c].color !=0 && mapCollect[r][c2].color !=0 && mapCollect[r][c3].color != 0) {
-					
-					if(mapCollect[r][c].color==mapCollect[r][c2].color && mapCollect[r][c2].color== mapCollect[r][c3].color ) {
-							
-						
-						mapCollect[r][c].color=0;
-						mapCollect[r][c2].color=0;
-						mapCollect[r][c3].color=0;
-						mapCollect[r][c].eliminate();
-						mapCollect[r][c2].eliminate();
-						mapCollect[r][c3].eliminate();
-						checkTris=true;
-						if(addPoint==0) {
-							addPoint=1;
-						point = point + 3;
-						}
-						//controllo vittoria
-	   					int count=0;
-	   					for(int r1=0; r1<8; r1++) {
-	   			            for(int c1=0; c1<13; c1++) {
-	   			            	
-	   			                if(mapCollect[r1][c1].color!=0) {
-	   			                	count++;
-	   			                }
-	   			            }
-	   					}
-	   					if(count==0) {
-	   						victory=true;
-	   					}
-						
-						
-						
-					
-					}
-					}
-				}
-			}
-			/*controllo verticale 3 */
-			for(int r=0; r<9; r++) {
-				for(int c=0; c<13; c++) {
-					int r2=r+1;
-					int r3=r+2;
-					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null && mapCollect[r3][c]!=null && mapCollect[r][c].color!=0 && mapCollect[r2][c].color!=0 && mapCollect[r3][c].color!=0) {
-					
-					if(mapCollect[r][c].color==mapCollect[r2][c].color && mapCollect[r2][c].color== mapCollect[r3][c].color ) {
-						
-						checkTris=true;
-						mapCollect[r][c].color=0;
-						mapCollect[r2][c].color=0;
-						mapCollect[r3][c].color=0;
+						checkTris = true;
+						mapCollect[r][c].color = 0;
+						mapCollect[r2][c].color = 0;
+						mapCollect[r3][c].color = 0;
 						mapCollect[r][c].eliminate();
 						mapCollect[r2][c].eliminate();
 						mapCollect[r3][c].eliminate();
-						if(addPoint==0) {
-							addPoint=1;
-						point = point + 3;
-						}
-						//controllo vittoria
-	   					int count=0;
-	   					for(int r1=0; r1<8; r1++) {
-	   			            for(int c1=0; c1<13; c1++) {
-	   			                if(mapCollect[r1][c1].color!=0) {
-	   			                	count++;
-	   			                }
-	   			            }
-	   					}
-	   					if(count==0) {
-	   						victory=true;
-	   					}
-						
 					
-					}
+						if(addPoint == 0) {
+							addPoint = 1;
+							point = point + 3;
+						}
+						
+						victory(mapCollect);
 					}
 				}
 			}
-			
-			/*controllo 1 pallina attaccate al vuoto*/
-			
-		
-			for(int r=0; r<9; r++) {
-				for(int c=0; c<13; c++) {
-					
-					int r2=r-1; //pallina sopra
-					
-					if(r2==-1) {
-						r2=0;
-						
-					}
-					
-					int c3=c+2; //pallina a dx
-					if(mapCollect[r][c]!=null && mapCollect[r2][c]!=null) {
-					
-					if( mapCollect[r2][c].color==0) {
-						
-						checkTris=true;
-						
-						mapCollect[r][c].color=0;
-						mapCollect[r][c].eliminate();
-						if(addPoint==0) {
-							addPoint=1;
-							System.out.println("SONO QUI");
-							flyngPoint =  1;
-						}
-						//controllo vittoria
-	   					int count=0;
-	   					for(int r1=0; r1<8; r1++) {
-	   			            for(int c1=0; c1<13; c1++) {
-	   			                if(mapCollect[r1][c1].color!=0) {
-	   			                	count++;
-	   			                }
-	   			            }
-	   					}
-	   					if(count==0) {
-	   						victory=true;
-	   					}
-						
-					
-					}
-					}
-				}
-			}
-			/*controllo + palline attaccate al vuoto*/
-			
-			for(int r=0; r<9; r++) {
-				for(int c=0; c<14; c++) {
-					boolean stop=false;
-					int i=0;
-					int r2 = r-i;
-					int r3=r2-1;
-					
-					if(r2<0) {
-						r2=0;
-					}
-					if(r3<0) {
-						r3=0;
-					}
-					i++;
-					if(mapCollect[0][c]!=null && mapCollect[0][c].color ==0) {
-						for(int row=0; row<8; row++) {
-							mapCollect[row][c].color=0;
-							mapCollect[row][c].eliminate();
-							if(addPoint==0) {
-								
-								addPoint=1;
-								flyngPoint =  r;
-							}
-							
-							
-						}
-					}
-					if(mapCollect[r2][c]!=null) {
-						if(mapCollect[r2][c].color==0)
-						{
-							checkTris=true;
-							mapCollect[r][c].color=0;
-							mapCollect[r][c].eliminate();
-							if(addPoint==0) {
-								addPoint=1;
-								flyngPoint =  r;
-							}
-							
-							//controllo vittoria
-		   					int count=0;
-		   					for(int r1=0; r1<8; r1++) {
-		   			            for(int c1=0; c1<13; c1++) {
-		   			                if(mapCollect[r1][c1].color!=0) {
-		   			                	count++;
-		   			                }
-		   			            }
-		   					}
-		   					if(count==0) {
-		   						victory=true;
-		   					}
-							stop=true;
-						}
-					}
-						
-				
-				}
-			}
-			
-		
-			for(int r=0; r<8; r++) {
-                            for(int c=0; c<13; c++) {
-                                if(mapCollect[r][c].color==0) {
-                                    for(Ball b:collectionBall) {
-                                        if(mapCollect[r][c].getX() == b.getX() && mapCollect[r][c].getY()==b.getY()) {
-                                        	
-                                            b.color=0;
-                                            b.eliminate();
-                                        }
-                                        
-                                    }
-                                }
-                            }
-		        }
-		//confronto mappa e collection Ball
-			for(int r=0; r<9; r++) {
-                for(int c=0; c<13; c++) {
-                    if(mapCollect[r][c].color==0) {
-                        for(Ball b:collectionBall) {
-                            if(mapCollect[r][c].index==b.index) {
-                                b.color=0;
-                                b.eliminate();
-                                
-                            }
-                        }
-                    }
-                }
-				}
-			
-			
-			
-			
-		score.addPoint(point, flyngPoint);
-		
-		
-		return checkTris;
-		
-		
+		}
 	}
 	
+	/**
+	 * Ball attached one check.
+	 */
+	private void ballAttachedOneCheck() {
+		
+		int count = 0;
+		
+		/*controllo 1 pallina attaccate al vuoto*/
+		
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 13; c++) {
+				
+				int r2 = r - 1;
+				
+				if(r2 == -1) {
+					r2 = 0;
+				}
+				
+				int c3 = c + 2;
+				
+				if(mapCollect[r][c] != null && mapCollect[r2][c] != null) {
+					if(mapCollect[r2][c].color == 0) {
+						
+						checkTris = true;
+						mapCollect[r][c].color = 0;
+						mapCollect[r][c].eliminate();
+					
+						if(addPoint == 0) {
+							addPoint = 1;
+							flyngPoint =  1;
+						}
+					
+						victory(mapCollect);				
+					}
+				}
+			}
+		}
+	}
 	
+	/**
+	 * Ball attached plus check.
+	 */
+	private void ballAttachedPlusCheck() {
+		
+		/* Controllo + Palline Attaccate Al Vuoto*/
+		
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 14; c++) {
+				
+				boolean stop = false;
+				int i = 0;
+				int r2 = r - i;
+				int r3 = r2 - 1;
+				
+				if(r2 < 0) {
+					r2 = 0;
+				}
+				
+				if(r3 < 0) {
+					r3 = 0;
+				}
+				
+				i++;
+				if(mapCollect[0][c] != null && mapCollect[0][c].color == 0) {
+					for(int row=0; row<8; row++) {
+						
+						mapCollect[row][c].color = 0;
+						mapCollect[row][c].eliminate();
+						
+						if(addPoint == 0) {
+							addPoint = 1;
+							flyngPoint =  r;
+						}
+					}
+				}
+				
+				if(mapCollect[r2][c] != null) {
+					if(mapCollect[r2][c].color == 0) {
+						
+						checkTris = true;
+						mapCollect[r][c].color = 0;
+						mapCollect[r][c].eliminate();
+						
+						if(addPoint == 0) {
+							addPoint = 1;
+							flyngPoint =  r;
+						}
+						
+						victory(mapCollect);
+						
+	   					stop = true;
+					}
+				}			
+			}
+		}
+	}
+	
+	/**
+	 * Ball horizontal check.
+	 */
+	private void ballHorizontalCheck() {
+		
+		/*Controllo Orizzontale Particolare*/
+		
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 13; c++) {
+				
+				int c2 = c - 1;
+				
+				if(c2 < 0) {
+					c2 = 0;
+				}
+				
+				int c3 = c - 2;
+				
+				if(c3 < 0) {
+					c3 = 0;
+				}
+				
+				if(mapCollect[r][c] != null && mapCollect[r][c2] != null && mapCollect[r][c3] != null && mapCollect[r][c].color != 0 && mapCollect[r][c2].color != 0 
+				   && mapCollect[r][c3].color != 0) {
+					if(mapCollect[r][c].color == mapCollect[r][c2].color && mapCollect[r][c2].color == mapCollect[r][c3].color ) {
+						
+						mapCollect[r][c].color = 0;
+						mapCollect[r][c2].color = 0;
+						mapCollect[r][c3].color = 0;
+						mapCollect[r][c].eliminate();
+						mapCollect[r][c2].eliminate();
+						mapCollect[r][c3].eliminate();
+					
+						checkTris = true;
+					
+						if(addPoint == 0) {
+							addPoint = 1;
+							point = point + 3;
+						}
+						
+						victory(mapCollect);							
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * Tris.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean tris() {
+		
+		
+		flyngPoint = 0;
+		addPoint=0;
+		
+		this.fiveCheck();
+		
+		this.fourAndThreeCheck();
+		
+		this.threeVerticalCheck();
+		
+		this.ballHorizontalCheck();	
+		
+		this.ballAttachedOneCheck();
+			
+		this.ballAttachedPlusCheck();
+			
+		
+		for(int r = 0; r < 8; r++) {
+			for(int c = 0; c < 13; c++) {
+				
+				if(mapCollect[r][c].color == 0) {
+					for(Ball b:collectionBall) {
+						
+						if(mapCollect[r][c].getX() == b.getX() && mapCollect[r][c].getY() == b.getY()) {
+							
+								b.color = 0;
+								b.eliminate();
+						}        
+					}
+				}
+			}
+		}
+		
+		//confronto mappa e collection Ball
+		for(int r = 0; r < 9; r++) {
+			for(int c = 0; c < 13; c++) {
+				
+				if(mapCollect[r][c].color == 0) {
+					for(Ball b:collectionBall) {
+						
+						if(mapCollect[r][c].index == b.index) {
+                                b.color = 0;
+                                b.eliminate();
+                                
+						}
+					}
+				}
+			}
+		}
+		
+		score.addPoint(point, flyngPoint);
+		
+		return checkTris;		
+	}
+	
+	/**
+	 * Save game.
+	 *
+	 * @param matrix the matrix
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void saveGame(Ball[][] matrix) throws IOException {
-            System.out.println("Scrivo");
-            String filePath = new File("").getAbsolutePath();
-                File save = new File(filePath+"\\src\\res\\map\\save.txt");
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
+        String filePath = new File("").getAbsolutePath();
+        File save = new File(filePath+"\\src\\res\\map\\save.txt");
+        PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
             
-            for(int r=0; r<9; r++) {
-            for(int c=0; c<13; c++) {
-                    out.print(matrix[r][c].color);
-               }
-               out.println();
+        for(int r=0; r<9; r++) {
+        	for(int c=0; c<13; c++) {
+        		out.print(matrix[r][c].color);
+        	}
+        	out.println();
         }
-        out.close();
-        StatoMenu.saveGame=save;
         
-           
-                
-                  
-                  
-        }
+        out.close();
+        StateMenu.saveGame = save;
+	}
+	
+	/**
+	 * Victory.
+	 *
+	 * @param map the map
+	 */
+	private void victory(Ball[][] map) {
+		int count=0;
+		for(int r1 = 0; r1 < 8; r1++) {
+			for(int c1 = 0; c1 < 13; c1++) {
+				if(map[r1][c1].color != 0) {
+					count++;
+				}
+			}
+		}
+		if(count == 0) {
+			victory = true;
+		}	
+	}
     
+    /**
+     * Gets the bolle.
+     *
+     * @return the bolle
+     */
     public ArrayList<Ball> getBolle() {
         return collectionBall;
     }
 
+    /**
+     * Render.
+     *
+     * @param g the g
+     */
     public void render(Graphics g) {
     	
-    	
-
-        for(Ball b : collectionBall) {
-       	
-            b.render(g); 
-           
-        }
-   
+    	for(Ball b : collectionBall) {
+            b.render(g);   
+    	}
+  
         if(gameOver) {
-        	
         	g.drawImage(Assets.game_over, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
         }
-        if(victory) {
-        	
-        	g.drawImage(Assets.victory, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
-        	
-        }
-        score.render(g);
-      
         
+        if(victory) {	
+        	g.drawImage(Assets.victory, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
+        }
+        
+        score.render(g);
     }
     
-    
-    
+    /**
+     * Adds the ball.
+     *
+     * @param b the b
+     */
     public void addBall(Ball b) {
         collectionBall.add(b);
     }
