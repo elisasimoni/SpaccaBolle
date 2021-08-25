@@ -112,7 +112,7 @@ public class StatoGioco extends Stato{
 
 		   if(KeyManager.save) {
 			   save = true;
-			   Display.saveFile();
+			   Display.saveFile((StatoMenu) handler.getGame().menuState);
 		   }
 
 		   if(KeyManager.enter) {
