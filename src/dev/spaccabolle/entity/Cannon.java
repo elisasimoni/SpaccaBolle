@@ -3,7 +3,7 @@ package dev.spaccabolle.entity;
 import java.awt.Graphics;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.input.KeyManager;
-import dev.spaccabolle.stati.StateGame;
+import dev.spaccabolle.states.StateGame;
 
 /**
  * The Class Cannon.

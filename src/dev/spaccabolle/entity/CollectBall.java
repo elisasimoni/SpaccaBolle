@@ -18,9 +18,9 @@ import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.score.Score;
-import dev.spaccabolle.stati.State;
-import dev.spaccabolle.stati.StateGame;
-import dev.spaccabolle.stati.StateMenu;
+import dev.spaccabolle.states.State;
+import dev.spaccabolle.states.StateGame;
+import dev.spaccabolle.states.StateMenu;
 
 // TODO: Auto-generated Javadoc
 /**
