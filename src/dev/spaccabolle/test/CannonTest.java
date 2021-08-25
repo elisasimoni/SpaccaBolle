@@ -10,6 +10,6 @@ class CannonTest {
 	
 	@Test
 	void testGetCollectBall() {
-		//assertEquals(Cannon.collectBall, Cannon.getCollectBall());
+		assertEquals(Cannon.collectBall, Cannon.getCollectBall());
 	}
 }

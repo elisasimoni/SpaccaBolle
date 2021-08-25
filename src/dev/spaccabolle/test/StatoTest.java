@@ -4,15 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import dev.spaccabolle.stati.Stato;
+import dev.spaccabolle.states.State;
 
 class StatoTest {
-	Stato stato = null;
+	State stato = null;
 
 	@Test
 	void testSetStateAndGetState() {
-		Stato.setState(stato);
-		assertEquals(stato, Stato.getState());
+		State.setState(stato);
+		assertEquals(stato, State.getState());
 	}
 
 }

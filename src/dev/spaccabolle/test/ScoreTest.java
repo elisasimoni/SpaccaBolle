@@ -12,16 +12,16 @@ class ScoreTest {
 	@Test
 	void testAddPoint() {
 		score.addPoint(370, 5);
-		assertEquals(3, score.number1);
-		assertEquals(7, score.number1);
-		assertEquals(3, score.number2);
-		assertEquals(2, score.number3);
+		assertEquals(3, score.getNumber1());
+		assertEquals(7, score.getNumber2());
+		assertEquals(3, score.getNumber3());
+		assertEquals(2, score.getNumber4());
 	}
 
 	@Test
 	void testPower() {
-		//int score = score.power(2, 2);
-		//assertEquals(4, score);
+	    int score = Score.power(2, 2);
+		assertEquals(4, score);
 	}
 
 }

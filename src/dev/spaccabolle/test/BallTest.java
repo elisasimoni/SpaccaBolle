@@ -15,16 +15,7 @@ class BallTest {
 	int index = 1;
 	Ball ball = new Ball(x,y,height, width, color,index);
 	
-	@Test
-	void testCoordinate() {
-	Ball ball1 = ball.getBall();
-	ball1.y = ball.getY();
-	ball1.x = ball.getX();
-	assertEquals(x,ball1.x);
-	assertEquals(y,ball1.y);
-
-
-	}
+	
 	@Test
 	void testGetColor() {
 		int colorBall = ball.getColor();
@@ -35,6 +26,14 @@ class BallTest {
 	void testGetBall() {
 		Ball ball1 = ball.getBall();
 		assertEquals(ball, ball1);
+	}
+	@Test
+	void testCoordinate() {
+		Ball ball1 = ball.getBall();
+		ball1.y = ball.getY();
+		ball1.x = ball.getX();
+		assertEquals(x,ball1.x);
+		assertEquals(y,ball1.y);	
 	}
 	
 	@Test
