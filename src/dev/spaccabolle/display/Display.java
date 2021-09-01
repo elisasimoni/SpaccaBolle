@@ -5,16 +5,22 @@ import java.awt.Dimension;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import dev.spaccabolle.states.StateMenu;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Display.
  */
 public class Display {
+	
 
         /** The frame. */
         private static JFrame frame;
@@ -73,18 +79,19 @@ public class Display {
         /**
          * Gets the file.
          *
+         * @param menuFile the menu file
          * @return the file
          */
-        public static File getFile() {
-            String filePath = new File("").getAbsolutePath();
-            JFileChooser fileChooser = new JFileChooser(new File(filePath+"/../src/res/map/"));
-            int response = fileChooser.showOpenDialog(frame);
-            if(response == JFileChooser.APPROVE_OPTION) {
-                File file= new File(fileChooser.getSelectedFile().getAbsolutePath());
-                return file;
-            }
-            return null;
-        }
+		/*
+		 * public static File getFile() {
+		 * 
+		 * String filePath = new File("").getAbsolutePath(); JFileChooser fileChooser =
+		 * new JFileChooser(new File(filePath+"/res/map/")); int response =
+		 * fileChooser.showOpenDialog(frame); if(response ==
+		 * JFileChooser.APPROVE_OPTION) { File file= new
+		 * File(fileChooser.getSelectedFile().getAbsolutePath()); return file; } return
+		 * null; }
+		 */
         
 /**
  * Save file.
@@ -92,11 +99,11 @@ public class Display {
  * @param menuFile the menu file
  */
 public static void saveFile(StateMenu menuFile) {
-                
-                String filePath = new File("").getAbsolutePath();
-                JFileChooser fileChooser = new JFileChooser(new File(filePath+"/../src/res/map/save.txt"));
+				ProtectionDomain pd = Display.class.getProtectionDomain();
+				CodeSource cs = pd.getCodeSource();
+				URL location = cs.getLocation();
+                JFileChooser fileChooser = new JFileChooser(new File(location+"save.txt"));
                 fileChooser.setDialogTitle("Save your game");   
-                
                 int retrival = fileChooser.showSaveDialog(frame);
             if (retrival == JFileChooser.APPROVE_OPTION) {
                 try {
