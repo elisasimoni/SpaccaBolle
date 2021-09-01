@@ -8,6 +8,7 @@ package dev.spaccabolle.gfx;
 
 import java.awt.image.BufferedImage;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Assets.
  */
@@ -26,7 +27,7 @@ public class Assets {
 	public static BufferedImage[] btn_start,btn_exit,btn_load,trasparent, ballGroup, numbers;
 
 	/** The hard. */
-	public static BufferedImage cannon,arrow,dark_background, logo, dragon, dragon2, btn_pause, btn_save, btn_exit_statoGioco, game_over, victory, quitGame, exit, black, home, pause, easy, normal, hard;
+	public static BufferedImage demo, cannon,arrow,dark_background, logo, dragon, dragon2, btn_pause, btn_save, btn_exit_statoGioco, game_over, victory, quitGame, exit, black, home, pause, easy, normal, hard;
 
 	/**
 	 * Inits the.
@@ -51,6 +52,7 @@ public class Assets {
 		quitGame = ImageLoader.loadImage("/res/textures/quitGame.png");
 		game_over = ImageLoader.loadImage("/res/textures/gameOver3.png");
 	    victory = ImageLoader.loadImage("/res/textures/youWin.png");
+	    demo = ImageLoader.loadImage("/res/textures/demo.png");
 	    
 		btn_start = new BufferedImage[NUM_BUTTONS];
 			btn_start[0] = ImageLoader.loadImage("/res/textures/PLAY.png");

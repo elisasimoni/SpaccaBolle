@@ -7,6 +7,7 @@ import dev.spaccabolle.entity.CollectBall;
 import dev.spaccabolle.states.StateGame;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DrawImage.
  */
@@ -43,6 +44,7 @@ public class DrawImage {
 			 if(CollectBall.gameOver) {		        	
 		        g.drawImage(Assets.game_over, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
 		     }
+			 
 		     
 		
 	}
