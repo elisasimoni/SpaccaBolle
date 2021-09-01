@@ -15,9 +15,10 @@ import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.gfx.DrawImage;
 import dev.spaccabolle.gfx.Pause;
 import dev.spaccabolle.input.KeyManager;
-
+import dev.spaccabolle.score.Score;
 import dev.spaccabolle.entity.Map;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class StateGame.
  */
@@ -99,7 +100,9 @@ public class StateGame extends State{
 			
 			collectBall=new CollectBall();
 			collectBallMap=new CollectBall();
-			
+			CollectBall.point=0;
+			Score.tempFlyngPoint=0;
+			CollectBall.flyngPoint=0;
 			cannon = new Cannon(CANNON_X, CANNON_Y, Assets.cannon.getWidth(), Assets.cannon.getHeight(),collectBall);
 			map = new Map(0, Ball.LEFT_BOUNCE,collectBallMap,level);			
 			paused = new Pause();
@@ -157,6 +160,9 @@ public class StateGame extends State{
 			if (CollectBall.gameOver) {
 			   if(KeyManager.restart) {
 				   State.setState(handler.getGame().menuState);
+					CollectBall.point=0;
+					Cannon.firstShot=0;  //restart of the game		
+					
 				   StateMenu.run = false;
 			   }
 		   	}
@@ -171,7 +177,7 @@ public class StateGame extends State{
 		   ifPause();   //pause game
 		   ifExit();	//exit game
 		   ifGameOver(); //if game over restart game
-
+		   
 		   if(KeyManager.save && Cannon.firstShot==1) {			   
 			   Display.saveFile((StateMenu) handler.getGame().menuState);
 		   }

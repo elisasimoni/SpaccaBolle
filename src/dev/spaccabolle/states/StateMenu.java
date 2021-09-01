@@ -6,10 +6,10 @@ import java.io.File;
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
 import dev.spaccabolle.display.Display;
-import dev.spaccabolle.entity.Ball;
+//import dev.spaccabolle.entity.Ball;
 import dev.spaccabolle.entity.Cannon;
 import dev.spaccabolle.entity.CollectBall;
-import dev.spaccabolle.entity.Map;
+//import dev.spaccabolle.entity.Map;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.score.Score;
 import dev.spaccabolle.ui.ClickListener;
@@ -51,6 +51,9 @@ public class StateMenu extends State{
 	
 	/** The run. */
 	public static boolean run = false;
+	
+	/** The load. */
+	public static boolean load = false;
 	
 	/** The home. */
 	public static boolean home = false;
@@ -117,9 +120,9 @@ public class StateMenu extends State{
 					State.setState(handler.getGame().menuState);
 					StateGame.pause = false;
 					Cannon.firstShot=0;  //restart of the game		
-					Score.setZero(CollectBall.score);
 					CollectBall.point=0;
-					CollectBall.flyngPoint=0;
+					Score.setZero(CollectBall.score);
+
 					run = false;
 					home = true;
 				}
@@ -140,16 +143,23 @@ public class StateMenu extends State{
 			}
 		}));
 		uiManager.addObject(new UIImageButton(308, YMoveButton, 220, 150, Assets.btn_load, new ClickListener() {
-                    @SuppressWarnings("static-access")
+                 
 					public void onClick() {
                     	if(!run) {
-                    		loadGame = Display.getFile();
-                    		StateGame game= (StateGame) handler.getGame().gameState;
-                    		game.level=loadGame;
-                    		game.collectBallMap = new CollectBall();
-                    		game.map=new Map(0, Ball.LEFT_BOUNCE,game.collectBallMap,game.level);
-                            isLoadGame=true;  
-                            run = true;
+                    		load = true;
+                    		try{
+                    			Thread.sleep(3000);
+                    			load=false;
+                    		}catch(Exception e){}
+                    		
+                    		//loadGame = Display.getFile();
+                    		//StateGame game= (StateGame) handler.getGame().gameState;                    		
+                    		//game.level=loadGame;
+                    		//game.collectBallMap = new CollectBall();
+                    		//game.map=new Map(0, Ball.LEFT_BOUNCE,game.collectBallMap,game.level);
+                            //isLoadGame=true;  
+                    	
+                            
                             
                     	}
                     }
@@ -207,6 +217,9 @@ public class StateMenu extends State{
 		g.drawImage(Assets.logo, 70, StateMenu.yMovelogo, 650, 650, null);
 		g.drawImage(Assets.dragon, StateMenu.xDragon, StateMenu.yDragon, StateMenu.dimDragon, StateMenu.dimDragon, null);
 		StateMenu.uiManager.render(g);
+		if(load) {
+			 g.drawImage(Assets.demo, 0, 0, Launcher.GAME_WIDTH, Launcher.GAME_HEIGHT, null);
+		 }
 	
 	}
 }
