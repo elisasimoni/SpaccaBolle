@@ -162,7 +162,7 @@ public class StateGame extends State{
 				   State.setState(handler.getGame().menuState);
 					CollectBall.point=0;
 					Cannon.firstShot=0;  //restart of the game		
-					
+					Score.setZero(CollectBall.score);
 				   StateMenu.run = false;
 			   }
 		   	}
