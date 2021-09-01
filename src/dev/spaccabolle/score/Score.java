@@ -14,7 +14,7 @@ public class Score {
 	private int tempPoint = 0;
 	
 	/** The temp flyng point. */
-	private int tempFlyngPoint = 0;
+	public static int tempFlyngPoint = 0;
 	
 	/** The number 1. */
 	private int number1;
@@ -53,9 +53,10 @@ public class Score {
 	 */
 	public void addPoint( int point, int flyngPoint ) {
 		this.tempPoint = this.tempPoint + ( point * 10 );
-        this.tempFlyngPoint = (int)( this.tempFlyngPoint + ( Math.pow(2, flyngPoint) ) );
-        this.tempPoint = this.tempPoint + this.tempFlyngPoint;
-		
+        tempFlyngPoint = (int)(tempFlyngPoint + ( Math.pow(2, flyngPoint) ) );
+        this.tempPoint = this.tempPoint + tempFlyngPoint;
+       
+       
 		for (int i = 0; i <= 3; i++) {
 			int definitive = this.tempPoint / ( power(10, 3-i) ); //prima le centinaia, poi le decine e infine le unità
 			switch(i) {
@@ -72,7 +73,11 @@ public class Score {
 		    }
 			
 			this.tempPoint = this.tempPoint - definitive * power(10, 3 - i);   
-		}		
+		}	
+		 flyngPoint=0;
+		 
+		
+		
 	}
 	
 	/**
