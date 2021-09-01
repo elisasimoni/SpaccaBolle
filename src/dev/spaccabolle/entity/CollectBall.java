@@ -9,6 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URL;
+import java.security.CodeSource;
+import java.security.ProtectionDomain;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.Random;
 
 import dev.spaccabolle.Handler;
 import dev.spaccabolle.Launcher;
+import dev.spaccabolle.display.Display;
 import dev.spaccabolle.gfx.Assets;
 import dev.spaccabolle.score.Score;
 import dev.spaccabolle.states.State;
@@ -28,6 +32,22 @@ import dev.spaccabolle.states.StateMenu;
  */
 @SuppressWarnings("unused")
 public class CollectBall {
+	
+	/** The numrow. */
+	private static int NUMROW = 8;
+	
+	/** The numrow1. */
+	private static int NUMROW1 = 9;
+	
+	/** The numcol. */
+	private static int NUMCOL = 13;
+	
+	/** The numcol1. */
+	private static int NUMCOL1 = 14;
+	
+	/** The roff limit. */
+	private static int ROOF_LIMIT = 40;
+	
     
 	/** The collection ball. */
     private ArrayList<Ball> collectionBall;
@@ -101,8 +121,8 @@ public class CollectBall {
     	int random = 0;
     	int right=0;
     	
-    	for(int r = 0; r < 9; r++) {
-    		for(int c = 0; c < 13; c++) {
+    	for(int r = 0; r < NUMROW1; r++) {
+    		for(int c = 0; c < NUMCOL; c++) {
     			
     			int readColor=mapCollect[r][c].color;
     			
@@ -207,15 +227,13 @@ public class CollectBall {
 		  for(Ball bobble:collectionBall) {	  
 			  if(coordinateX >= bobble.getX() && coordinateX <= bobble.getX() + bobble.getWidth()) {
 				  
-				  if(coordinateY < 40 && bobble.getY() < 40 && bobble.color == 0) {
+				  if(coordinateY < ROOF_LIMIT && bobble.getY() < ROOF_LIMIT && bobble.color == 0) {
 					  
-					  System.out.println("So qua");
-					  for(int r=0; r<9; r++) {
-						  for(int c=0; c<13; c++) {
+					  
+					  for(int r=0; r<NUMROW1; r++) {
+						  for(int c=0; c<NUMCOL; c++) {
 							  if(mapCollect[r][c].index==bobble.index) {
-								  System.out.println(mapCollect[r][c].x + " " + mapCollect[r][c].y);
-			                      System.out.println(mapCollect[r][c-1].x + " " + mapCollect[r][c-1].y);
-			                      System.out.println(mapCollect[r+1][c].x + " " + mapCollect[r+1][c].y);
+								  
 			                      b.x = mapCollect[r][c].x;
 			                      b.y = mapCollect[r][c].y;
 			                      mapCollect[r][c].color = b.color;          
@@ -225,14 +243,7 @@ public class CollectBall {
 
 					  randomColorCannon= getColorInMap();
 				 
-					  System.out.println("  indice   " + b.index);
-					 
-					  for(int c1=0; c1<9; c1++) {
-						  for(int r1=0; r1<13; r1++) {
-							  System.out.print(" " + mapCollect[c1][r1].color + " ");
-							}
-						  System.out.println();
-						}
+					
 					  
 					  check=true;    			   
 				  }	   
@@ -254,8 +265,6 @@ public class CollectBall {
 	public boolean check(float coordinateX,float coordinateY,Ball b) throws IOException {
 		
 		boolean check = false;
-        boolean control = false;
-        boolean control2 = false;
         int saveCol = 0;
 
           for(Ball bobble:collectionBall) {
@@ -274,7 +283,7 @@ public class CollectBall {
                                   saveCol  =tempSaveCol;
                               }else {
                             	  tempSaveCol++;
-                                  if(tempSaveCol == 13) {
+                                  if(tempSaveCol == NUMCOL) {
                                 	  isEqual=false;
                                   }
                               }
@@ -284,13 +293,13 @@ public class CollectBall {
                           }
                       }
                       
-                      for(int col = 1 ; col < 13; col++) {
+                      for(int col = 1 ; col < NUMCOL; col++) {
                     	  if(b.x==mapCollect[0][col].x ) {
                     		  saveCol=col;
                     	  }
                       }
                       
-                      for(int row = 0; row < 8;row++) {
+                      for(int row = 0; row < NUMROW;row++) {
                     	  if(b.y>=mapCollect[row][saveCol].y-30 && b.y<= mapCollect[row][saveCol].y+30) {
                     		  mapCollect[row][saveCol] = b;
                               saveGame(mapCollect);
@@ -321,8 +330,8 @@ public class CollectBall {
 		/* 
 		 * Controllo Orizzontale a 5
 		 */
-		for(int r = 0; r < 8; r++) {
-			for(int c = 0; c < 13; c++) {
+		for(int r = 0; r < NUMROW; r++) {
+			for(int c = 0; c < NUMCOL; c++) {
 				int c2 = c + 1;
 				int c3 = c + 2;
 				int c4 = c - 1;
@@ -373,8 +382,8 @@ public class CollectBall {
 		int count = 0;
 		
 		/* Controllo Orizzontale 4 e 3 */
-		for(int r = 0; r < 9; r++) {
-			for(int c = 0; c < 13; c++) {
+		for(int r = 0; r < NUMROW1; r++) {
+			for(int c = 0; c < NUMCOL; c++) {
 				int c2 = c + 1;
 				int c3 = c + 2;
 				int c4 = c + 3;
@@ -431,8 +440,8 @@ public class CollectBall {
 		int count=0;
 		
 		/*Controllo Tris Verticale a 3 */
-		for(int r = 0; r < 9; r++) {
-			for(int c = 0; c < 13; c++) {
+		for(int r = 0; r < NUMROW1; r++) {
+			for(int c = 0; c < NUMCOL; c++) {
 				int r2 = r + 1;
 				int r3 = r + 2;
 				
@@ -489,7 +498,7 @@ public class CollectBall {
 					
 						if(addPoint == 0) {
 							addPoint = 1;
-							flyngPoint =  1;
+							flyngPoint =  0;
 						}
 					
 						victory(mapCollect);				
@@ -504,10 +513,11 @@ public class CollectBall {
 	 */
 	private void ballAttachedPlusCheck() {
 		
+		
 		/* Controllo + Palline Attaccate Al Vuoto*/
 		
-		for(int r = 0; r < 9; r++) {
-			for(int c = 0; c < 14; c++) {
+		for(int r = 0; r < NUMROW1; r++) {
+			for(int c = 0; c < NUMCOL1; c++) {
 				
 				boolean stop = false;
 				int i = 0;
@@ -532,6 +542,9 @@ public class CollectBall {
 						if(addPoint == 0) {
 							addPoint = 1;
 							flyngPoint =  r;
+							if(flyngPoint==1) {
+								flyngPoint=0;
+							}
 						}
 					}
 				}
@@ -546,6 +559,9 @@ public class CollectBall {
 						if(addPoint == 0) {
 							addPoint = 1;
 							flyngPoint =  r;
+							if(flyngPoint==1) {
+								flyngPoint=0;
+							}
 						}
 						
 						victory(mapCollect);
@@ -563,9 +579,9 @@ public class CollectBall {
 	private void ballHorizontalCheck() {
 		
 		/*Controllo Orizzontale Particolare*/
-		
-		for(int r = 0; r < 9; r++) {
-			for(int c = 0; c < 13; c++) {
+	
+		for(int r = 0; r < NUMROW1; r++) {
+			for(int c = 0; c < NUMCOL1; c++) {
 				
 				int c2 = c - 1;
 				
@@ -602,6 +618,7 @@ public class CollectBall {
 				}
 			}
 		}
+		
 	}
 	
 	/**
@@ -612,8 +629,8 @@ public class CollectBall {
 	public boolean tris() {
 		
 		
-		flyngPoint = 0;
 		addPoint=0;
+		
 		
 		this.fiveCheck();
 		
@@ -626,10 +643,10 @@ public class CollectBall {
 		this.ballAttachedOneCheck();
 			
 		this.ballAttachedPlusCheck();
-			
 		
-		for(int r = 0; r < 8; r++) {
-			for(int c = 0; c < 13; c++) {
+		
+		for(int r = 0; r < NUMROW; r++) {
+			for(int c = 0; c < NUMCOL; c++) {
 				
 				if(mapCollect[r][c].color == 0) {
 					for(Ball b:collectionBall) {
@@ -645,8 +662,8 @@ public class CollectBall {
 		}
 		
 		//confronto mappa e collection Ball
-		for(int r = 0; r < 9; r++) {
-			for(int c = 0; c < 13; c++) {
+		for(int r = 0; r < NUMROW1; r++) {
+			for(int c = 0; c < NUMCOL; c++) {
 				
 				if(mapCollect[r][c].color == 0) {
 					for(Ball b:collectionBall) {
@@ -673,12 +690,15 @@ public class CollectBall {
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public void saveGame(Ball[][] matrix) throws IOException {
-        String filePath = new File("").getAbsolutePath();
-        File save = new File(filePath+"/../src/res/map/save.txt");
+		ProtectionDomain pd = Display.class.getProtectionDomain();
+ 		CodeSource cs = pd.getCodeSource();
+ 		URL location = cs.getLocation();
+        File save = new File("save.txt");
+       
         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(save)));
             
-        for(int r=0; r<9; r++) {
-        	for(int c=0; c<13; c++) {
+        for(int r=0; r<NUMROW1; r++) {
+        	for(int c=0; c<NUMCOL; c++) {
         		out.print(matrix[r][c].color);
         	}
         	out.println();
@@ -695,8 +715,8 @@ public class CollectBall {
 	 */
 	private void victory(Ball[][] map) {
 		int count=0;
-		for(int r1 = 0; r1 < 8; r1++) {
-			for(int c1 = 0; c1 < 13; c1++) {
+		for(int r1 = 0; r1 < NUMROW; r1++) {
+			for(int c1 = 0; c1 < NUMCOL; c1++) {
 				if(map[r1][c1].color != 0) {
 					count++;
 				}
@@ -727,13 +747,6 @@ public class CollectBall {
             b.render(g);   
     	}
   
-        if(gameOver) {
-        	g.drawImage(Assets.game_over, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
-        }
-        
-        if(victory) {	
-        	g.drawImage(Assets.victory, 170, 150, 500, Launcher.GAME_HEIGHT/2, null);
-        }
         
         score.render(g);
     }

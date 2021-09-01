@@ -11,19 +11,21 @@ package dev.spaccabolle.entity;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import dev.spaccabolle.Launcher;
 
 
+
+// TODO: Auto-generated Javadoc
 /**
  * The Class Map.
  */
 public class Map {
+	
+	
     
     /** The Constant RADIUS. */
     private static final int RADIUS = (int)(Ball.BOBBLE_SIZE / 1.25);
@@ -132,21 +134,25 @@ public class Map {
      * @param level the level
      * @return the buffered reader
      */
-    private BufferedReader loadLevel(BufferedReader reader, File level) {
-    	try {
-        	if(level!=null) {       	    
-        	    String filePath = new File("").getAbsolutePath();
-        	    //System.out.println(filePath+level.getName());
-        	    reader = new BufferedReader(new FileReader(filePath+"/../src/res/map/"+level.getName()));
-        	    //System.out.println("Creato livello");        	    
-        	} else {
-        	    String filePath = new File("").getAbsolutePath();
-        	    reader = new BufferedReader(new FileReader(filePath+"/../src/res/map/level1.txt"));
-        	    System.out.println(filePath+"/../map/level1.txt");
-        	}          
-        } catch (FileNotFoundException e2) {                
-                e2.printStackTrace();
-        }    	
+    @SuppressWarnings("unused")
+	private BufferedReader loadLevel(BufferedReader reader, File level) {
+    	if(level!=null) {       	    
+			
+		    //String filePath = new File("").getAbsolutePath(); 
+		    //System.out.println(filePath+level.getName());
+		    InputStream in = getClass().getResourceAsStream("/"+level.getName()); 
+		    reader = new BufferedReader(new InputStreamReader(in));
+		    if(reader==null) {
+		    	
+		    }
+		    //System.out.println("Creato livello");        	    
+		} else {
+		   // String filePath = new File("").getAbsolutePath();
+		    InputStream in = getClass().getResourceAsStream("/res/map/level1.txt"); 
+		    reader = new BufferedReader(new InputStreamReader(in));
+		    
+		    
+		}    	
 		return reader;    	
     }
     
